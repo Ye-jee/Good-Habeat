@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/mainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/subContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.example.goodhabeat_view.CustomCalendarView
+                android:id="@+id/custom_calendar_view"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_marginTop="30dp"
+                />
+
+            <ImageView
+                android:id="@+id/borderLine1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="30dp"
+                android:src="@drawable/border_line"
+                android:background="#80F4F4F4"
+                android:elevation="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bottom_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/record_view"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                    app:layout_constraintStart_toStartOf="@id/guideline_left"
+                    app:layout_constraintTop_toTopOf="@id/guideline_top">
+
+                    <LinearLayout
+                        android:id="@+id/progress_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal">
+
+                        <com.dinuscxj.progressbar.CircleProgressBar
+                            android:id="@+id/cpb_circlebar"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:progress_background_color="@color/sea_green"
+                            app:progress_end_color="@color/dark_sea_green"
+                            app:progress_start_color="@color/dark_sea_green"
+                            app:progress_stroke_cap="square"
+                            app:progress_stroke_width="10dp"
+                            app:progress_text_color="#8FBC8B"
+                            app:progress_text_size="20sp"
+                            app:style="solid_line" />
+
+                        <LinearLayout
+                            android:id="@+id/txt_progressBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txt_percent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:layout_marginBottom="10dp"
+                                android:text="이번 달 출석률"
+                                android:textColor="@color/main_text"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:shadowColor="#B3B3B3"
+                                android:shadowRadius="4"
+                                android:gravity="center" />
+
+                            <TextView
+                                android:id="@+id/txt_percent2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="3월달보다 15퍼센트 더 잘지켰어요"
+                                android:textColor="#9A9A9A"
+                                android:textSize="14sp"
+                                android:shadowColor="#B3B3B3"
+                                android:shadowRadius="2"  />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/borderLine2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="#80F4F4F4"
+                        android:elevation="4dp"
+                        android:src="@drawable/border_line"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+
+                    <LinearLayout
+                        android:id="@+id/bmi"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/img_bmi"
+                            android:layout_width="100dp"
+                            android:layout_height="95dp"
+                            app:srcCompat="@drawable/bmi_weight2" />
+
+                        <LinearLayout
+                            android:id="@+id/bmi_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="15dp">
+
+                                <TextView
+                                    android:id="@+id/txt_bmi1_1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
+                                    android:shadowColor="#B3B3B3"
+                                    android:shadowRadius="4"
+                                    android:text="BMI는 정상으로 "
+                                    android:textColor="@color/main_text"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/txt_bmi1_2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
+                                    android:shadowColor="#B3B3B3"
+                                    android:shadowRadius="4"
+                                    android:text=" 21.8"
+                                    android:textColor="@color/main_text"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/txt_bmi1_3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
+                                    android:shadowColor="#B3B3B3"
+                                    android:shadowRadius="4"
+                                    android:text=" 입니다."
+                                    android:textColor="@color/main_text"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/txt_bmi2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:shadowColor="#B3B3B3"
+                                android:shadowRadius="2"
+                                android:text="113일만에 23.9에서 21.8이 되었어요."
+                                android:textColor="#9A9A9A"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/txt_bmi3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:shadowColor="#B3B3B3"
+                                android:shadowRadius="2"
+                                android:text="몸무게가 5kg이 줄었어요."
+                                android:textColor="#9A9A9A"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:id="@+id/borderLine4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="#80F4F4F4"
+                        android:elevation="4dp"
+                        android:src="@drawable/border_line"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <LinearLayout
+                        android:id="@+id/challenge_record"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="95dp"
+                            app:srcCompat="@drawable/trophy" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="35dp"
+                                android:text="나의 챌린지 기록 확인하기"
+                                android:textColor="@color/main_text"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:shadowColor="#B3B3B3"
+                                android:shadowRadius="4" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="20dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="20dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="30dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_end="40dp"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+
+        app:menu="@menu/menu"
+        app:headerLayout="@layout/navigation_header"
+        android:layout_gravity="start" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

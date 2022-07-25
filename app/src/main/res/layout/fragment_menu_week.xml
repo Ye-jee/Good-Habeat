@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MenuWeekFragment">
+
+
+    <RadioGroup
+        android:id="@+id/group_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">>
+
+        <RadioButton
+            android:id="@+id/week_bf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="아침" />
+
+        <RadioButton
+
+            android:id="@+id/week_lc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="점심" />
+
+        <RadioButton
+            android:id="@+id/week_dn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="저녁" />
+
+    </RadioGroup>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/week_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_week">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+
+        <ImageView
+            android:id="@+id/lc_pic"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="20dp"
+            android:background="#00EFE4B0"
+            android:scaleType="centerCrop"
+            android:src="@drawable/a"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bf_pic"
+            app:srcCompat="@drawable/salad" />
+
+        <TextView
+            android:id="@+id/menu_lcex"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="2"
+            android:text="가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사"
+            android:textColor="#9A9A9A"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/lc_pic"
+            app:layout_constraintTop_toBottomOf="@+id/menu_lcname" />
+
+        <TextView
+            android:id="@+id/menu_bfname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="4"
+            android:text="연어 샐러드"
+            android:textColor="@color/main_text"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/bf_pic"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/menu_dnex"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="2"
+            android:text="가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사"
+            android:textColor="#9A9A9A"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dn_pic"
+            app:layout_constraintTop_toBottomOf="@+id/menu_dnname" />
+
+        <ImageView
+            android:id="@+id/dn_pic"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="#00EFE4B0"
+            android:scaleType="centerCrop"
+            android:src="@drawable/a"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lc_pic"
+            app:srcCompat="@drawable/salmon" />
+
+        <TextView
+            android:id="@+id/dn_donteat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="2"
+            android:text="못먹었어요"
+            android:textColor="#A5A5A5"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menu_dnex" />
+
+        <TextView
+            android:id="@+id/menu_dnname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="4"
+            android:text="연어 구이"
+            android:textColor="@color/main_text"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/dn_pic"
+            app:layout_constraintTop_toBottomOf="@+id/lc_pic" />
+
+        <TextView
+            android:id="@+id/dn_eat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:shadowColor="#CDCDCD"
+            android:shadowRadius="7"
+            android:text="먹었어요!"
+            android:textColor="@color/main_color1"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/dn_donteat"
+            app:layout_constraintTop_toBottomOf="@+id/menu_dnex" />
+
+        <TextView
+            android:id="@+id/lc_donteat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="2"
+            android:text="못먹었어요"
+            android:textColor="#A5A5A5"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menu_lcex" />
+
+        <TextView
+            android:id="@+id/bf_donteat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="2"
+            android:text="못먹었어요"
+            android:textColor="#A5A5A5"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menu_bfex" />
+
+        <TextView
+            android:id="@+id/lc_eat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:shadowColor="#CDCDCD"
+            android:shadowRadius="7"
+            android:text="먹었어요!"
+            android:textColor="@color/main_color1"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/lc_donteat"
+            app:layout_constraintTop_toBottomOf="@+id/menu_lcex" />
+
+        <TextView
+            android:id="@+id/bf_eat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:shadowColor="#CDCDCD"
+            android:shadowRadius="7"
+            android:text="먹었어요!"
+            android:textColor="@color/main_color1"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/bf_donteat"
+            app:layout_constraintTop_toBottomOf="@+id/menu_bfex" />
+
+        <TextView
+            android:id="@+id/menu_bfex"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="2"
+            android:text="가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사"
+            android:textColor="#9A9A9A"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/bf_pic"
+            app:layout_constraintTop_toBottomOf="@+id/menu_bfname" />
+
+        <TextView
+            android:id="@+id/menu_lcname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="4"
+            android:text="두부 샐러드"
+            android:textColor="@color/main_text"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/lc_pic"
+            app:layout_constraintTop_toBottomOf="@+id/bf_pic" />
+
+        <ImageView
+            android:id="@+id/bf_pic"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="10dp"
+            android:background="#00EFE4B0"
+            android:scaleType="centerCrop"
+            android:src="@drawable/a"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/broccoli" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
