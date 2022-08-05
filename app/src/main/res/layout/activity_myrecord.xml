@@ -63,6 +63,8 @@
                         android:orientation="horizontal">
 
                         <com.dinuscxj.progressbar.CircleProgressBar
+                            android:includeFontPadding="false"
+                            android:fontFamily="@font/notosans_regular"
                             android:id="@+id/cpb_circlebar"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
@@ -86,7 +88,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="20dp"
+                            android:layout_marginLeft="15dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
@@ -94,25 +96,23 @@
                                 android:id="@+id/txt_percent"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-
-                                android:layout_marginBottom="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:fontFamily="@font/notosans_bold"
+                                android:includeFontPadding="false"
                                 android:text="이번 달 출석률"
                                 android:textColor="@color/main_text"
-                                android:textSize="16sp"
-                                android:textStyle="bold"
-                                android:shadowColor="#B3B3B3"
-                                android:shadowRadius="4"
-                                android:gravity="center" />
+                                android:textSize="16sp" />
 
                             <TextView
                                 android:id="@+id/txt_percent2"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="3월달보다 15퍼센트 더 잘지켰어요"
+                                android:fontFamily="@font/notosans_regular"
+                                android:includeFontPadding="false"
+                                android:text="3월달보다 15% 더 잘지켰어요"
                                 android:textColor="#9A9A9A"
-                                android:textSize="14sp"
-                                android:shadowColor="#B3B3B3"
-                                android:shadowRadius="2"  />
+                                android:textSize="14sp" />
                         </LinearLayout>
 
 
@@ -146,7 +146,7 @@
                             android:id="@+id/bmi_txt"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="20dp"
+                            android:layout_marginLeft="15dp"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -156,61 +156,58 @@
                                 android:layout_marginTop="15dp">
 
                                 <TextView
-                                    android:id="@+id/txt_bmi1_1"
+                                    android:id="@+id/txt_bmi1_1" android:fontFamily="@font/notosans_bold"
+                                    android:includeFontPadding="false"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="10dp"
-                                    android:shadowColor="#B3B3B3"
-                                    android:shadowRadius="4"
+                                    android:layout_marginBottom="5dp"
                                     android:text="BMI는 정상으로 "
                                     android:textColor="@color/main_text"
                                     android:textSize="16sp"
-                                    android:textStyle="bold" />
+                                    />
 
                                 <TextView
                                     android:id="@+id/txt_bmi1_2"
+                                    android:fontFamily="@font/notosans_bold"
+                                    android:includeFontPadding="false"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="10dp"
-                                    android:shadowColor="#B3B3B3"
-                                    android:shadowRadius="4"
+                                    android:layout_marginBottom="5dp"
                                     android:text=" 21.8"
                                     android:textColor="@color/main_text"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold" />
+                                    android:textSize="16sp" />
 
                                 <TextView
                                     android:id="@+id/txt_bmi1_3"
+                                    android:fontFamily="@font/notosans_bold"
+                                    android:includeFontPadding="false"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="10dp"
-                                    android:shadowColor="#B3B3B3"
-                                    android:shadowRadius="4"
+                                    android:layout_marginBottom="5dp"
                                     android:text=" 입니다."
                                     android:textColor="@color/main_text"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold" />
+                                    android:textSize="16sp" />
                             </LinearLayout>
 
                             <TextView
                                 android:id="@+id/txt_bmi2"
+                                android:fontFamily="@font/notosans_regular"
+                                android:includeFontPadding="false"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:shadowColor="#B3B3B3"
-                                android:shadowRadius="2"
                                 android:text="113일만에 23.9에서 21.8이 되었어요."
                                 android:textColor="#9A9A9A"
-                                android:textSize="13sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/txt_bmi3"
+                                android:fontFamily="@font/notosans_regular"
+                                android:includeFontPadding="false"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:shadowColor="#B3B3B3"
-                                android:shadowRadius="2"
                                 android:text="몸무게가 5kg이 줄었어요."
                                 android:textColor="#9A9A9A"
-                                android:textSize="13sp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
 
 
@@ -245,19 +242,19 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="20dp"
+                            android:layout_marginLeft="15dp"
                             android:orientation="vertical">
 
                             <TextView
+                                android:fontFamily="@font/notosans_bold"
+                                android:includeFontPadding="false"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="35dp"
                                 android:text="나의 챌린지 기록 확인하기"
                                 android:textColor="@color/main_text"
                                 android:textSize="16sp"
-                                android:textStyle="bold"
-                                android:shadowColor="#B3B3B3"
-                                android:shadowRadius="4" />
+                                />
 
                         </LinearLayout>
                     </LinearLayout>

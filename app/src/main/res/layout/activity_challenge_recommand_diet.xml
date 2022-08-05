@@ -9,29 +9,27 @@
         android:id="@+id/text_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/notosans_black"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
         android:shadowColor="#CDCDCD"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="7"
         android:text="나에게 맞는 식단 고르기"
+        android:includeFontPadding="false"
         android:textColor="@color/dark_sea_green"
         android:textSize="30sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toTopOf="@id/guideline_top" />
 
-
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="100dp"
         android:scrollbarStyle="outsideInset"
         app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,16 +43,16 @@
 
                 <TextView
                     android:id="@+id/textView22"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosans_bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:shadowColor="#B3B3B3"
                     android:shadowDx="0"
                     android:shadowDy="0"
-                    android:shadowRadius="4"
                     android:text="하루 식사 횟수"
                     android:textColor="@color/theme3"
-                    android:textSize="16sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -69,42 +67,37 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="-7dp"
                         android:layout_weight="1"
+                        android:fontFamily="@font/notosans_medium"
+                        android:includeFontPadding="false"
                         android:onClick="onCheckboxClicked"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowDx="0"
-                        android:shadowDy="0"
-                        android:shadowRadius="2"
+
                         android:text="아침"
                         android:textColor="@color/theme3"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textSize="18sp" />
 
                     <CheckBox
                         android:id="@+id/cb_lunch"
+                        android:includeFontPadding="false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:onClick="onCheckboxClicked"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowDx="0"
-                        android:shadowDy="0"
-                        android:shadowRadius="2"
+                        android:fontFamily="@font/notosans_medium"
                         android:text="점심"
                         android:textColor="@color/theme3"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
+                        android:textSize="18sp" />
                     <CheckBox
                         android:id="@+id/cb_dinner"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/notosans_demilite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:onClick="onCheckboxClicked"
                         android:shadowColor="#B3B3B3"
-                        android:shadowRadius="2"
                         android:text="저녁"
                         android:textColor="@color/theme3"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
@@ -128,27 +121,24 @@
 
                 <CheckBox
                     android:id="@+id/cb_single"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosans_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-7dp"
                     android:onClick="onCheckboxClicked"
-                    android:shadowColor="#B3B3B3"
-                    android:shadowDx="0"
-                    android:shadowDy="0"
-                    android:shadowRadius="4"
                     android:text="1인 가구입니다"
                     android:textColor="@color/theme3"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/textView30"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:shadowColor="#B3B3B3"
-                    android:shadowRadius="2"
+                    android:fontFamily="@font/notosans_demilite"
+                    android:includeFontPadding="false"
                     android:text="건강을 위해 배달 음식을 줄이고자 하는 분, \n간단한 요리를 원하시는 분은 체크해주세요."
-                    android:textColor="#9A9A9A"
+                    android:textColor="@color/colorSecondaryText"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -171,28 +161,25 @@
 
                 <CheckBox
                     android:id="@+id/cb_weight"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosans_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-7dp"
                     android:onClick="onCheckboxClicked"
-                    android:shadowColor="#B3B3B3"
-                    android:shadowDx="0"
-                    android:shadowDy="0"
-                    android:shadowRadius="4"
                     android:text="체중을 조절하고 싶어요"
                     android:textColor="@color/theme3"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/textView27"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:shadowColor="#B3B3B3"
-                    android:shadowRadius="2"
+                    android:fontFamily="@font/notosans_demilite"
+                    android:includeFontPadding="false"
                     android:text="현재 몸무게와 목표 몸무게를 먼저 입력해 주세요."
-                    android:textColor="#9A9A9A"
+                    android:textColor="@color/colorSecondaryText"
                     android:textSize="14sp" />
 
                 <LinearLayout
@@ -291,24 +278,21 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-7dp"
                     android:onClick="onCheckboxClicked"
-                    android:shadowColor="#B3B3B3"
-                    android:shadowDx="0"
-                    android:shadowDy="0"
-                    android:shadowRadius="4"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosans_medium"
                     android:text="단 음식을 자주 먹어요"
                     android:textColor="@color/theme3"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/textView33"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:shadowColor="#B3B3B3"
-                    android:shadowRadius="2"
+                    android:fontFamily="@font/notosans_demilite"
+                    android:includeFontPadding="false"
                     android:text="일주일에 액상과당을 얼마나 자주 드시나요?"
-                    android:textColor="#9A9A9A"
+                    android:textColor="@color/colorSecondaryText"
                     android:textSize="14sp" />
 
                 <RadioGroup
@@ -321,60 +305,44 @@
 
                     <RadioButton
                         android:id="@+id/rb_zeroOne"
-                        android:layout_width="wrap_content"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/notosans_medium"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="-6dp"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowRadius="2"
+                        android:layout_marginLeft="-5dp"
                         android:text="0~1번"
                         android:textColor="@color/theme3"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:textSize="16sp" />
 
                     <RadioButton
                         android:id="@+id/rb_twoFour"
-                        android:layout_width="wrap_content"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/notosans_medium"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowDx="0"
-                        android:shadowDy="0"
-                        android:shadowRadius="2"
                         android:text="2~4번"
                         android:textColor="@color/theme3"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:textSize="16sp"/>
 
                     <RadioButton
                         android:id="@+id/rb_fiveSeven"
-                        android:layout_width="wrap_content"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowRadius="2"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/notosans_medium"
                         android:text="5~7번"
                         android:textColor="@color/theme3"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:textSize="16sp" />
 
                     <RadioButton
                         android:id="@+id/rb_Ten"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowDx="0"
-                        android:shadowDy="0"
-                        android:shadowRadius="2"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/notosans_medium"
                         android:text="9번 이상"
                         android:textColor="@color/theme3"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:textSize="16sp" />
                 </RadioGroup>
             </LinearLayout>
 
@@ -383,6 +351,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosans_black"
                 android:background="@drawable/btn_week"
                 android:backgroundTint="@color/theme1"
                 android:button="@null"
@@ -391,11 +361,11 @@
                 android:minHeight="0dp"
                 android:padding="12dp"
                 android:text="맞춤 식단 받기"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"/>
 
         </LinearLayout>
     </ScrollView>
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"

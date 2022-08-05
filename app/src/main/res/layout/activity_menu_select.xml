@@ -8,10 +8,10 @@
 
     <TextView
         android:id="@+id/selectmenu"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/notosans_black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:shadowColor="#CDCDCD"
-        android:shadowRadius="7"
         android:textColor="@color/dark_sea_green"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -23,13 +23,12 @@
         android:id="@+id/select_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/notosans_medium"
+        android:includeFontPadding="false"
         android:text="2022.10.01~2022.10.07"
-        android:layout_marginBottom="8dp"
-        android:shadowColor="#B3B3B3"
-        android:shadowRadius="2"
         android:textColor="#9A9A9A"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/selectmenu" />
 
@@ -54,6 +53,8 @@
 
         <RadioButton
             android:id="@+id/mon_select"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -72,6 +73,8 @@
 
         <RadioButton
             android:id="@+id/tue_select"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_week"
@@ -89,6 +92,8 @@
 
         <RadioButton
             android:id="@+id/wed_select"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_week"
@@ -106,6 +111,8 @@
 
         <RadioButton
             android:id="@+id/thr_select"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
@@ -125,6 +132,8 @@
 
         <RadioButton
             android:id="@+id/fri_select"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_week"
@@ -142,6 +151,8 @@
 
         <RadioButton
             android:id="@+id/sat_select"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_week"
@@ -159,6 +170,8 @@
 
         <RadioButton
             android:id="@+id/sun_select"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -191,6 +204,8 @@
 
     <Button
         android:id="@+id/select_menu_select"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/notosans_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_login_overlap"

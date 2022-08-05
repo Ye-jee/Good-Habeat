@@ -35,6 +35,8 @@
 
                 <TextView
                     android:id="@+id/today_menu"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosans_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
@@ -45,7 +47,6 @@
                     android:text="오늘의 식단"
                     android:textColor="#FFFFFF"
                     android:textSize="32sp"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/menu_list"
                     app:layout_constraintStart_toStartOf="@id/guideline_left" />
 
@@ -61,13 +62,14 @@
 
                     <TextView
                         android:id="@+id/today_clock"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/notosans_bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:text="점심"
                         android:textColor="@color/colorWhite"
                         android:textSize="18sp"
-                        android:textStyle="bold"
                         android:shadowColor="#616161"
                         android:shadowDx="0"
                         android:shadowDy="0"
@@ -75,12 +77,13 @@
 
                     <TextView
                         android:id="@+id/today_clock_text"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/notosans_bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="먹을 시간이에요!"
                         android:textColor="#B0FFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -153,6 +156,8 @@
 
                 <TextView
                     android:id="@+id/textView0"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosans_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
@@ -178,44 +183,40 @@
 
                     <TextView
                         android:id="@+id/challenge_text"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/notosans_bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:text="식단 관리 시작한지"
                         android:textColor="@color/main_text"
-                        android:textStyle="bold"
-                        android:textSize="14dp"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowDx="0"
-                        android:shadowDy="0"
-                        android:shadowRadius="4"
+                        android:textSize="16dp"
                         app:layout_constraintStart_toEndOf="@id/textView0"
                         app:layout_constraintTop_toBottomOf="@+id/borderLine1" />
 
                     <TextView
                         android:id="@+id/challenge_date"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/notosans_bold"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="3dp"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowRadius="4"
                         android:text="12"
                         android:textColor="@color/main_text"
                         android:textSize="16sp"
-                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@id/guideline_right"
                         app:layout_constraintTop_toBottomOf="@+id/borderLine1" />
 
                     <TextView
                         android:id="@+id/challenge_text2"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/notosans_bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="일 째"
                         android:textColor="@color/main_text"
                         android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowRadius="4" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -232,13 +233,13 @@
 
                     <TextView
                         android:id="@+id/goal"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/notosans_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:layout_gravity="right"
                         android:text="목표달성률"
-                        android:textColor="@color/main_text"
-                        />
+                        android:textColor="@color/main_text" />
 
                     <ProgressBar
                         android:id="@+id/goal_main_bar"
@@ -251,10 +252,11 @@
 
                     <TextView
                         android:id="@+id/today_cal"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/notosans_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:layout_gravity="right"
                         android:text="오늘 섭취한 총 칼로리량"
                         android:textColor="@color/main_text"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -317,14 +319,11 @@
                             android:layout_height="match_parent"
                             android:layout_marginStart="10dp"
                             android:text="겨울에 추천하는 제철 음식"
-                            android:shadowColor="#B3B3B3"
-                            android:shadowDx="0"
-                            android:shadowDy="0"
-                            android:shadowRadius="4"
+                            android:includeFontPadding="false"
+                            android:fontFamily="@font/notosans_bold"
                             android:gravity="center"
                             android:textColor="@color/main_text"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                            android:textSize="14sp"/>
                     </LinearLayout>
 
                     <ImageView
@@ -342,16 +341,13 @@
 
                     <TextView
                         android:id="@+id/season_name"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/notosans_bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowDx="0"
-                        android:shadowDy="0"
-                        android:shadowRadius="4"
                         android:text="딸기"
                         android:textSize="22sp"
-                        android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@+id/season_food_img"
                         app:layout_constraintTop_toBottomOf="@id/title_season"
                         app:layout_constraintBottom_toTopOf="@id/season_exp"/>
@@ -359,6 +355,8 @@
 
                     <TextView
                         android:id="@+id/season_recipe"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/notosans_bold"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
@@ -366,12 +364,13 @@
                         android:text="▶ 레시피 보러 가기"
                         android:textColor="@color/main_color1"
                         android:textSize="10sp"
-                        android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@id/season_food_img"
                         app:layout_constraintTop_toBottomOf="@id/season_name"/>
 
                     <TextView
                         android:id="@+id/season_exp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/notosans_regular"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"

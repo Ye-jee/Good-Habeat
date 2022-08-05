@@ -7,13 +7,12 @@
 
     <TextView
         android:id="@+id/weekmenu"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/notosans_black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:shadowColor="#CDCDCD"
-        android:shadowRadius="7"
         android:textColor="@color/dark_sea_green"
         android:textSize="30sp"
-        android:textStyle="bold"
         android:text="이번 주 식단"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toTopOf="@id/guideline_top" />
@@ -22,13 +21,12 @@
         android:id="@+id/week_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/notosans_medium"
+        android:includeFontPadding="false"
         android:text="2022.10.01~2022.10.07"
-        android:layout_marginBottom="8dp"
-        android:shadowColor="#B3B3B3"
-        android:shadowRadius="2"
         android:textColor="#9A9A9A"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/weekmenu" />
 
@@ -55,6 +53,8 @@
 
         <RadioButton
             android:id="@+id/mon_week"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_week"
@@ -72,6 +72,8 @@
 
         <RadioButton
             android:id="@+id/tue_week"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_week"
@@ -83,12 +85,15 @@
             android:paddingTop="5dp"
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
+
             android:text="화"
             android:textColor="@drawable/btn_week_text"
             tools:ignore="TouchTargetSizeCheck" />
 
         <RadioButton
             android:id="@+id/wed_week"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_week"
@@ -100,14 +105,20 @@
             android:paddingTop="5dp"
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
+
             android:text="수"
             android:textColor="@drawable/btn_week_text"
             tools:ignore="TouchTargetSizeCheck" />
 
         <RadioButton
             android:id="@+id/thr_week"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
             android:background="@drawable/btn_week"
             android:button="@null"
             android:gravity="center"
@@ -117,6 +128,7 @@
             android:paddingTop="5dp"
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
+
             android:text="목"
             android:textColor="@drawable/btn_week_text"
             tools:ignore="TouchTargetSizeCheck" />
@@ -127,19 +139,24 @@
             android:layout_height="wrap_content"
             android:background="@drawable/btn_week"
             android:button="@null"
+            android:fontFamily="@font/notosans_regular"
             android:gravity="center"
+            android:includeFontPadding="false"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:paddingLeft="15dp"
             android:paddingTop="5dp"
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
+
             android:text="금"
             android:textColor="@drawable/btn_week_text"
             tools:ignore="TouchTargetSizeCheck" />
 
         <RadioButton
             android:id="@+id/sat_week"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_week"
@@ -157,8 +174,11 @@
 
         <RadioButton
             android:id="@+id/sun_week"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:background="@drawable/btn_week"
             android:button="@null"
             android:gravity="center"
@@ -188,6 +208,8 @@
 
     <Button
         android:id="@+id/week_menu_btn"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/notosans_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_login_overlap"

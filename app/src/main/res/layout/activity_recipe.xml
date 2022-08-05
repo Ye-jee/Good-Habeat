@@ -6,178 +6,160 @@
     android:layout_height="match_parent"
     tools:context=".RecipeActivity">
 
+    <TextView
+        android:id="@+id/recipe_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/notosans_black"
+        android:text="레시피 이름"
+        android:textColor="@color/dark_sea_green"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toTopOf="@id/guideline_top" />
+    <!--
+        <View
+            android:layout_width="0dp"
+            android:layout_height="210dp"
+            android:layout_marginTop="35dp"
+            android:background="@color/sea_green"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/recipe_name" />
+            -->
 
-    <ScrollView
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/recipe_view"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="215dp"
+        android:layout_marginLeft="-20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="-20dp"
+        android:elevation="5dp"
+        android:src="@drawable/berry_yogurt"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_name"
+        app:riv_corner_radius="20dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/notosans_bold"
+        android:includeFontPadding="false"
+        android:text="재료"
+        android:textColor="@color/theme3"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_view" />
+
+    <TextView
+        android:id="@+id/recipe_ingredient"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorWhite"
+        android:fontFamily="@font/notosans_regular"
+        android:includeFontPadding="false"
+        android:padding="5dp"
+        android:text="재료재료재료"
+        android:textColor="#9A9A9A"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <ImageView
+        android:id="@+id/borderLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="50dp"
+        android:background="#80F4F4F4"
+        android:elevation="4dp"
+        android:src="@drawable/border_line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/recipe_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:shadowColor="#CDCDCD"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:shadowRadius="7"
-                android:text="레시피 이름"
-                android:textColor="@color/dark_sea_green"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toTopOf="@id/guideline_top" />
-            <!--
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="210dp"
-                    android:layout_marginTop="35dp"
-                    android:background="@color/sea_green"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@id/guideline_left"
-                    app:layout_constraintTop_toBottomOf="@+id/recipe_name" />
-                    -->
-
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/recipe_view"
-                android:layout_width="0dp"
-                android:layout_height="215dp"
-                android:layout_marginLeft="-20dp"
-                android:layout_marginRight="-20dp"
-                android:layout_marginTop="40dp"
-                android:elevation="5dp"
-                android:src="@drawable/berry_yogurt"
-                app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/recipe_name"
-                app:riv_corner_radius="20dp" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="재료"
-                android:textColor="@color/theme3"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/recipe_view" />
-
-            <TextView
-                android:id="@+id/recipe_ingredient"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@color/colorWhite"
-                android:padding="5dp"
-                android:text="재료재료재료"
-                android:textSize="16sp"
-                android:textColor="#9A9A9A"
-                android:shadowColor="#B3B3B3"
-                android:shadowRadius="2"
-                app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-            <ImageView
-                android:id="@+id/borderLine"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="50dp"
-                android:background="#80F4F4F4"
-                android:elevation="4dp"
-                android:src="@drawable/border_line"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recipe_ingredient"/>
+        app:layout_constraintTop_toBottomOf="@id/recipe_ingredient"/>
 
 
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="조리방법"
-                android:textColor="@color/theme3"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/borderLine" />
+    <TextView
+        android:id="@+id/textView9"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/notosans_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="조리방법"
+        android:textColor="@color/theme3"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/borderLine" />
 
 
-            <TextView
-                android:id="@+id/recipe_howto"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@color/colorWhite"
-                android:padding="5dp"
-                android:shadowColor="#B3B3B3"
-                android:shadowRadius="2"
-                android:text="1. 조리방법"
-                android:textColor="#9A9A9A"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
-                app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+    <TextView
+        android:id="@+id/recipe_howto"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/colorWhite"
+        android:fontFamily="@font/notosans_regular"
+        android:includeFontPadding="false"
+        android:padding="5dp"
+        android:text="1. 조리방법"
+        android:textColor="#9A9A9A"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
 
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_end="170dp" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="170dp" />
 
 
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="40dp" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="40dp" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="40dp" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="40dp" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_top"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="40dp" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="40dp" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_bottom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_end="40dp"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="40dp"/>
 
 
-
-    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

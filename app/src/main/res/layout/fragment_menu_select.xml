@@ -16,6 +16,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_medium"
             android:id="@+id/select_lc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,6 +25,8 @@
 
         <RadioButton
             android:id="@+id/select_bf"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
@@ -31,6 +35,8 @@
 
         <RadioButton
             android:id="@+id/select_dn"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="저녁" />
@@ -38,6 +44,8 @@
     </RadioGroup>
 
     <TextView
+        android:includeFontPadding="false"
+        android:fontFamily="@font/notosans_bold"
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -89,6 +97,8 @@
             android:orientation="vertical">
 
             <Button
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosans_medium"
                 android:id="@+id/menu_plus"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -110,6 +120,8 @@
             android:orientation="vertical">
 
             <TextView
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosans_medium"
                 android:id="@+id/menuOne"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -120,6 +132,8 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosans_regular"
                 android:id="@+id/menuOne_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -136,6 +150,8 @@
             android:orientation="vertical">
 
             <TextView
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosans_medium"
                 android:id="@+id/menuTwo"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -147,6 +163,8 @@
 
             <TextView
                 android:id="@+id/menuTwo_name"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosans_regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -162,6 +180,8 @@
             android:orientation="vertical">
 
             <TextView
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosans_medium"
                 android:id="@+id/menuThree"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -173,6 +193,8 @@
 
             <TextView
                 android:id="@+id/menuThree_name"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosans_regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
