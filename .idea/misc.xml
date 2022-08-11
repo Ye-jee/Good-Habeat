@@ -4,12 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/font/font.xml" value="0.38425925925925924" />
-        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_challenge_not.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_challenge_not.xml" value="0.33" />
         <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_challenge_recommand_diet.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_challenge_recommand_diet2.xml" value="0.271875" />
         <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_challenge_record.xml" value="0.2765625" />
         <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_challenge_setting.xml" value="0.2765625" />
-        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_challenge_start.xml" value="0.271875" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_challenge_start.xml" value="0.5" />
         <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_intro.xml" value="0.2765625" />
         <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_join.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_login.xml" value="0.33" />
@@ -17,10 +17,10 @@
         <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_menu.xml" value="0.2765625" />
         <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_menu_select.xml" value="0.5" />
         <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_myrecord.xml" value="0.2765625" />
-        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_recipe.xml" value="0.33" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_recipe.xml" value="0.5" />
         <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/calendar_layout.xml" value="0.2765625" />
         <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/dont_eat.xml" value="0.2765625" />
-        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/fragment_menu_select.xml" value="0.2765625" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/fragment_menu_select.xml" value="0.67" />
         <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/fragment_menu_week.xml" value="0.2765625" />
         <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/item_challenge_record.xml" value="0.2765625" />
         <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/layout_bottom_sheet.xml" value="0.2765625" />
