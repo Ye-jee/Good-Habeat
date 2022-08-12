@@ -24,6 +24,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -64,6 +65,9 @@ public class CustomCalendarView extends LinearLayout {
     TextView time_break, time_lunch, time_dinner;
     ImageView check_break, check_lunch, check_dinner;
     String txtMenuBreak, txtMenuLunch, txtMenuDinner;
+
+    ProgressBar cal_progress, carbo_progress, protein_progress, fat_progress;
+    TextView tv_cal_num, tv_carbo_num, tv_protein_num, tv_fat_num;
 
     private static final int MAX_CALENDAR_DAYS = 42;
     Calendar calendar = Calendar.getInstance(Locale.KOREA);
@@ -161,8 +165,36 @@ public class CustomCalendarView extends LinearLayout {
                 time_lunch = (TextView) bottomSheetView.findViewById(R.id.time_lunch);
                 time_dinner = (TextView) bottomSheetView.findViewById(R.id.time_dinner);
 
+                // 메뉴 취소선
                 menu_break.setPaintFlags(menu_break.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG); //취소선
                 menu_lunch.setPaintFlags(menu_lunch.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG); //취소선
+
+                // ProgressBar 설정
+                cal_progress = (ProgressBar) bottomSheetView.findViewById(R.id.cal_amount);
+                carbo_progress = (ProgressBar) bottomSheetView.findViewById(R.id.carbohydrate_amount);
+                protein_progress = (ProgressBar) bottomSheetView.findViewById(R.id.protein_amount);
+                fat_progress = (ProgressBar) bottomSheetView.findViewById(R.id.fat_amount);
+
+                tv_cal_num = (TextView) bottomSheetView.findViewById(R.id.cal_progress_num);
+                tv_carbo_num = (TextView) bottomSheetView.findViewById(R.id.carbohydrate_progress_num);
+                tv_protein_num = (TextView) bottomSheetView.findViewById(R.id.protein_progress_num);
+                tv_fat_num = (TextView) bottomSheetView.findViewById(R.id.fat_progress_num);
+
+                int cal_progress_num = cal_progress.getProgress();
+                int carbo_progress_num = carbo_progress.getProgress();
+                int protein_progress_num = protein_progress.getProgress();
+                int fat_progress_num = fat_progress.getProgress();
+
+                String cal_str = String.valueOf(cal_progress_num);
+                String carbo_str = String.valueOf(carbo_progress_num);
+                String protein_str = String.valueOf(protein_progress_num);
+                String fat_str = String.valueOf(fat_progress_num);
+
+                tv_cal_num.setText(cal_str);
+                tv_carbo_num.setText(carbo_str);
+                tv_protein_num.setText(protein_str);
+                tv_fat_num.setText(fat_str);
+
 
                 // 날짜 변경
                 tvToday.setText(m + " " + d + "일");
