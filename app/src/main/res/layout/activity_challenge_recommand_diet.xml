@@ -184,7 +184,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/textView27"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -193,9 +193,9 @@
                     android:shadowRadius="2"
                     android:text="현재 몸무게와 목표 몸무게를 먼저 입력해 주세요."
                     android:textColor="#9A9A9A"
-                    android:textSize="14sp" />
+                    android:textSize="14sp" />-->
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:id="@+id/linearLayout4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -263,7 +263,7 @@
                             android:inputType="numberDecimal" />
                     </LinearLayout>
 
-                </LinearLayout>
+                </LinearLayout>-->
 
 
             </LinearLayout>
