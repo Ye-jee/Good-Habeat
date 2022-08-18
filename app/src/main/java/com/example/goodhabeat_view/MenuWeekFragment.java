@@ -1,7 +1,9 @@
 package com.example.goodhabeat_view;
-
+// ~ 22.08.19 : MenuActivity.java에 RecyclerView 사용 => 현재 MenuWeekFragment.java 불필요 (사용 안 함)
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.Image;
@@ -35,9 +37,16 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MenuWeekFragment extends Fragment {
     String url;
+
+    String today_week = "";
+    int todayWeek;
+
+    SharedPreferences preferences;
 
     ////////// 기존 변수 (RecyclerView 이전)
     /*
@@ -63,11 +72,14 @@ public class MenuWeekFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_menu_week, container, false);
 
+        preferences = getActivity().getSharedPreferences("dayOfWeek", Context.MODE_PRIVATE);
+
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.menu_week_container);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ArrayList<MenuWeekData> menu_week_data = new ArrayList<>();
 
         // 임시 데이터
+        /*
         int[] menu_pic_id = {R.drawable.broccoli, R.drawable.salad, R.drawable.banana};
         String[] menu_name = {"연어 샐러드", "두부 샐러드", "바나나 주스"};
         String[] menu_text = {"연어 샐러드 입니다. 연어를 넣은 샐러드 입니다.",
@@ -77,6 +89,63 @@ public class MenuWeekFragment extends Fragment {
         for(int i=0; i<3; i++) {
             MenuWeekData dataSet = new MenuWeekData(menu_pic_id[i], menu_name[i], menu_text[i]);
             menu_week_data.add(dataSet);
+        }
+         */
+
+
+        // 임시 데이터
+        if (preferences.equals("monday")) {
+            menu_week_data.clear();
+            int[] menu_pic_id = {R.drawable.salmon, R.drawable.salad};
+            String[] menu_name = {"연어 샐러드", "두부 샐러드"};
+            String[] menu_text = {"연어 샐러드 입니다. 연어를 넣은 샐러드 입니다.",
+                    "두부 샐러드 입니다. 두부를 넣은 샐러드 입니다."};
+
+            for(int i=0; i<2; i++) {
+                MenuWeekData dataSet = new MenuWeekData(menu_pic_id[i], menu_name[i], menu_text[i]);
+                menu_week_data.add(dataSet);
+            }
+        }
+
+        if (preferences.equals("tuesday")) {
+            menu_week_data.clear();
+            int[] menu_pic_id = {R.drawable.seapasta, R.drawable.tomato, R.drawable.orange};
+            String[] menu_name = {"해물 파스타", "토마토 샐러드", "오렌지 주스"};
+            String[] menu_text = {"해물 파스타 입니다. 해물을 넣은 파스타 입니다.",
+                    "토마토 샐러드 입니다. 토마토를 넣은 샐러드 입니다.",
+                    "오렌지 주스 입니다. 오렌지를 넣은 주스 입니다."};
+
+            for(int i=0; i<3; i++) {
+                MenuWeekData dataSet = new MenuWeekData(menu_pic_id[i], menu_name[i], menu_text[i]);
+                menu_week_data.add(dataSet);
+            }
+        }
+
+        if (preferences.equals("wednesday")) {
+            menu_week_data.clear();
+            int[] menu_pic_id = {R.drawable.stake, R.drawable.brocoll, R.drawable.banana};
+            String[] menu_name = {"안심 스테이크", "브로콜리 샐러드", "바나나 주스"};
+            String[] menu_text = {"안심 스테이크 입니다. 대박 맛있겠다.",
+                    "브로콜리 샐러드 입니다. 초장...",
+                    "바나나 주스 입니다. 바나나를 넣은 주스 입니다."};
+
+            for(int i=0; i<3; i++) {
+                MenuWeekData dataSet = new MenuWeekData(menu_pic_id[i], menu_name[i], menu_text[i]);
+                menu_week_data.add(dataSet);
+            }
+        }
+
+        if (preferences.equals("sunday")) {
+            menu_week_data.clear();
+            int[] menu_pic_id = {R.drawable.kimchijjigae, R.drawable.eggdolldoll};
+            String[] menu_name = {"김치찌개", "계란말이"};
+            String[] menu_text = {"김치찌개 입니다. 맛있겠네요",
+                    "계란말이 입니다. 밥이랑 같이 드세요."};
+
+            for(int i=0; i<2; i++) {
+                MenuWeekData dataSet = new MenuWeekData(menu_pic_id[i], menu_name[i], menu_text[i]);
+                menu_week_data.add(dataSet);
+            }
         }
 
         recyclerView.setAdapter(new MenuWeekAdapter(menu_week_data));

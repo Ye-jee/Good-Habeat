@@ -9,17 +9,18 @@
         <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_challenge_recommand_diet2.xml" value="0.23384615384615384" />
         <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_challenge_record.xml" value="0.25885416666666666" />
         <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_login.xml" value="0.23384615384615384" />
-        <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_main.xml" value="0.225" />
-        <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_menu.xml" value="0.264" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_menu.xml" value="0.2" />
         <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_menu_select.xml" value="0.2375" />
         <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_myrecord.xml" value="0.152" />
         <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_recipe.xml" value="0.23384615384615384" />
         <entry key="..\:/CapstoneProject/app/src/main/res/layout/calendar_layout.xml" value="0.23384615384615384" />
         <entry key="..\:/CapstoneProject/app/src/main/res/layout/dont_eat.xml" value="0.23384615384615384" />
         <entry key="..\:/CapstoneProject/app/src/main/res/layout/fragment_menu_select.xml" value="0.2375" />
-        <entry key="..\:/CapstoneProject/app/src/main/res/layout/fragment_menu_week.xml" value="0.2" />
-        <entry key="..\:/CapstoneProject/app/src/main/res/layout/item_challenge_record.xml" value="0.1966019417475728" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/fragment_menu_week.xml" value="0.1" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/item_challenge_record.xml" value="0.72" />
         <entry key="..\:/CapstoneProject/app/src/main/res/layout/item_menu_week.xml" value="0.264" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/layout_bottom_sheet.xml" value="0.1" />
         <entry key="..\:/CapstoneProject/app/src/main/res/layout/menu_plus_btn.xml" value="0.23384615384615384" />
         <entry key="..\:/CapstoneProject/app/src/main/res/layout/single_cell_layout.xml" value="0.23384615384615384" />
         <entry key="..\:/Users/user/Downloads/goodHabEat_view/goodHabEat_view/app/src/main/res/drawable-v24/btn_week.xml" value="0.2195" />
