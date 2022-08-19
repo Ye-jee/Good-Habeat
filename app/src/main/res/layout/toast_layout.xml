@@ -7,13 +7,12 @@
 
     <TextView
         android:id="@+id/toast_textview"
-        android:includeFontPadding="false"
-        android:fontFamily="@font/notosans_medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/toast_custom"
         android:text="커스텀 메시지입니다."
         android:textColor="@color/theme3"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:textStyle="normal" />
 
 </LinearLayout>

@@ -19,8 +19,6 @@
 
         <RadioButton
             android:id="@+id/week_bf"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -31,8 +29,6 @@
         <RadioButton
 
             android:id="@+id/week_lc"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -42,8 +38,6 @@
 
         <RadioButton
             android:id="@+id/week_dn"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minWidth="0dp"
@@ -85,13 +79,13 @@
 
         <TextView
             android:id="@+id/menu_lcex"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_medium"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="2"
             android:text="가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사"
             android:textColor="#9A9A9A"
             android:textSize="16sp"
@@ -101,27 +95,28 @@
 
         <TextView
             android:id="@+id/menu_bfname"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="4"
             android:text="연어 샐러드"
             android:textColor="@color/main_text"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/bf_pic"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/menu_dnex"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_medium"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="2"
             android:text="가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사"
             android:textColor="#9A9A9A"
             android:textSize="16sp"
@@ -145,105 +140,112 @@
 
         <TextView
             android:id="@+id/dn_donteat"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="2"
             android:text="못먹었어요"
             android:textColor="#A5A5A5"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/menu_dnex" />
 
         <TextView
             android:id="@+id/menu_dnname"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="4"
             android:text="연어 구이"
             android:textColor="@color/main_text"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/dn_pic"
             app:layout_constraintTop_toBottomOf="@+id/lc_pic" />
 
         <TextView
             android:id="@+id/dn_eat"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:shadowColor="#CDCDCD"
+            android:shadowRadius="7"
             android:text="먹었어요!"
             android:textColor="@color/main_color1"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/dn_donteat"
             app:layout_constraintTop_toBottomOf="@+id/menu_dnex" />
 
         <TextView
             android:id="@+id/lc_donteat"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="2"
             android:text="못먹었어요"
             android:textColor="#A5A5A5"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/menu_lcex" />
 
         <TextView
             android:id="@+id/bf_donteat"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="2"
             android:text="못먹었어요"
             android:textColor="#A5A5A5"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/menu_bfex" />
 
         <TextView
             android:id="@+id/lc_eat"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:shadowColor="#CDCDCD"
+            android:shadowRadius="7"
             android:text="먹었어요!"
             android:textColor="@color/main_color1"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/lc_donteat"
             app:layout_constraintTop_toBottomOf="@+id/menu_lcex" />
 
         <TextView
             android:id="@+id/bf_eat"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:shadowColor="#CDCDCD"
+            android:shadowRadius="7"
             android:text="먹었어요!"
             android:textColor="@color/main_color1"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/bf_donteat"
             app:layout_constraintTop_toBottomOf="@+id/menu_bfex" />
 
         <TextView
             android:id="@+id/menu_bfex"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_medium"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="2"
             android:text="가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사"
             android:textColor="#9A9A9A"
             android:textSize="16sp"
@@ -253,15 +255,16 @@
 
         <TextView
             android:id="@+id/menu_lcname"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="4"
             android:text="두부 샐러드"
             android:textColor="@color/main_text"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/lc_pic"
             app:layout_constraintTop_toBottomOf="@+id/bf_pic" />
 

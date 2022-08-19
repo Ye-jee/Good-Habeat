@@ -29,8 +29,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:includeFontPadding="false"
-                android:fontFamily="@font/notosans_black"
                 android:id="@+id/tvToday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,8 +65,6 @@
                         app:srcCompat="@drawable/check" />
 
                     <TextView
-                        android:includeFontPadding="false"
-                        android:fontFamily="@font/notosans_regular"
                         android:id="@+id/time_break"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -77,15 +73,14 @@
 
                     <TextView
                         android:id="@+id/menu_break"
-                        android:includeFontPadding="false"
-                        android:fontFamily="@font/notosans_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
                         android:text="두부 샐러드"
                         android:textColor="#000000"
-                        />
+                        android:shadowColor="#B3B3B3"
+                        android:shadowRadius="2" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -105,8 +100,6 @@
 
                     <TextView
                         android:id="@+id/time_lunch"
-                        android:includeFontPadding="false"
-                        android:fontFamily="@font/notosans_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"
@@ -114,15 +107,14 @@
 
                     <TextView
                         android:id="@+id/menu_lunch"
-                        android:includeFontPadding="false"
-                        android:fontFamily="@font/notosans_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
                         android:text="바질페스토 파스타"
                         android:textColor="#000000"
-                        />
+                        android:shadowColor="#B3B3B3"
+                        android:shadowRadius="2" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -149,15 +141,14 @@
 
                     <TextView
                         android:id="@+id/menu_dinner"
-                        android:includeFontPadding="false"
-                        android:fontFamily="@font/notosans_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
                         android:text="훈제 연어"
                         android:textColor="#000000"
-                        />
+                        android:shadowColor="#B3B3B3"
+                        android:shadowRadius="2" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -178,15 +169,15 @@
 
             <TextView
                 android:id="@+id/txt_cal"
-                android:includeFontPadding="false"
-                android:fontFamily="@font/notosans_medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
                 android:text="오늘 섭취한 총 칼로리량"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:shadowColor="#B3B3B3"
+                android:shadowRadius="2"/>
 
             <ProgressBar
                 android:id="@+id/cal_amount"
@@ -202,15 +193,15 @@
 
             <TextView
                 android:id="@+id/txt_ch"
-                android:includeFontPadding="false"
-                android:fontFamily="@font/notosans_medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
                 android:text="오늘 섭취한 총 탄수화물량"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:shadowColor="#B3B3B3"
+                android:shadowRadius="2"/>
 
             <ProgressBar
                 android:id="@+id/carbohydrate_amount"
@@ -223,18 +214,18 @@
                 android:max="100"
                 android:progress="30"
                 android:progressDrawable="@drawable/progressbar_progressbar3" />
-            \
+\
             <TextView
                 android:id="@+id/txt_protein"
-                android:includeFontPadding="false"
-                android:fontFamily="@font/notosans_medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
                 android:text="오늘 섭취한 총 단백질량"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:shadowColor="#B3B3B3"
+                android:shadowRadius="2" />
 
             <ProgressBar
                 android:id="@+id/protein_amount"
@@ -250,15 +241,15 @@
 
             <TextView
                 android:id="@+id/txt_fat"
-                android:includeFontPadding="false"
-                android:fontFamily="@font/notosans_medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
                 android:text="오늘 섭취한 총 지방량"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:shadowColor="#B3B3B3"
+                android:shadowRadius="2" />
 
             <ProgressBar
                 android:id="@+id/fat_amount"

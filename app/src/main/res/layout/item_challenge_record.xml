@@ -29,8 +29,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:includeFontPadding="false"
-                android:fontFamily="@font/notosans_bold"
                 android:id="@+id/past_challenge_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,17 +36,18 @@
                 android:text="challenge_name"
                 android:textSize="14sp"
                 android:textColor="@color/main_text"
-                />
+                android:textStyle="bold"
+                android:shadowColor="#B3B3B3"
+                android:shadowRadius="2" />
 
             <TextView
                 android:id="@+id/past_challenge_period"
-                android:includeFontPadding="false"
-                android:fontFamily="@font/notosans_bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:text="2022-06-02 ~ 2022-06-15"
                 android:textSize="13sp"
+                android:textStyle="bold"
                 android:textColor="#919191"/>
 
             <LinearLayout
@@ -57,14 +56,13 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:includeFontPadding="false"
-                    android:fontFamily="@font/notosans_bold"
                     android:id="@+id/past_challenge_percent"
                     android:layout_width="35dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:text="75\u0025"
                     android:textSize="13sp"
+                    android:textStyle="bold"
                     android:textColor="#919191" />
 
                 <ProgressBar
@@ -96,4 +94,5 @@
 
 
 </androidx.cardview.widget.CardView>
+
 

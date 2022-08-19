@@ -19,8 +19,6 @@
         app:srcCompat="@drawable/people" />
 
     <TextView
-        android:includeFontPadding="false"
-        android:fontFamily="@font/notosans_black"
         android:id="@+id/tv_username1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +26,9 @@
         android:text="user_name 님"
         android:textColor="@color/theme3"
         android:textSize="16sp"
-
+        android:textStyle="bold"
+        android:shadowColor="#B3B3B3"
+        android:shadowRadius="2"
         app:layout_constraintBottom_toTopOf="@+id/textView17"
         app:layout_constraintEnd_toEndOf="@+id/recipe_view"
         app:layout_constraintStart_toStartOf="@+id/recipe_view"
@@ -36,13 +36,13 @@
 
     <TextView
         android:id="@+id/textView17"
-        android:includeFontPadding="false"
-        android:fontFamily="@font/notosans_medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="간편식, 저칼로리, 저염 식단 진행 중"
         android:textColor="@color/theme3"
+        android:shadowColor="#B3B3B3"
+        android:shadowRadius="2"
         app:layout_constraintBottom_toTopOf="@+id/textView18"
         app:layout_constraintEnd_toEndOf="@+id/tv_username1"
         app:layout_constraintStart_toStartOf="@+id/tv_username1"
@@ -50,14 +50,14 @@
 
     <TextView
         android:id="@+id/textView18"
-        android:includeFontPadding="false"
-        android:fontFamily="@font/notosans_medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="30dp"
         android:text="아자아자 챌린지 진행 중"
         android:textColor="@color/theme3"
+        android:shadowColor="#B3B3B3"
+        android:shadowRadius="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView17"
         app:layout_constraintStart_toStartOf="@+id/textView17"

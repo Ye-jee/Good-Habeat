@@ -25,7 +25,6 @@ import com.google.android.material.navigation.NavigationView;
 public class ChallengeActivity_Not extends AppCompatActivity {
 
     ImageView img_setChallenge;
-    ConstraintLayout cl_recordChallenge;
     TextView tv_setChallenge;
 
     //네비게이션 관련 코드
@@ -44,7 +43,7 @@ public class ChallengeActivity_Not extends AppCompatActivity {
         setContentView(R.layout.activity_challenge_not);
 
         img_setChallenge = (ImageView) findViewById(R.id.challenge_illust);
-        cl_recordChallenge = (ConstraintLayout) findViewById(R.id.recordChallenge_container);
+        //cl_recordChallenge = (ConstraintLayout) findViewById(R.id.recordChallenge_container);
         tv_setChallenge = (TextView) findViewById(R.id.tv_setChallenge);
 
         //챌린지 설정하기 부분을 클릭하면 챌린지를 시작하는 페이지로 이동
@@ -63,15 +62,6 @@ public class ChallengeActivity_Not extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        cl_recordChallenge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ChallengeRecordActivity.class);
-                startActivity(intent);
-            }
-        });
-
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00000000")));
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
