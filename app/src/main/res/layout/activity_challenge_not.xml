@@ -5,169 +5,44 @@
     android:id="@+id/drawerlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChallengeActivity_Not">
+    tools:context=".ChallengeActivity_Not"
+    android:background="#FAF0E6">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginTop="-80dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/back" />
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/challenge_bottom_background"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/guideline_top"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" >
-
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="32dp"
-                android:shadowColor="#B3B3B3"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:shadowRadius="4"
-                android:text="새로운 목표를 설정해 보세요!"
-                android:textColor="@color/main_text"
-                android:textSize="22dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <ImageView
-                android:id="@+id/challenge_illust"
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_marginTop="30dp"
-                android:background="#FAF0E6"
-                android:src="@drawable/challenge_illust"
-                app:layout_constraintEnd_toEndOf="@+id/guideline_right"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toTopOf="@id/guideline_center" />
-
-            <TextView
-                android:id="@+id/tv_setChallenge"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:background="#FAF0E6"
-                android:gravity="center"
-                android:shadowColor="#B3B3B3"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:shadowRadius="4"
-                android:text="챌린지 설정하기"
-                android:textColor="@color/main_text"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/challenge_illust" />
-
-
-            <ImageView
-                android:id="@+id/borderLine2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:background="#80F4F4F4"
-                android:elevation="4dp"
-                android:src="@drawable/border_line"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_setChallenge"/>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/recordChallenge_container"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:background="@color/toast_background"
-                android:paddingBottom="10dp"
-                app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/borderLine2">
-
-                <ImageView
-                    android:id="@+id/recordChallenge_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:src="@drawable/challenge_icon_1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_recordChallenge"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:shadowColor="#B3B3B3"
-                    android:shadowDx="0"
-                    android:shadowDy="0"
-                    android:shadowRadius="4"
-                    android:text="나의 챌린지 기록 확인하기"
-                    android:textColor="@color/main_text"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@id/recordChallenge_icon"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="40dp" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="40dp" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_end="547dp" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_top"
+        <TextView
+            android:id="@+id/tv_setChallenge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="115dp" />
+            android:layout_marginBottom="20dp"
+            android:background="#FAF0E6"
+            android:gravity="center"
+            android:padding="10dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="4"
+            android:text="챌린지 설정하기"
+            android:textColor="@color/main_text"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/challenge_illust"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/challenge_illust"
+            android:layout_width="550dp"
+            android:layout_height="0dp"
+            android:src="@drawable/not_challenge"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

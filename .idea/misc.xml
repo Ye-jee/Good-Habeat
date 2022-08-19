@@ -3,6 +3,70 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
+<<<<<<< HEAD
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/font/font.xml" value="0.38425925925925924" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_challenge_not.xml" value="0.264" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_challenge_recommand_diet.xml" value="0.33" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_challenge_recommand_diet2.xml" value="0.67" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_challenge_record.xml" value="0.2765625" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_challenge_setting.xml" value="0.5" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_challenge_start.xml" value="0.5" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_intro.xml" value="0.2765625" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_join.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_main.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_menu.xml" value="0.2765625" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_menu_select.xml" value="0.5" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_myrecord.xml" value="0.2765625" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/activity_recipe.xml" value="0.5" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/calendar_layout.xml" value="0.2765625" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/dont_eat.xml" value="0.2765625" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/fragment_menu_select.xml" value="0.47774480712166173" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/fragment_menu_week.xml" value="0.2765625" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/item_challenge_record.xml" value="0.67" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/layout_bottom_sheet.xml" value="0.2765625" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/menu_plus_btn.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/menu_plus_layout.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/navigation_header.xml" value="0.75" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/single_cell_layout.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/layout/toast_layout.xml" value="0.2765625" />
+        <entry key="..\:/Users/YUNA/AndroidStudioProjects/goodHabEat_view/Good-Habeat/app/src/main/res/menu/menu.xml" value="0.2765625" />
+=======
+        <entry key="..\:/Users/user/Desktop/GoodHabeat(capstone_code)/goodHabEat_view/app/src/main/res/drawable-v24/text_custom.xml" value="0.19" />
+        <entry key="..\:/Users/user/Desktop/GoodHabeat(capstone_code)/goodHabEat_view/app/src/main/res/drawable/round_rec_background.xml" value="0.1805" />
+        <entry key="..\:/Users/user/Desktop/GoodHabeat(capstone_code)/goodHabEat_view/app/src/main/res/layout/activity_challenge_recommand_diet.xml" value="0.4" />
+        <entry key="..\:/Users/user/Desktop/GoodHabeat(capstone_code)/goodHabEat_view/app/src/main/res/layout/activity_challenge_recommand_diet2.xml" value="0.2101851851851852" />
+        <entry key="..\:/Users/user/Desktop/GoodHabeat(capstone_code)/goodHabEat_view/app/src/main/res/layout/activity_challenge_setting.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/user/Desktop/GoodHabeat(capstone_code)/goodHabEat_view/app/src/main/res/layout/activity_challenge_start.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/user/Desktop/GoodHabeat(capstone_code)/goodHabEat_view/app/src/main/res/layout/activity_join.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/user/Desktop/GoodHabeat(capstone_code)/goodHabEat_view/app/src/main/res/layout/activity_main.xml" value="0.23282051282051283" />
+        <entry key="..\:/Users/user/Desktop/GoodHabeat(capstone_code)/goodHabEat_view/app/src/main/res/layout/activity_menu.xml" value="0.24635416666666668" />
+        <entry key="..\:/Users/user/Desktop/GoodHabeat(capstone_code)/goodHabEat_view/app/src/main/res/layout/challenge_hw_dialog.xml" value="0.4" />
+        <entry key="..\:/Users/user/Desktop/GoodHabeat(capstone_code)/goodHabEat_view/app/src/main/res/menu/menu.xml" value="0.23645833333333333" />
+>>>>>>> 7e2b1ae2ec70ab442656dac603b208852cb1bb59
+=======
+        <entry key="..\:/CapstoneProject/app/src/main/res/font/font.xml" value="0.11354166666666667" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_challenge_not.xml" value="0.23384615384615384" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_challenge_recommand_diet.xml" value="0.20625" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_challenge_recommand_diet2.xml" value="0.23384615384615384" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_challenge_record.xml" value="0.25885416666666666" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_login.xml" value="0.23384615384615384" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_menu.xml" value="0.2" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_menu_select.xml" value="0.2375" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_myrecord.xml" value="0.152" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/activity_recipe.xml" value="0.23384615384615384" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/calendar_layout.xml" value="0.23384615384615384" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/dont_eat.xml" value="0.23384615384615384" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/fragment_menu_select.xml" value="0.2375" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/fragment_menu_week.xml" value="0.1" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/item_challenge_record.xml" value="0.72" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/item_menu_week.xml" value="0.264" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/layout_bottom_sheet.xml" value="0.1" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/menu_plus_btn.xml" value="0.23384615384615384" />
+        <entry key="..\:/CapstoneProject/app/src/main/res/layout/single_cell_layout.xml" value="0.23384615384615384" />
+>>>>>>> 9ab24d060bff5b1a03a06c0b96fc2414ec558005
         <entry key="..\:/Users/user/Downloads/goodHabEat_view/goodHabEat_view/app/src/main/res/drawable-v24/btn_week.xml" value="0.2195" />
         <entry key="..\:/Users/user/Downloads/goodHabEat_view/goodHabEat_view/app/src/main/res/layout/activity_challenge_not.xml" value="0.264" />
         <entry key="..\:/Users/user/Downloads/goodHabEat_view/goodHabEat_view/app/src/main/res/layout/activity_challenge_recommand_diet.xml" value="0.4" />

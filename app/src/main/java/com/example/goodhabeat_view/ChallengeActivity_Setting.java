@@ -35,7 +35,7 @@ public class ChallengeActivity_Setting extends AppCompatActivity {
     //네비게이션 관련 코드
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
-
+//
     //네비게이션 드로우어 헤더
     View navHeader;
 

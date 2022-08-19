@@ -50,7 +50,8 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
     private static final String DEFAULT_PATTERN = "%d%%";
 
     ImageView bmi_img;
-    TextView bmi_num;
+    TextView bmi_num, bmi_status;
+    // (아직 구현 X) bmi_status : 계산된 bmi 숫자를 이용해 정상, 과체중, 비만 등의 상태를 if 문으로 setText
     double bmi;
 
     LinearLayout challenge_record;
@@ -92,7 +93,7 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
         bmi_img = (ImageView) findViewById(R.id.img_bmi);
         bmi_img.setColorFilter(Color.argb(30,000,000,000));
 
-        bmi_num = (TextView) findViewById(R.id.txt_bmi1_2);
+        bmi_num = (TextView) findViewById(R.id.bmi_num);
         bmi = 21.8;
         if (bmi >= 18 && bmi <= 23 )
             bmi_num.setTextColor(Color.parseColor("#8FBC8B"));
