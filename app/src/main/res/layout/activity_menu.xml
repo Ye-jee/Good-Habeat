@@ -33,8 +33,6 @@
         app:layout_constraintTop_toBottomOf="@+id/weekmenu" />
 
 
-
-
     <RadioGroup
         android:id="@+id/week_menu"
         android:layout_width="0dp"
@@ -45,12 +43,12 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="5dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/week_date"
-        app:layout_constraintBottom_toTopOf="@id/menu_container">
+        app:layout_constraintBottom_toTopOf="@id/group_week">
 
 
         <RadioButton
@@ -173,18 +171,59 @@
             tools:ignore="TouchTargetSizeCheck" />
     </RadioGroup>
 
-    <FrameLayout
+    <RadioGroup
+        android:id="@+id/group_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/week_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/menu_container">
+
+        <RadioButton
+            android:id="@+id/week_bf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="아침" />
+
+        <RadioButton
+            android:id="@+id/week_lc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="점심" />
+
+        <RadioButton
+            android:id="@+id/week_dn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="저녁" />
+
+    </RadioGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/menu_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginLeft="-20dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="-20dp"
         android:layout_marginBottom="60dp"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/week_menu">
+        app:layout_constraintTop_toBottomOf="@+id/group_week"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom">
 
-    </FrameLayout>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <Button
         android:id="@+id/week_menu_btn"
