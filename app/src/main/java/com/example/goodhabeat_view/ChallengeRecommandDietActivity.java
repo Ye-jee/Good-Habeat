@@ -26,12 +26,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.w3c.dom.Text;
+
 public class ChallengeRecommandDietActivity extends AppCompatActivity {
 
     CheckBox cb_breakfast, cb_lunch, cb_dinner,
             cb_single, cb_weight, cb_sugar;
 
     /*EditText et_CurrentWeight, et_TargetWeight;*/
+    TextView tv_currentWeight, tv_targetWeight;
 
     RadioGroup rg_sugarFrequency;
     RadioButton rb_zeroOne, rb_twoFour, rb_fiveSeven, rb_Ten;
@@ -60,6 +63,9 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
 
         /*et_CurrentWeight = (EditText) findViewById(R.id.et_currentWeight);
         et_TargetWeight = (EditText) findViewById(R.id.et_targetWeight);*/
+
+        tv_currentWeight = (TextView) findViewById(R.id.tv_currentWeight);
+        tv_targetWeight = (TextView) findViewById(R.id.tv_targetWeight);
 
         rg_sugarFrequency = (RadioGroup) findViewById(R.id.rg_sugarFrequency);
         rb_zeroOne = (RadioButton) findViewById(R.id.rb_zeroOne);
@@ -221,14 +227,20 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
                                 lowcal = 1;
                                 lowsalt = 1;
                                 highcal = 0;
-                                Toast.makeText(getApplicationContext(), "저칼로리 : " + lowcal + "\n저염 : " + lowsalt, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "저칼로리 : " + lowcal + "\n저염 : " + lowsalt, Toast.LENGTH_SHORT).show();
                             }
                             else {
                                 highcal = 1;
                                 lowcal = 0;
                                 lowsalt = 0;
-                                Toast.makeText(getApplicationContext(), "고칼로리 : " + highcal, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "고칼로리 : " + highcal, Toast.LENGTH_SHORT).show();
                             }
+
+                            tv_currentWeight.setVisibility(View.VISIBLE);
+                            tv_targetWeight.setVisibility(View.VISIBLE);
+
+                            tv_currentWeight.setText("현재 몸무게 : " + current + "kg");
+                            tv_targetWeight.setText("목표 몸무게 : " + target + "kg");
                         }
 
                     }
@@ -276,7 +288,10 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
                 lowcal = 0;
                 lowsalt = 0;
                 highcal = 0;
-                Toast.makeText(getApplicationContext(), "체중조절에 관심이 없습니다...", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "체중조절에 관심이 없습니다...", Toast.LENGTH_SHORT).show();
+
+                tv_currentWeight.setVisibility(View.GONE);
+                tv_targetWeight.setVisibility(View.GONE);
             }
         }
 
