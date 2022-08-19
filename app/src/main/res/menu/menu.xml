@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/menu_home"
-        android:icon="@drawable/icon_mainhome"
-        android:title="메인화면" />
-    <item
-        android:id="@+id/menu_myrecord"
-        android:icon="@drawable/icon_myrecord"
-        android:title="내 기록" />
-    <item
-        android:id="@+id/menu_challenge"
-        android:icon="@drawable/icon_challenge"
-        android:title="챌린지" />
-    <!--<item
-        android:id="@+id/menu_community"
-        android:icon="@android:drawable/ic_dialog_email"
-        android:title="커뮤니티" />-->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_home"
+            android:icon="@drawable/icon_mainhome"
+            android:title="메인화면" />
+        <item
+            android:id="@+id/menu_myrecord"
+            android:icon="@drawable/icon_myrecord"
+            android:title="내 기록" />
+        <item
+            android:id="@+id/menu_challenge"
+            android:icon="@drawable/icon_challenge"
+            android:title="챌린지" />
+        <item
+            android:id="@+id/menu_community"
+            android:icon="@drawable/icon_community"
+            android:title="커뮤니티" />
+    </group>
+
+    <item android:title="설정">
+        <menu>
+            <item
+                android:id="@+id/menu_setting"
+                android:icon="@drawable/icon_setting"
+                android:title="설정"/>
+
+        </menu>
+
+    </item>
+
+
+
 </menu>

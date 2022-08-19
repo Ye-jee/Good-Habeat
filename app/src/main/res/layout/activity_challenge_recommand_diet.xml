@@ -185,17 +185,31 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView27"
+                    android:id="@+id/tv_currentWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="15dp"
                     android:shadowColor="#B3B3B3"
                     android:shadowRadius="2"
-                    android:text="현재 몸무게와 목표 몸무게를 먼저 입력해 주세요."
+                    android:text="현재 몸무게 : "
                     android:textColor="#9A9A9A"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:visibility="gone" />
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tv_targetWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowRadius="2"
+                    android:text="목표 몸무게 : "
+                    android:textColor="#9A9A9A"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
+                <!--<LinearLayout
                     android:id="@+id/linearLayout4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -263,7 +277,7 @@
                             android:inputType="numberDecimal" />
                     </LinearLayout>
 
-                </LinearLayout>
+                </LinearLayout>-->
 
 
             </LinearLayout>

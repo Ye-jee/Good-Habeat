@@ -3,6 +3,8 @@ package com.example.goodhabeat_view;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -24,12 +26,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.w3c.dom.Text;
+
 public class ChallengeRecommandDietActivity extends AppCompatActivity {
 
     CheckBox cb_breakfast, cb_lunch, cb_dinner,
             cb_single, cb_weight, cb_sugar;
 
-    EditText et_CurrentWeight, et_TargetWeight;
+    /*EditText et_CurrentWeight, et_TargetWeight;*/
+    TextView tv_currentWeight, tv_targetWeight;
 
     RadioGroup rg_sugarFrequency;
     RadioButton rb_zeroOne, rb_twoFour, rb_fiveSeven, rb_Ten;
@@ -38,6 +43,9 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
 
     int eatingNumber;
     int single, lowcal, lowsalt, highcal, lowsugar, lowfat = 0;
+
+    //체중조절 다이얼로그
+    View dialogView_hw;
 
     RequestQueue requestQueue;
 
@@ -53,8 +61,11 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
         cb_weight = (CheckBox) findViewById(R.id.cb_weight);
         cb_sugar = (CheckBox) findViewById(R.id.cb_sugar);
 
-        et_CurrentWeight = (EditText) findViewById(R.id.et_currentWeight);
-        et_TargetWeight = (EditText) findViewById(R.id.et_targetWeight);
+        /*et_CurrentWeight = (EditText) findViewById(R.id.et_currentWeight);
+        et_TargetWeight = (EditText) findViewById(R.id.et_targetWeight);*/
+
+        tv_currentWeight = (TextView) findViewById(R.id.tv_currentWeight);
+        tv_targetWeight = (TextView) findViewById(R.id.tv_targetWeight);
 
         rg_sugarFrequency = (RadioGroup) findViewById(R.id.rg_sugarFrequency);
         rb_zeroOne = (RadioButton) findViewById(R.id.rb_zeroOne);
@@ -188,7 +199,66 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
         //체중조절 관련 - 감량, 증량
         if(view.getId() == R.id.cb_weight) {
             if(checked) {
-                if(et_CurrentWeight.getText().toString().equals("") || et_TargetWeight.getText().toString().equals("")) {
+
+                dialogView_hw = (View) View.inflate(ChallengeRecommandDietActivity.this, R.layout.challenge_hw_dialog, null);
+
+                AlertDialog.Builder alertDialog_hw = new AlertDialog.Builder(ChallengeRecommandDietActivity.this);
+
+                //hwDialog.setTitle("현재 몸무게와 목표 몸무게를 입력하세요.");
+
+                alertDialog_hw.setView(dialogView_hw);
+
+                alertDialog_hw.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        EditText et_currentWeight = (EditText) dialogView_hw.findViewById(R.id.et_currentWeight);
+                        EditText et_targetWeight = (EditText) dialogView_hw.findViewById(R.id.et_targetWeight);
+
+                        if(et_currentWeight.getText().toString().equals("") || et_targetWeight.getText().toString().equals("")) {
+                            Toast.makeText(getApplicationContext(), "현재 몸무게와 목표 몸무게를 입력해주세요!!", Toast.LENGTH_SHORT).show();
+                            cb_weight.setChecked(false);
+                        }
+                        else {
+                            int current = Integer.parseInt(et_currentWeight.getText().toString());
+                            int target = Integer.parseInt(et_targetWeight.getText().toString());
+                            int value = target - current;
+
+                            if(value <= 0) {
+                                lowcal = 1;
+                                lowsalt = 1;
+                                highcal = 0;
+                                //Toast.makeText(getApplicationContext(), "저칼로리 : " + lowcal + "\n저염 : " + lowsalt, Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                highcal = 1;
+                                lowcal = 0;
+                                lowsalt = 0;
+                                //Toast.makeText(getApplicationContext(), "고칼로리 : " + highcal, Toast.LENGTH_SHORT).show();
+                            }
+
+                            tv_currentWeight.setVisibility(View.VISIBLE);
+                            tv_targetWeight.setVisibility(View.VISIBLE);
+
+                            tv_currentWeight.setText("현재 몸무게 : " + current + "kg");
+                            tv_targetWeight.setText("목표 몸무게 : " + target + "kg");
+                        }
+
+                    }
+                });
+
+                alertDialog_hw.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //hwDialog.dismiss(); - 코드 오류남, 이유는 AlertDialog.Builder에는 해당함수가 없기 때문에
+                        cb_weight.setChecked(false);
+                    }
+                });
+
+                //alertDialog_hw.getWindow().setBackgroundDrawableResource(R.drawable.round_rec_background);
+
+                alertDialog_hw.show();
+
+                /*if(et_CurrentWeight.getText().toString().equals("") || et_TargetWeight.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "현재 몸무게와 목표 몸무게를 먼저 입력해주세요!!", Toast.LENGTH_SHORT).show();
                     cb_weight.setChecked(false);
                 }
@@ -211,7 +281,7 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
                     }
 
                     //Toast.makeText(getApplicationContext(), "체중조절에 관심이 있습니다!", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
 
             else {
@@ -219,6 +289,9 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
                 lowsalt = 0;
                 highcal = 0;
                 //Toast.makeText(getApplicationContext(), "체중조절에 관심이 없습니다...", Toast.LENGTH_SHORT).show();
+
+                tv_currentWeight.setVisibility(View.GONE);
+                tv_targetWeight.setVisibility(View.GONE);
             }
         }
 
