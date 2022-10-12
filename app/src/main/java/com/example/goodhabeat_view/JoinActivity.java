@@ -24,6 +24,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -31,7 +32,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JoinActivity extends AppCompatActivity {
     TextView tvUserAdmin, tvJoinBirth;
@@ -70,9 +78,12 @@ public class JoinActivity extends AppCompatActivity {
         btnNick = (Button) findViewById(R.id.btn_nickCheck);
         btnJoin = (Button) findViewById(R.id.btn_Join);
 
+        /*--
+        //성별 임시 삭제
         rgGender = (RadioGroup) findViewById(R.id.radioGender);
         rbFemale = (RadioButton) findViewById(R.id.rbtn_female);
         rbMale = (RadioButton) findViewById(R.id.rbtn_male);
+        --*/
 
         /*rgGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -163,6 +174,7 @@ public class JoinActivity extends AppCompatActivity {
         //우선 etJoinEmail1과 @와 etJoinEmail2를 합쳐서 저장하는 것으로!!
         //그리고 이용자 동의 체크하면 회원가입 끝-!
 
+        /*--
         rgGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -177,14 +189,25 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
-
-        String url = "http://192.168.56.1:8000/AndroidAppEx/capstoneEx/capstoneJoinEx.jsp";
+         */
 
         //가입하기 버튼을 누르면, DB에 사용자 정보가 저장이 되고
         //어느 화면으로 넘어가야 하나??
+        
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------
+        // join버튼 누를 때 node.js -> db 연결
+        // (유나 수정 _ 22/10/06) - post 방식 추가, 예지가 작성한 volley 백업 후 삭제함
+        // (유나 수정 _ 22/10/09) - btnJoin의 setOnClickListender와 request분리(삭제_그럴 필요 없었음)
+        // (유나 수정 _ 22/10/09) - node.js를 통해 db에 회원정보 저장되는 것 확인
+
+
+        String url = "http://10.0.2.2:3000/delivery";
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+
         btnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String id = etJoinID.getText().toString();
                 String pwd = etJoinPwd.getText().toString();
                 String nickName = etJoinNick.getText().toString();
@@ -193,48 +216,54 @@ public class JoinActivity extends AppCompatActivity {
                 String weight = etJoinWeight.getText().toString();
                 String email = etJoinEmail1.getText().toString() + "@" + etJoinEmail2.getText().toString();
 
-                String url2 = url
-                        + "?nickname=" + nickName
-                        + "&id=" + id
-                        + "&pwd=" + pwd
-                        + "&email=" + email
-                        + "&birth=" + birth
-                        + "&height=" + height
-                        + "&weight=" + weight
-                        + "&gender=" + gender;
 
-                requestQueue = Volley.newRequestQueue(getApplicationContext());
+            StringRequest request = new StringRequest(
+                    Request.Method.POST,
+                    url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try{
+                                JSONObject respObj = new JSONObject(response);
 
-                StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                        url2,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                Toast.makeText(getApplicationContext(), "회원가입 완료!" + response, Toast.LENGTH_SHORT).show();
+                            }catch (Exception e){
+                                e.printStackTrace();
                             }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(getApplicationContext(), "에러 원인 :" + error.toString(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
 
-                /*stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                        1000000,
-                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));*/
+                            Toast.makeText(getApplicationContext(), "회원가입 완료!", Toast.LENGTH_SHORT).show();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getApplicationContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            System.out.println(error.getMessage());
+                        }
+                    }
+            ) {
+                @Nullable
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("nickname", nickName);
+                    params.put("id", id);
+                    params.put("password", pwd);
+                    params.put("email", email);
+                    params.put("birth", birth);
+                    params.put("height", height);
+                    params.put("weight", weight);
 
-                //requestQueue.add(stringRequest);
+                    return params;
+                }
+            };
+            requestQueue.add(request);
 
-                CustomToast("회원가입이 완료되었습니다.");
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
             }
-        });
-
-    }
-
+        }); // btnJoin 클릭 리스너 버튼 끝 */
+    } //onCreate 끝
+    
+    
+    // 외부 함수
     public void CustomToast(String message){
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup)findViewById(R.id.toast_layout));
