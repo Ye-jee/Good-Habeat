@@ -47,7 +47,7 @@
                     -->
 
             <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/recipe_view"
+                android:id="@+id/user_profilePic"
                 android:layout_width="0dp"
                 android:layout_height="215dp"
                 android:layout_marginLeft="-20dp"
@@ -71,7 +71,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/recipe_view" />
+                app:layout_constraintTop_toBottomOf="@+id/user_profilePic" />
 
             <TextView
                 android:id="@+id/recipe_ingredient"
@@ -90,7 +90,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
             <ImageView
-                android:id="@+id/borderLine"
+                android:id="@+id/borderLine_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -115,7 +115,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/borderLine" />
+                app:layout_constraintTop_toBottomOf="@+id/borderLine_1" />
 
 
             <TextView

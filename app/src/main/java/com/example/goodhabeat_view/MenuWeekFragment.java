@@ -148,7 +148,7 @@ public class MenuWeekFragment extends Fragment {
             }
         }
 
-        recyclerView.setAdapter(new MenuWeekAdapter(menu_week_data));
+        recyclerView.setAdapter(new MenuWeekRecyclerViewAdapter(menu_week_data));
 
         ///////// 기존 코드 (RecyclerView 이전)
         /*
