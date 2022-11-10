@@ -49,7 +49,7 @@ public class MenuActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.menu_container);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ArrayList<MenuWeekData> menu_week_data = new ArrayList<>();
+        ArrayList<MenuDayData> menu_day_data = new ArrayList<>();
 
         //fragmentManager = getSupportFragmentManager();
         //menuweekFragment = new MenuWeekFragment();
@@ -126,8 +126,8 @@ public class MenuActivity extends AppCompatActivity {
                     "오렌지 주스 입니다. 오렌지로 만든 주스 입니다."};
 
             for (int i = 0; i < 3; i++) {
-                MenuWeekData dataSet = new MenuWeekData(menu_pic_id[i], menu_name[i], menu_text[i]);
-                menu_week_data.add(dataSet);
+                MenuDayData dataSet = new MenuDayData(menu_pic_id[i], menu_name[i], menu_text[i]);
+                menu_day_data.add(dataSet);
             }
 
         }
@@ -231,7 +231,11 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+<<<<<<< Updated upstream
         recyclerView.setAdapter(new MenuWeekAdapter(menu_week_data));
+=======
+        recyclerView.setAdapter(new MenuDayRecyclerViewAdapter(menu_day_data));
+>>>>>>> Stashed changes
 
         // 식단 수정 페이지로 이동
         week_menu_btn.setOnClickListener(new View.OnClickListener() {
