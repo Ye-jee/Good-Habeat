@@ -17,8 +17,8 @@ public class MenuSelect_ViewPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         fragmentArrayList.add(new MenuFragment_rice());
         fragmentArrayList.add(new MenuFragment_soup());
-        fragmentArrayList.add(new com.example.goodhabeat_view.MenuFragment_kimchi());
-        fragmentArrayList.add(new com.example.goodhabeat_view.MenuFragment_sideDish());
+        fragmentArrayList.add(new MenuFragment_kimchi());
+        fragmentArrayList.add(new MenuFragment_sideDish());
         fragmentArrayList.add(new MenuFragment_aBowl());
 
         name.add("밥");

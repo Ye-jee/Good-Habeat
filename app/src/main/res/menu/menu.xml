@@ -10,10 +10,10 @@
             android:id="@+id/menu_myrecord"
             android:icon="@drawable/icon_myrecord"
             android:title="내 기록" />
-        <item
+        <!--<item
             android:id="@+id/menu_challenge"
             android:icon="@drawable/icon_challenge"
-            android:title="챌린지" />
+            android:title="챌린지" />-->
         <item
             android:id="@+id/menu_community"
             android:icon="@drawable/icon_community"

@@ -13,9 +13,9 @@ import java.util.ArrayList;
 
 public class MenuSelectRecyclerViewAdapter extends RecyclerView.Adapter<MenuSelectRecyclerViewAdapter.ViewHolder>{
 
-    ArrayList<com.example.goodhabeat_view.MenuSelectData> data;
+    ArrayList<MenuSelectData> data;
 
-    public MenuSelectRecyclerViewAdapter(ArrayList<com.example.goodhabeat_view.MenuSelectData> data) {
+    public MenuSelectRecyclerViewAdapter(ArrayList<MenuSelectData> data) {
         this.data = data;
     }
 
@@ -29,7 +29,7 @@ public class MenuSelectRecyclerViewAdapter extends RecyclerView.Adapter<MenuSele
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final com.example.goodhabeat_view.MenuSelectData item = data.get(position);
+        final MenuSelectData item = data.get(position);
         holder.menu_img.setImageResource(item.getMenu_img());
         holder.menu_name.setText(item.getMenu_name());
         holder.menu_information.setText(item.getMenu_information());

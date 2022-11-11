@@ -30,14 +30,13 @@ import org.w3c.dom.Text;
 
 public class ChallengeRecommandDietActivity extends AppCompatActivity {
 
-    CheckBox cb_breakfast, cb_lunch, cb_dinner,
-            cb_single, cb_weight, cb_sugar;
+    CheckBox cb_single, cb_weight, cb_sugar;
 
     /*EditText et_CurrentWeight, et_TargetWeight;*/
     TextView tv_currentWeight, tv_targetWeight;
 
-    RadioGroup rg_sugarFrequency;
-    RadioButton rb_zeroOne, rb_twoFour, rb_fiveSeven, rb_Ten;
+    /*RadioGroup rg_sugarFrequency;
+    RadioButton rb_zeroOne, rb_twoFour, rb_fiveSeven, rb_Ten;*/
 
     Button btn_recmdCustomDiet;
 
@@ -54,12 +53,9 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_recommand_diet);
 
-        cb_breakfast = (CheckBox) findViewById(R.id.cb_breakfast);
-        cb_lunch = (CheckBox) findViewById(R.id.cb_lunch);
-        cb_dinner = (CheckBox) findViewById(R.id.cb_dinner);
         cb_single = (CheckBox) findViewById(R.id.cb_single);
         cb_weight = (CheckBox) findViewById(R.id.cb_weight);
-        cb_sugar = (CheckBox) findViewById(R.id.cb_sugar);
+        //cb_sugar = (CheckBox) findViewById(R.id.cb_sugar);
 
         /*et_CurrentWeight = (EditText) findViewById(R.id.et_currentWeight);
         et_TargetWeight = (EditText) findViewById(R.id.et_targetWeight);*/
@@ -67,11 +63,11 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
         tv_currentWeight = (TextView) findViewById(R.id.tv_currentWeight);
         tv_targetWeight = (TextView) findViewById(R.id.tv_targetWeight);
 
-        rg_sugarFrequency = (RadioGroup) findViewById(R.id.rg_sugarFrequency);
+        /*rg_sugarFrequency = (RadioGroup) findViewById(R.id.rg_sugarFrequency);
         rb_zeroOne = (RadioButton) findViewById(R.id.rb_zeroOne);
         rb_twoFour = (RadioButton) findViewById(R.id.rb_twoFour);
         rb_fiveSeven = (RadioButton) findViewById(R.id.rb_fiveSeven);
-        rb_Ten = (RadioButton) findViewById(R.id.rb_Ten);
+        rb_Ten = (RadioButton) findViewById(R.id.rb_Ten);*/
 
         btn_recmdCustomDiet = (Button) findViewById(R.id.btn_recmdCustomDiet);
 
@@ -149,7 +145,7 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
         boolean checked = ((CheckBox) view).isChecked();        // Is the view now checked?
 
         //하루 식사 횟수
-        if(view.getId() == R.id.cb_breakfast) {
+        /*if(view.getId() == R.id.cb_breakfast) {
             if(checked) {
                 eatingNumber = 1;
                 //Toast.makeText(getApplicationContext(), "하루 식사 횟수 : " + eatingNumber + "번", Toast.LENGTH_SHORT).show();
@@ -180,7 +176,7 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
                 eatingNumber--;
                 //Toast.makeText(getApplicationContext(), "하루 식사 횟수 : " + eatingNumber + "번", Toast.LENGTH_SHORT).show();
             }
-        }
+        }*/
 
 
         //1인 가구
@@ -297,7 +293,7 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
 
 
         //단 음식, 저당
-        if(view.getId() == R.id.cb_sugar) {
+        /*if(view.getId() == R.id.cb_sugar) {
             if(checked) {
                 //Toast.makeText(getApplicationContext(), "단 음식을 자주 먹습니다...", Toast.LENGTH_SHORT).show();
 
@@ -333,7 +329,9 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
                 lowsugar = 0;
                 //Toast.makeText(getApplicationContext(), "단 음식을 자주 먹지 않아요~", Toast.LENGTH_SHORT).show();
             }
-        }
+        }*/
+
+
 
     }
 

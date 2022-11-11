@@ -243,7 +243,7 @@
 
                     <TextView
                         android:id="@+id/main_convenience_category"
-                        android:layout_width="90dp"
+                        android:layout_width="92dp"
                         android:layout_height="55dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
@@ -257,13 +257,13 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/main_lowCal_category"
+                        android:id="@+id/main_highPro_category"
                         android:layout_width="90dp"
                         android:layout_height="55dp"
                         android:layout_marginStart="20dp"
                         android:background="@drawable/main_category_custom"
                         android:gravity="center"
-                        android:text="저칼로리"
+                        android:text="고단백질"
                         android:textColor="@color/theme1"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -271,54 +271,42 @@
                         app:layout_constraintTop_toTopOf="@+id/main_convenience_category" />
 
                     <TextView
-                        android:id="@+id/main_highPro_category"
+                        android:id="@+id/main_vitamin_mineral_category"
                         android:layout_width="90dp"
                         android:layout_height="55dp"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="19dp"
                         android:layout_marginEnd="5dp"
                         android:background="@drawable/main_category_custom"
                         android:gravity="center"
-                        android:text="고단백질"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="15dp"
+                        android:paddingBottom="5dp"
+                        android:text="비타민/무기질"
                         android:textColor="@color/theme1"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/main_lowCal_category"
-                        app:layout_constraintTop_toTopOf="@+id/main_lowCal_category" />
+                        app:layout_constraintStart_toEndOf="@+id/main_highPro_category"
+                        app:layout_constraintTop_toTopOf="@+id/main_highPro_category" />
 
                     <TextView
-                        android:id="@+id/main_lowSugar_category"
+                        android:id="@+id/main_lowCal_category"
                         android:layout_width="90dp"
                         android:layout_height="55dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="5dp"
                         android:background="@drawable/main_category_custom"
                         android:gravity="center"
-                        android:text="저당"
+                        android:text="저칼로리"
                         android:textColor="@color/theme1"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/main_convenience_category"
-                        app:layout_constraintStart_toStartOf="@+id/main_convenience_category"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/main_convenience_category" />
-
-                    <TextView
-                        android:id="@+id/main_lowFat_category"
-                        android:layout_width="90dp"
-                        android:layout_height="55dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@drawable/main_category_custom"
-                        android:gravity="center"
-                        android:text="저지방"
-                        android:textColor="@color/theme1"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/main_lowCal_category"
-                        app:layout_constraintStart_toStartOf="@+id/main_lowCal_category"
-                        app:layout_constraintTop_toBottomOf="@+id/main_lowCal_category" />
 
                     <TextView
                         android:id="@+id/main_lowSalt_category"
@@ -336,6 +324,23 @@
                         app:layout_constraintEnd_toEndOf="@+id/main_highPro_category"
                         app:layout_constraintStart_toStartOf="@+id/main_highPro_category"
                         app:layout_constraintTop_toBottomOf="@+id/main_highPro_category" />
+
+                    <TextView
+                        android:id="@+id/main_lowSugar_category"
+                        android:layout_width="90dp"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/main_category_custom"
+                        android:gravity="center"
+                        android:text="저당"
+                        android:textColor="@color/theme1"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/main_vitamin_mineral_category"
+                        app:layout_constraintStart_toStartOf="@+id/main_vitamin_mineral_category"
+                        app:layout_constraintTop_toBottomOf="@+id/main_vitamin_mineral_category" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ImageView

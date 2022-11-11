@@ -22,115 +22,38 @@
 
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="100dp"
+        android:fillViewport="true"
         android:scrollbarStyle="outsideInset"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="1.0">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="600dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView22"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:shadowColor="#B3B3B3"
-                    android:shadowDx="0"
-                    android:shadowDy="0"
-                    android:shadowRadius="4"
-                    android:text="하루 식사 횟수"
-                    android:textColor="@color/theme3"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:id="@+id/linearLayout3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/cb_breakfast"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="-7dp"
-                        android:layout_weight="1"
-                        android:onClick="onCheckboxClicked"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowDx="0"
-                        android:shadowDy="0"
-                        android:shadowRadius="2"
-                        android:text="아침"
-                        android:textColor="@color/theme3"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/cb_lunch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:onClick="onCheckboxClicked"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowDx="0"
-                        android:shadowDy="0"
-                        android:shadowRadius="2"
-                        android:text="점심"
-                        android:textColor="@color/theme3"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/cb_dinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:onClick="onCheckboxClicked"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowRadius="2"
-                        android:text="저녁"
-                        android:textColor="@color/theme3"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <ImageView
+                android:id="@+id/single_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
-                android:background="#80F4F4F4"
-                android:elevation="4dp"
-                android:src="@drawable/border_line"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/progress_container" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <CheckBox
                     android:id="@+id/cb_single"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="-7dp"
+                    android:layout_marginLeft="-5dp"
                     android:onClick="onCheckboxClicked"
                     android:shadowColor="#B3B3B3"
                     android:shadowDx="0"
@@ -142,7 +65,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView30"
+                    android:id="@+id/textView1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:shadowColor="#B3B3B3"
@@ -153,21 +76,24 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/borderLine1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
                 android:background="#80F4F4F4"
                 android:elevation="4dp"
                 android:src="@drawable/border_line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/progress_container" />
+                app:layout_constraintTop_toBottomOf="@+id/single_layout" />
 
             <LinearLayout
+                android:id="@+id/weight_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/borderLine1">
 
                 <CheckBox
                     android:id="@+id/cb_weight"
@@ -279,124 +205,489 @@
 
                 </LinearLayout>-->
 
-
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/borderLine2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
                 android:background="#80F4F4F4"
                 android:elevation="4dp"
                 android:src="@drawable/border_line"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/progress_container" />
+                app:layout_constraintTop_toBottomOf="@+id/weight_layout" />
 
             <LinearLayout
+                android:id="@+id/sugar_layout1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/borderLine2">
 
                 <CheckBox
-                    android:id="@+id/cb_sugar"
+                    android:id="@+id/cb_sugar1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="-7dp"
+                    android:layout_marginLeft="-5dp"
                     android:onClick="onCheckboxClicked"
                     android:shadowColor="#B3B3B3"
                     android:shadowDx="0"
                     android:shadowDy="0"
                     android:shadowRadius="4"
-                    android:text="단 음식을 자주 먹어요"
+                    android:text="곡류음식(밥, 빵, 면 등)을 하루에 자주 먹어요"
                     android:textColor="@color/theme3"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView33"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="10dp"
                     android:shadowColor="#B3B3B3"
                     android:shadowRadius="2"
-                    android:text="일주일에 액상과당을 얼마나 자주 드시나요?"
+                    android:text="자주 먹는다의 기준은 하루 세끼에 모두 곡류음식이 들어간다는 것입니다"
+                    android:textColor="#9A9A9A"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/borderLine3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="#80F4F4F4"
+                android:elevation="4dp"
+                android:src="@drawable/border_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sugar_layout1" />
+
+
+            <LinearLayout
+                android:id="@+id/sugar_layout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/borderLine3">
+
+                <CheckBox
+                    android:id="@+id/cb_sugar2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-5dp"
+                    android:onClick="onCheckboxClicked"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:text="단 음식(과자, 초콜릿, 아이스크림, 음료수)를 하루에 자주 먹어요"
+                    android:textColor="@color/theme3"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowRadius="2"
+                    android:text="자주 먹는다의 기준은 하루에 3번 이상 먹는다는 것입니다"
+                    android:textColor="#9A9A9A"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/borderLine4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="#80F4F4F4"
+                android:elevation="4dp"
+                android:src="@drawable/border_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sugar_layout2" />
+
+            <LinearLayout
+                android:id="@+id/protein_layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/borderLine4">
+
+                <CheckBox
+                    android:id="@+id/cb_protein1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-5dp"
+                    android:onClick="onCheckboxClicked"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:text="생선, 고기, 계란, 콩, 두부 등으로 만든 음식을 하루에 자주 먹어요"
+                    android:textColor="@color/theme3"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowRadius="2"
+                    android:text="자주 먹는다의 기준은 하루 세끼에 모두 생선이나 고기, 계란, 콩이 들어간 음식을 먹는다는 것입니다"
+                    android:textColor="#9A9A9A"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/borderLine5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="#80F4F4F4"
+                android:elevation="4dp"
+                android:src="@drawable/border_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/protein_layout1" />
+
+            <LinearLayout
+                android:id="@+id/protein_layout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/borderLine5">
+
+                <CheckBox
+                    android:id="@+id/cb_protein2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-5dp"
+                    android:onClick="onCheckboxClicked"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:text="우유나 유제품(치즈, 요거트)을 하루에 자주 먹어요"
+                    android:textColor="@color/theme3"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowRadius="2"
+                    android:text="자주 먹는다의 기준은 하루에 3번 이상 먹는다는 것입니다"
+                    android:textColor="#9A9A9A"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/borderLine6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="#80F4F4F4"
+                android:elevation="4dp"
+                android:src="@drawable/border_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/protein_layout2" />
+
+
+            <LinearLayout
+                android:id="@+id/vitamin_layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/borderLine6">
+
+                <CheckBox
+                    android:id="@+id/cb_vitamin1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-5dp"
+                    android:onClick="onCheckboxClicked"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:text="채소류, 해조류, 버섯 등으로 만든 음식을 하루에 자주 먹어요"
+                    android:textColor="@color/theme3"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView6_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowRadius="2"
+                    android:text="해조류 음식의 예시로는 김, 다시마, 미역, 톳 등이 있습니다"
                     android:textColor="#9A9A9A"
                     android:textSize="14sp" />
 
-                <RadioGroup
-                    android:id="@+id/rg_sugarFrequency"
+                <TextView
+                    android:id="@+id/textView6_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minWidth="0dp"
-                    android:minHeight="0dp"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rb_zeroOne"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="-6dp"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowRadius="2"
-                        android:text="0~1번"
-                        android:textColor="@color/theme3"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        android:id="@+id/rb_twoFour"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowDx="0"
-                        android:shadowDy="0"
-                        android:shadowRadius="2"
-                        android:text="2~4번"
-                        android:textColor="@color/theme3"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        android:id="@+id/rb_fiveSeven"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowRadius="2"
-                        android:text="5~7번"
-                        android:textColor="@color/theme3"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        android:id="@+id/rb_Ten"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowDx="0"
-                        android:shadowDy="0"
-                        android:shadowRadius="2"
-                        android:text="9번 이상"
-                        android:textColor="@color/theme3"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </RadioGroup>
+                    android:layout_marginTop="5dp"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowRadius="2"
+                    android:text="자주 먹는다의 기준은 하루 세끼에 모두 채소류나 해조류, 버섯이 들어간 음식을 먹는다는 것입니다"
+                    android:textColor="#9A9A9A"
+                    android:textSize="14sp" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/borderLine7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="#80F4F4F4"
+                android:elevation="4dp"
+                android:src="@drawable/border_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vitamin_layout1" />
+
+            <LinearLayout
+                android:id="@+id/vitamin_layout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/borderLine7">
+
+                <CheckBox
+                    android:id="@+id/cb_vitamin2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-5dp"
+                    android:onClick="onCheckboxClicked"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:text="과일을 하루에 자주 먹어요"
+                    android:textColor="@color/theme3"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowRadius="2"
+                    android:text="자주 먹는다의 기준은 하루에 3번 이상 먹는다는 것입니다"
+                    android:textColor="#9A9A9A"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/borderLine8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="#80F4F4F4"
+                android:elevation="4dp"
+                android:src="@drawable/border_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vitamin_layout2" />
+
+            <LinearLayout
+                android:id="@+id/lowKcal_layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/borderLine8">
+
+                <CheckBox
+                    android:id="@+id/cb_lowKcal1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-5dp"
+                    android:onClick="onCheckboxClicked"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:text="튀김, 전, 볶음 같은 음식이나 기름, 마요네즈를 사용한 음식을 하루 자주 먹어요"
+                    android:textColor="@color/theme3"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowRadius="2"
+                    android:text="자주 먹는다의 기준은 하루 세끼에 모두 튀김, 전, 볶음 같은 음식이나 기름, 마요네즈가 들어간 음식을 먹는다는 것입니다"
+                    android:textColor="#9A9A9A"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/borderLine9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="#80F4F4F4"
+                android:elevation="4dp"
+                android:src="@drawable/border_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lowKcal_layout1" />
+
+            <LinearLayout
+                android:id="@+id/lowKcal_layout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/borderLine9">
+
+                <CheckBox
+                    android:id="@+id/cb_lowKcal2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-5dp"
+                    android:onClick="onCheckboxClicked"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:text="기름이 많은 고기(삼겹살, 갈비) 가공식품(햄, 소세지), 생크림케이크, 버터 등을 하루에 자주 먹어요"
+                    android:textColor="@color/theme3"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowRadius="2"
+                    android:text="자주 먹는다의 기준은 하루 세끼에 모두 기름이 많은 고기나 가공식품, 생크림케이크, 버터를 먹는다는 것입니다"
+                    android:textColor="#9A9A9A"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/borderLine10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="#80F4F4F4"
+                android:elevation="4dp"
+                android:src="@drawable/border_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lowKcal_layout2" />
+
+            <LinearLayout
+                android:id="@+id/lowSalt_layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/borderLine10">
+
+                <CheckBox
+                    android:id="@+id/cb_lowSalt1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-5dp"
+                    android:onClick="onCheckboxClicked"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:text="짠 음식, 젓갈류, 장아찌, 자반 등을 하루에 자주 먹어요"
+                    android:textColor="@color/theme3"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:shadowColor="#B3B3B3"
+                    android:shadowRadius="2"
+                    android:text="자주 먹는다의 기준은 하루 세끼에 모두 젓갈류나 장아찌, 자반 등과 같이 짠음식을 먹는다는 것입니다"
+                    android:textColor="#9A9A9A"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
 
             <Button
                 android:id="@+id/btn_recmdCustomDiet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/btn_week"
                 android:backgroundTint="@color/theme1"
                 android:button="@null"
@@ -404,11 +695,30 @@
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 android:padding="12dp"
-                android:text="맞춤 식단 받기"
+                android:text="추천식단 결과 보기"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reference_text" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/reference_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="추천식단 결과는 참고용으로 이용하세요"
+                android:textColor="@color/theme2"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lowSalt_layout1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
 
     <androidx.constraintlayout.widget.Guideline

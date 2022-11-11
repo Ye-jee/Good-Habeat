@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/weekmenu"
+        android:id="@+id/todayMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:shadowColor="#CDCDCD"
@@ -14,26 +14,25 @@
         android:textColor="@color/dark_sea_green"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:text="이번 주 식단"
+        android:text="오늘의 식단"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toTopOf="@id/guideline_top" />
 
     <TextView
-        android:id="@+id/week_date"
+        android:id="@+id/todayDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="2022.10.01~2022.10.07"
-        android:layout_marginBottom="8dp"
         android:shadowColor="#B3B3B3"
         android:shadowRadius="2"
+        android:text="2022.08.28"
         android:textColor="#9A9A9A"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/weekmenu" />
+        app:layout_constraintTop_toBottomOf="@+id/todayMenu" />
 
 
-    <RadioGroup
+    <!--<RadioGroup
         android:id="@+id/week_menu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -169,44 +168,68 @@
             android:text="일"
             android:textColor="@drawable/btn_week_text"
             tools:ignore="TouchTargetSizeCheck" />
-    </RadioGroup>
+    </RadioGroup>-->
 
     <RadioGroup
-        android:id="@+id/group_week"
+        android:id="@+id/group_dayMeal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/week_menu"
+        app:layout_constraintBottom_toTopOf="@id/menu_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/menu_container">
+        app:layout_constraintTop_toBottomOf="@+id/todayDate">
 
         <RadioButton
-            android:id="@+id/week_bf"
+            android:id="@+id/today_breakfast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
+            android:background="@drawable/selector_radio_button"
+            android:button="@null"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:text="아침" />
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="8dp"
+            android:text="아침"
+            android:checked="true"
+            android:textColor="@drawable/selector_radio_text" />
 
         <RadioButton
-            android:id="@+id/week_lc"
+            android:id="@+id/today_lunch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="-2dp"
+            android:background="@drawable/selector_radio_button"
+            android:button="@null"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:text="점심" />
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="8dp"
+            android:text="점심"
+            android:checked="false"
+            android:textColor="@drawable/selector_radio_text" />
 
         <RadioButton
-            android:id="@+id/week_dn"
+            android:id="@+id/today_dinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="-2dp"
+            android:background="@drawable/selector_radio_button"
+            android:button="@null"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:text="저녁" />
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="8dp"
+            android:text="저녁"
+            android:checked="false"
+            android:textColor="@drawable/selector_radio_text" />
 
     </RadioGroup>
 
@@ -215,28 +238,38 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginLeft="-20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="-20dp"
         android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/group_week"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom">
+        app:layout_constraintTop_toBottomOf="@+id/group_dayMeal">
 
     </androidx.recyclerview.widget.RecyclerView>
 
     <Button
-        android:id="@+id/week_menu_btn"
+        android:id="@+id/diet_modifyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_login_overlap"
         android:backgroundTint="@color/main_color1"
-        android:text="식단 수정하기"
+        android:text="식단 수정"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
         app:layout_constraintEnd_toEndOf="@id/guideline_right" />
 
 
+    <Button
+        android:id="@+id/diet_addBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_login_overlap"
+        android:backgroundTint="@color/main_color1"
+        android:text="식단 추가"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
@@ -265,4 +298,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_end="40dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
