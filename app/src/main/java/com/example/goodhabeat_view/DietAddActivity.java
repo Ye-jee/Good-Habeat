@@ -1,8 +1,10 @@
 package com.example.goodhabeat_view;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
@@ -19,15 +21,19 @@ public class DietAddActivity extends AppCompatActivity {
     Calendar calendar = Calendar.getInstance(); // datePickerDialog
     TextView dietAdd_selectDate;
 
+    //음식추가 버튼
+    Button menuPlus_add;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet_add);
 
         //우선 식단 수정 액티비티 코드를 그대로 가져옴!!
+
         getSupportActionBar().hide();
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.dietChangeList_container);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.dietAddList_container);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ArrayList<DietChangeListData> diet_change_list_data = new ArrayList<>();
 
@@ -40,6 +46,19 @@ public class DietAddActivity extends AppCompatActivity {
         }
 
         recyclerView.setAdapter(new com.example.goodhabeat_view.DietChangeListRecyclerViewAdapter(diet_change_list_data));
+
+
+        //음식 추가 버튼 관련
+        menuPlus_add = (Button) findViewById(R.id.menu_plus_add);
+
+        menuPlus_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MenuSelectActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         // 생년월일 입력

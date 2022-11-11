@@ -176,13 +176,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/menu_container"
+        app:layout_constraintBottom_toTopOf="@id/menuDay_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/todayDate">
 
         <RadioButton
-            android:id="@+id/today_breakfast"
+            android:id="@+id/someday_breakfast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_radio_button"
@@ -198,7 +198,7 @@
             android:textColor="@drawable/selector_radio_text" />
 
         <RadioButton
-            android:id="@+id/today_lunch"
+            android:id="@+id/someday_lunch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="-2dp"
@@ -215,7 +215,7 @@
             android:textColor="@drawable/selector_radio_text" />
 
         <RadioButton
-            android:id="@+id/today_dinner"
+            android:id="@+id/someday_dinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="-2dp"
@@ -234,7 +234,7 @@
     </RadioGroup>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/menu_container"
+        android:id="@+id/menuDay_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginLeft="-20dp"

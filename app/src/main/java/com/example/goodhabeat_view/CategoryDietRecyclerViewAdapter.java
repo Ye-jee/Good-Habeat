@@ -62,7 +62,7 @@ public class CategoryDietRecyclerViewAdapter extends RecyclerView.Adapter<Catego
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            diet_img = (ImageView) itemView.findViewById(R.id.menu_img_day);
+            diet_img = (ImageView) itemView.findViewById(R.id.menu_pic_day);
             diet_title = (TextView) itemView.findViewById(R.id.diet_title);
             diet_food = (TextView) itemView.findViewById(R.id.diet_food);
             diet_information = (TextView) itemView.findViewById(R.id.diet_information);

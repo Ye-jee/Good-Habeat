@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class MenuDayRecyclerViewAdapter extends RecyclerView.Adapter<MenuDayRecyclerViewAdapter.ViewHolder> {
-    ArrayList<com.example.goodhabeat_view.MenuDayData> data;
+    ArrayList<MenuDayData> data;
 
-    public MenuDayRecyclerViewAdapter(ArrayList<com.example.goodhabeat_view.MenuDayData> data) { this.data = data; }
+    public MenuDayRecyclerViewAdapter(ArrayList<MenuDayData> data) { this.data = data; }
 
     @NonNull
     @Override
@@ -65,7 +65,7 @@ public class MenuDayRecyclerViewAdapter extends RecyclerView.Adapter<MenuDayRecy
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final com.example.goodhabeat_view.MenuDayData item = data.get(position);
+        final MenuDayData item = data.get(position);
         holder.menuPicId.setImageResource(item.getMenuPicId());
         holder.menuName.setText(item.getMenuName());
         holder.menuText.setText(item.getMenuText());
@@ -81,7 +81,7 @@ public class MenuDayRecyclerViewAdapter extends RecyclerView.Adapter<MenuDayRecy
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            menuPicId = (ImageView) itemView.findViewById(R.id.menu_pic);
+            menuPicId = (ImageView) itemView.findViewById(R.id.menu_pic_day);
             menuName = (TextView) itemView.findViewById(R.id.menu_name);
             menuText = (TextView) itemView.findViewById(R.id.menu_text);
         }

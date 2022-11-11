@@ -28,10 +28,12 @@ public class MenuSelectActivity extends AppCompatActivity {
         menuSelect_viewPagerAdapter = new com.example.goodhabeat_view.MenuSelect_ViewPagerAdapter(getSupportFragmentManager());
 
         tabLayout = findViewById(R.id.tabLayout);
-
         viewPager.setAdapter(menuSelect_viewPagerAdapter);
-
         tabLayout.setupWithViewPager(viewPager);
+
+
+
+
 
     }
 }

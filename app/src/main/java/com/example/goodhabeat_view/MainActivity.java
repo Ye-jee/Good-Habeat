@@ -131,11 +131,11 @@ public class MainActivity extends AppCompatActivity {
         indicator = findViewById(R.id.indicator);
         indicator.setViewPager(swipeableViewPager);
 
-        //상단 메뉴 사진 클릭시 음식메뉴 리스트 이동
+        //상단 메뉴 사진 클릭시, 오늘의 메뉴 페이지 이동
         menu_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MenuDayActivity.class);
                 startActivity(intent);
             }
         });
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        /*RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         url="http://192.168.0.58:8080/capston/exprot2.jsp";
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 url, new Response.Listener<String>() {
@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 });
-        requestQueue.add(stringRequest);
+        requestQueue.add(stringRequest)*/;
 
 
         //메인 중간에 있는 카테고리 텍스트를 클릭하면, 해당 카테고리 탭에 해당하는 페이지로 이동하는 코드

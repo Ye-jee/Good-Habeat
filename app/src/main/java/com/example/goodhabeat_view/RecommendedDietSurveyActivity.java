@@ -14,21 +14,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
-import org.w3c.dom.Text;
-
-public class ChallengeRecommandDietActivity extends AppCompatActivity {
+public class RecommendedDietSurveyActivity extends AppCompatActivity {
 
     CheckBox cb_single, cb_weight, cb_sugar;
 
@@ -51,7 +42,7 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_challenge_recommand_diet);
+        setContentView(R.layout.activity_recommanded_diet_survey);
 
         cb_single = (CheckBox) findViewById(R.id.cb_single);
         cb_weight = (CheckBox) findViewById(R.id.cb_weight);
@@ -118,7 +109,7 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
 
                 //CustomToast("맞춤 식단 설정이 완료되었습니다.");
 
-                Intent intent = new Intent(getApplicationContext(), ChallengeRecommandDietActivity2.class);
+                Intent intent = new Intent(getApplicationContext(), RecommendedDietResultActivity.class);
                 startActivity(intent);
 
             }
@@ -196,9 +187,9 @@ public class ChallengeRecommandDietActivity extends AppCompatActivity {
         if(view.getId() == R.id.cb_weight) {
             if(checked) {
 
-                dialogView_hw = (View) View.inflate(ChallengeRecommandDietActivity.this, R.layout.challenge_hw_dialog, null);
+                dialogView_hw = (View) View.inflate(RecommendedDietSurveyActivity.this, R.layout.challenge_hw_dialog, null);
 
-                AlertDialog.Builder alertDialog_hw = new AlertDialog.Builder(ChallengeRecommandDietActivity.this);
+                AlertDialog.Builder alertDialog_hw = new AlertDialog.Builder(RecommendedDietSurveyActivity.this);
 
                 //hwDialog.setTitle("현재 몸무게와 목표 몸무게를 입력하세요.");
 

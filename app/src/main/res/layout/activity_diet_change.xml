@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/diet_change_today">
 
         <RadioButton
-            android:id="@+id/today_breakfast"
+            android:id="@+id/someday_breakfast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_radio_button"
@@ -60,7 +60,7 @@
             android:textColor="@drawable/selector_radio_text" />
 
         <RadioButton
-            android:id="@+id/today_lunch"
+            android:id="@+id/someday_lunch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="-2dp"
@@ -77,7 +77,7 @@
             android:textColor="@drawable/selector_radio_text" />
 
         <RadioButton
-            android:id="@+id/today_dinner"
+            android:id="@+id/someday_dinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="-2dp"
@@ -245,20 +245,9 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </HorizontalScrollView>
 
-    <Button
-        android:id="@+id/select_menu_select"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_login_overlap"
-        android:backgroundTint="@color/dark_sea_green"
-        android:text="수정 완료"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right" />
-
 
     <Button
-        android:id="@+id/menu_plus"
+        android:id="@+id/menu_plus_change"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_gravity="center"
@@ -273,6 +262,30 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="@+id/group_dayMeal"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+    <Button
+        android:id="@+id/menu_change_complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_login_overlap"
+        android:backgroundTint="@color/dark_sea_green"
+        android:text="수정 완료"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dietAddList_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/menu_change_complete"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/menu_plus_change" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
@@ -312,19 +325,6 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/group_dayMeal" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/dietChangeList_container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/select_menu_select"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/menu_plus" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
