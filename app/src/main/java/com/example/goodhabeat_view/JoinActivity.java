@@ -106,7 +106,7 @@ public class JoinActivity extends AppCompatActivity {
 
         //이용약관 텍스트 스크롤
         tvUserAdmin.setMovementMethod(new ScrollingMovementMethod());
-
+        /*
         btnID.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,20 +120,7 @@ public class JoinActivity extends AppCompatActivity {
                 }
             }
         });
-
-        btnNick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String inputNick = etJoinNick.getText().toString();
-                String comNick = "가나다라";
-                if(inputNick.equals(comNick)) {
-                    Toast.makeText(getApplicationContext(), "이미 존재하는 닉네임입니다. 다시 입력해주세요.", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "사용 가능한 닉네임입니다", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        */
 
         // 생년월일 입력
         DatePickerDialog birthPicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -154,15 +141,18 @@ public class JoinActivity extends AppCompatActivity {
 
 
         //EditText 비밀번호와 비밀번호 확인의 내용이 같은지 비교! 우선 버튼을 통해 - Toast 메시지를 통해 알려줌!
+        //(유나 수정 _ 22/11/04) - System.out.println 추가, + 굳이 서버에서 비교할 필요 없음.
         btnPwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String pwd = etJoinPwd.getText().toString();
                 String pwd_check = etJoinPwd_check.getText().toString();
                 if(pwd.equals(pwd_check)) {
+                    System.out.println("비밀번호 일치");
                     Toast.makeText(getApplicationContext(), "비밀번호가 일치합니다.", Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    System.out.println("비밀번호 불일치");
                     Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다. 다시 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -193,7 +183,115 @@ public class JoinActivity extends AppCompatActivity {
 
         //가입하기 버튼을 누르면, DB에 사용자 정보가 저장이 되고
         //어느 화면으로 넘어가야 하나??
-        
+
+
+
+        // 추가 --------------------------------------------------------------------------------------------------------------------------------------------------------
+        //id 중복 확인 버튼
+        // (유나 수정 _ 22/11/04) - node.js와 연결은 가능한데 response 응답이 제대로 되질 않음
+
+        String url_id = "http://10.0.2.2:3000/id_overlap";
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        btnID.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String id = etJoinID.getText().toString();
+
+                StringRequest request = new StringRequest(
+                        Request.Method.POST,
+                        url_id,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                if(response.equals("1")){
+                                    //1이면 사용 가능
+                                    System.out.println(response + "아이디 사용 가능");
+                                    Toast.makeText(getApplicationContext(), "사용 가능한 아이디입니다", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    //2면 사용 불가
+                                    System.out.println(response+ "아이디 사용 불가능");
+                                    Toast.makeText(getApplicationContext(), "사용 불가능한 아이디입니다", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                System.out.println(error.getMessage());
+                            }
+                        }
+                ) {
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+
+                        params.put("id", id);
+
+                        return params;
+                    }
+                };
+                requestQueue.add(request);
+
+            }
+        }); // btnID 클릭 리스너 버튼 끝 */
+
+
+
+        // 추가 --------------------------------------------------------------------------------------------------------------------------------------------------------
+        //닉네임 중복 확인 버튼
+        // (유나 수정 _ 22/11/04) - node.js와 연결은 가능한데 response 응답이 제대로 되질 않음
+
+
+        String url_nick = "http://10.0.2.2:3000/nick_overlap";
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        btnNick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String nickName = etJoinNick.getText().toString();
+
+                StringRequest request = new StringRequest(
+                        Request.Method.POST,
+                        url_nick,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                if(response == "yes" ) {
+                                    //1이면 사용 가능
+                                    System.out.println(response + "  사용 가능");
+                                    Toast.makeText(getApplicationContext(), "사용 가능한 닉네임입니다", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    //2면 사용 불가
+                                    System.out.println(response + "  사용 불가");
+                                    Toast.makeText(getApplicationContext(), "이미 존재하는 닉네임입니다. 다시 입력해주세요.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                System.out.println(error.getMessage());
+                            }
+                        }
+                ) {
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+
+                        params.put("nickname", nickName);
+
+                        return params;
+                    }
+                };
+                requestQueue.add(request);
+
+            }
+        }); // btnID 클릭 리스너 버튼 끝 */
+
+
         //--------------------------------------------------------------------------------------------------------------------------------------------------------
         // join버튼 누를 때 node.js -> db 연결
         // (유나 수정 _ 22/10/06) - post 방식 추가, 예지가 작성한 volley 백업 후 삭제함
@@ -201,7 +299,7 @@ public class JoinActivity extends AppCompatActivity {
         // (유나 수정 _ 22/10/09) - node.js를 통해 db에 회원정보 저장되는 것 확인
 
 
-        String url = "http://10.0.2.2:3000/delivery";
+        String url_join = "http://10.0.2.2:3000/delivery";
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
         btnJoin.setOnClickListener(new View.OnClickListener() {
@@ -210,6 +308,7 @@ public class JoinActivity extends AppCompatActivity {
 
                 String id = etJoinID.getText().toString();
                 String pwd = etJoinPwd.getText().toString();
+                String pwd_check = etJoinPwd_check.getText().toString();
                 String nickName = etJoinNick.getText().toString();
                 String birth = tvJoinBirth.getText().toString();
                 String height = etJoinHeight.getText().toString();
@@ -219,7 +318,7 @@ public class JoinActivity extends AppCompatActivity {
 
             StringRequest request = new StringRequest(
                     Request.Method.POST,
-                    url,
+                    url_join,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -248,6 +347,7 @@ public class JoinActivity extends AppCompatActivity {
                     params.put("nickname", nickName);
                     params.put("id", id);
                     params.put("password", pwd);
+                    params.put("password_check", pwd_check);
                     params.put("email", email);
                     params.put("birth", birth);
                     params.put("height", height);
