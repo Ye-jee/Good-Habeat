@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/round_rec_background_community"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/commu_user_pic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/community_person01" />
+
+        <TextView
+            android:id="@+id/commu_user_nicName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="-5dp"
+            android:text="사용자 닉네임1"
+            android:textColor="@color/theme1"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/commu_user_pic"
+            app:layout_constraintTop_toTopOf="@+id/commu_user_pic" />
+
+        <TextView
+            android:id="@+id/commu_create_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:text="2022.08.28"
+            android:textColor="@color/theme2"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/commu_user_pic"
+            app:layout_constraintTop_toBottomOf="@+id/commu_user_nicName" />
+
+        <TextView
+            android:id="@+id/commu_create_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="11:30"
+            android:textColor="@color/theme2"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@+id/commu_create_date"
+            app:layout_constraintStart_toEndOf="@+id/commu_create_date"
+            app:layout_constraintTop_toTopOf="@+id/commu_create_date" />
+
+        <TextView
+            android:id="@+id/commu_content_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:text="늦은 아침으로 샐러드 먹었어요! 맛있네요 ^ㅁ^"
+            android:textColor="@color/theme3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/commu_user_pic"
+            app:layout_constraintTop_toBottomOf="@+id/commu_user_pic" />
+
+        <ImageView
+            android:id="@+id/commu_content_img"
+            android:layout_width="250dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/commu_content_text"
+            app:srcCompat="@drawable/community_img_salad"
+            tools:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/commu_heart_img"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/commu_heart_number"
+            app:layout_constraintEnd_toStartOf="@+id/commu_heart_number"
+            app:layout_constraintTop_toTopOf="@+id/commu_heart_number"
+            app:srcCompat="@drawable/community_heart_empty" />
+
+        <TextView
+            android:id="@+id/commu_heart_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:text="10"
+            android:textColor="@color/theme3"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/commu_content_img" />
+
+        <TextView
+            android:id="@+id/commu_delete_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:text="삭제"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/commu_user_nicName" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

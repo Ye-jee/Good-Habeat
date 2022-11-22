@@ -161,9 +161,13 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
 
                 }*/
                 else if(id == R.id.menu_community) {
-                    Toast.makeText(getApplicationContext(), "커뮤니티", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "커뮤니티", Toast.LENGTH_SHORT).show();
 
                     //커뮤니티 화면으로 이동하는 페이지 코드 입력 예정
+                    //커뮤니티 페이지로 이동하는 코드
+                    Intent intent = new Intent(getApplicationContext(), CommunityActivity.class);
+                    startActivity(intent);
+
                 }
                 else if(id == R.id.menu_setting) {
                     //설정 페이지로 이동하는 코드

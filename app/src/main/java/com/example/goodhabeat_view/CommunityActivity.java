@@ -1,22 +1,24 @@
 package com.example.goodhabeat_view;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class SettingsActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class CommunityActivity extends AppCompatActivity {
 
     //네비게이션 관련 코드
     DrawerLayout drawerLayout;
@@ -28,15 +30,40 @@ public class SettingsActivity extends AppCompatActivity {
     SharedPreferences preferences;
     TextView tvUserName;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_community);
 
         //타이틀바 없애는 코드
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+        getSupportActionBar().hide();
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.community_list_container);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ArrayList<com.example.goodhabeat_view.CommunityData> community_data = new ArrayList<>();
+
+        //삭제버튼은 내 게시글에만 보여야 됨!!! - 리사이클러뷰에서는 어떻게 해야 되지?
+
+        int user_pic[] = {R.drawable.community_person01, R  .drawable.community_person02, R.drawable.community_person03};
+        String user_nikName[] = {"user_name1", "로그인 사용자", "user_name2"};
+        String create_date[] = {"2022.04.20", "2022.08.28", "2022.10.16"};
+        String create_time[] = {"09:22", "10:11", "14:20"};
+        String content_text[] = {"일어나자마자 아침으로 샐러드를 만들어 먹었어요! 뿌듯하다!",
+                                    "오늘 아침으로 두부 샐러드를 먹었습니다 -ㅁ-",
+                                    "샐러드도 치킨이 들어가니 먹을만 하네요...!"};
+        int content_img[] = {R.drawable.community_img_salad, R.drawable.community_img_salad2, R.drawable.community_img_salad3};
+        int heart_img[] = {R.drawable.community_heart_fil, R.drawable.community_heart_empty, R.drawable.community_heart_empty};
+        String heart_number[] = {"152", "47" ,"66"};
+        String delete_text[] = {"", "삭제", ""};
+
+        for(int i = 0; i< user_pic.length; i++){
+            com.example.goodhabeat_view.CommunityData dataSet = new com.example.goodhabeat_view.CommunityData(user_pic[i], user_nikName[i], create_date[i], create_time[i],
+                                            content_text[i], content_img[i], heart_img[i], heart_number[i], delete_text[i]);
+            community_data.add(dataSet);
+        }
+
+        recyclerView.setAdapter(new CommunityRecyclerViewAdapter(community_data));
+
 
 
         //네비게이션 관련 코드

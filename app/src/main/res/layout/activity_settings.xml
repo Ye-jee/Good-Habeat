@@ -264,7 +264,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="저당 저칼로리"
+            android:text="간편식 | 저당 | 저칼로리"
             android:textColor="@color/theme2"
             android:textSize="16sp"
             android:textStyle="bold"

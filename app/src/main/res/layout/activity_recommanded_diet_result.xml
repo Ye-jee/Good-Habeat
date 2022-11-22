@@ -51,6 +51,37 @@
         app:layout_constraintTop_toBottomOf="@+id/text_subtitle" />
 
     <TextView
+        android:id="@+id/tv_highProt"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/button_custom"
+        android:gravity="center"
+        android:text="고단백질"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_conven"
+        app:layout_constraintTop_toTopOf="@+id/tv_conven" />
+
+    <TextView
+        android:id="@+id/tv_vitamin"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/button_custom"
+        android:gravity="center"
+        android:text="비타민/무기질"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_conven" />
+
+    <TextView
         android:id="@+id/tv_lowCal"
         android:layout_width="140dp"
         android:layout_height="80dp"
@@ -63,70 +94,39 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_conven"
-        app:layout_constraintTop_toTopOf="@+id/tv_conven" />
-
-    <TextView
-        android:id="@+id/tv_highCal"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/button_custom"
-        android:gravity="center"
-        android:text="고칼로리"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_conven" />
+        app:layout_constraintStart_toEndOf="@+id/tv_vitamin"
+        app:layout_constraintTop_toTopOf="@+id/tv_vitamin" />
 
     <TextView
         android:id="@+id/tv_lowSalt"
         android:layout_width="140dp"
         android:layout_height="80dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/button_custom"
         android:gravity="center"
         android:text="저염"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_highCal"
-        app:layout_constraintTop_toTopOf="@+id/tv_highCal" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_vitamin" />
 
     <TextView
         android:id="@+id/tv_lowSugar"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/button_custom"
-        android:gravity="center"
-        android:text="저당"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_highCal" />
-
-    <TextView
-        android:id="@+id/tv_lowFat"
         android:layout_width="140dp"
         android:layout_height="80dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/button_custom"
         android:gravity="center"
-        android:text="저지방"
+        android:text="저당"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_lowSugar"
-        app:layout_constraintTop_toTopOf="@+id/tv_lowSugar" />
+        app:layout_constraintStart_toEndOf="@+id/tv_lowSalt"
+        app:layout_constraintTop_toTopOf="@+id/tv_lowSalt" />
 
     <Button
         android:id="@+id/btn_selectCustomDiet"

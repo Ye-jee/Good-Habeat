@@ -3,13 +3,15 @@
     android:shape="rectangle">
 
     <!-- 테두리 부분 -->
-    <stroke
+    <!--<stroke
         android:width="2.5dp"
-        android:color="@color/theme2" />
+        android:color="@color/theme2" />-->
 
     <!-- 배경색 부분 -->
+    <!--<solid
+        android:color="@color/toast_background" />-->
     <solid
-        android:color="@color/toast_background" />
+        android:color="#D3E6D2" />
 
     <!-- 패팅 부분 -->
     <padding
@@ -19,7 +21,9 @@
         android:top="15dp" />
 
     <!-- 테두리 모서리 부분 둥글게 설정 -->
+    <!--<corners
+        android:radius="10dp" />-->
     <corners
-        android:radius="10dp" />
+        android:radius="15dp" />
 
 </shape>

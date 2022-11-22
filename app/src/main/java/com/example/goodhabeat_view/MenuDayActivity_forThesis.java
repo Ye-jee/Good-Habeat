@@ -1,22 +1,27 @@
 package com.example.goodhabeat_view;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class SettingsActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class MenuDayActivity_forThesis extends AppCompatActivity {
 
     //네비게이션 관련 코드
     DrawerLayout drawerLayout;
@@ -29,14 +34,75 @@ public class SettingsActivity extends AppCompatActivity {
     TextView tvUserName;
 
 
+    RadioGroup group_dayMeal;
+    RadioButton today_bf, today_lc, today_dn;
+
+    //SharedPreferences preferences;
+
+    //오늘 날짜
+    TextView todayDate;
+
+    //식단 수정, 추가 버튼
+    Button diet_modifyBtn;
+    Button diet_addBtn;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_menu_day_for_thesis);
 
-        //타이틀바 없애는 코드
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+        getSupportActionBar().hide();
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.menuDay_container);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        ArrayList<MenuDayData> menu_day_data = new ArrayList<>();
+
+
+        todayDate = (TextView) findViewById(R.id.todayDate);
+
+        group_dayMeal = (RadioGroup) findViewById(R.id.group_dayMeal);
+        today_bf = (RadioButton) findViewById(R.id.someday_breakfast);
+        today_lc = (RadioButton) findViewById(R.id.someday_lunch);
+        today_dn = (RadioButton) findViewById(R.id.someday_dinner);
+
+        diet_modifyBtn = (Button) findViewById(R.id.diet_modifyBtn);    // 식단 수정 버튼
+        diet_addBtn = (Button) findViewById(R.id.diet_addBtn);          //식단 추가 버튼
+
+
+        int menu_pic_id[] = {R.drawable.menu_select_img_brown_rice/*, R.drawable.menu_select_img_augh_soup, R.drawable.menu_select_img_rolled_omelet*/};
+        String menu_name[] = {"현미밥"/*, "아욱된장국", "계란말이"*/};
+        String menu_text[] = {"현미밥은 소화에 좋습니다",
+                    /*"아욱된장국은 혈액순환에 좋습니다.",
+                    "계란말이에는 단백질이 풍부합니다. "*/};
+
+        for (int i = 0; i <menu_pic_id.length; i++) {
+            MenuDayData dataSet = new MenuDayData(menu_pic_id[i], menu_name[i], menu_text[i]);
+            menu_day_data.add(dataSet);
+        }
+
+        recyclerView.setAdapter(new MenuDayRecyclerViewAdapter(menu_day_data));
+
+
+
+        // 식단 수정 페이지로 이동
+        diet_modifyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), DietChangeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //식단 추가 페이지로 이동
+        diet_addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), DietAddActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         //네비게이션 관련 코드
