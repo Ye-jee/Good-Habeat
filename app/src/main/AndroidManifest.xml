@@ -12,10 +12,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Capston"
-        android:usesCleartextTraffic="true" >
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CategoryDietActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ChallengeRecordActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +42,7 @@
         </activity>
         <activity
             android:name=".RecipeActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +51,7 @@
         </activity>
         <activity
             android:name=".MenuSelectActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,8 +59,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MenuActivity"
-            android:exported="true" >
+            android:name=".MenuDayActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,7 +69,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,7 +78,7 @@
         </activity>
         <activity
             android:name=".ChallengeActivity_Setting"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -68,8 +86,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ChallengeRecommandDietActivity2"
-            android:exported="true" >
+            android:name=".RecommendedDietResultActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -77,8 +95,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ChallengeRecommandDietActivity"
-            android:exported="true" >
+            android:name=".RecommendedDietSurveyActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -87,7 +105,7 @@
         </activity>
         <activity
             android:name=".ChallengeStartActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -96,7 +114,7 @@
         </activity>
         <activity
             android:name=".ChallengeActivity_Not"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -105,7 +123,7 @@
         </activity>
         <activity
             android:name=".JoinActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -114,7 +132,7 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -123,23 +141,49 @@
         </activity>
         <activity
             android:name=".MyRecordActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".introActivity"
+            android:name=".IntroActivity"
             android:exported="true" >
+            android:name=".introActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DietChangeActivity"
+            android:exported="true" >
+            android:name=".introActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".DietAddActivity"
+            android:exported="true" >
+            android:name=".introActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+
     </application>
 
 </manifest>

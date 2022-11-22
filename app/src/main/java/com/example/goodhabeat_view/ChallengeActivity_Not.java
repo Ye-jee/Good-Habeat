@@ -79,7 +79,7 @@ public class ChallengeActivity_Not extends AppCompatActivity {
         //네비게이션 헤더
         navHeader = navigationView.getHeaderView(0);
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        /*navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -106,15 +106,15 @@ public class ChallengeActivity_Not extends AppCompatActivity {
                     startActivity(intent);
 
                 }
-                /*else if(id == R.id.menu_community) {
+                *//*else if(id == R.id.menu_community) {
                     Toast.makeText(getApplicationContext(), "커뮤니티", Toast.LENGTH_SHORT).show();
 
                     //커뮤니티 화면으로 이동하는 페이지 코드 입력 예정
-                }*/
+                }*//*
 
                 return false;
             }
-        });
+        });*/
     }
 
     @Override

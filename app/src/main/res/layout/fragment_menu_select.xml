@@ -75,7 +75,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/menu_plus"
+                android:id="@+id/menu_plus_change"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
