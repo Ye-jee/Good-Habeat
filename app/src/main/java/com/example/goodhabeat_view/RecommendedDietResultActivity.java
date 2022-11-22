@@ -13,17 +13,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-public class ChallengeRecommandDietActivity2 extends AppCompatActivity {
+public class RecommendedDietResultActivity extends AppCompatActivity {
 
     TextView tv_conven, tv_lowCal, tv_highCal, tv_lowSalt, tv_lowSugar, tv_lowFat;
 
@@ -34,7 +27,7 @@ public class ChallengeRecommandDietActivity2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_challenge_recommand_diet2);
+        setContentView(R.layout.activity_recommanded_diet_result);
 
         tv_conven = (TextView) findViewById(R.id.tv_conven);
         tv_lowCal = (TextView) findViewById(R.id.tv_lowCal);

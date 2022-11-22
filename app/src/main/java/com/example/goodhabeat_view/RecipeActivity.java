@@ -18,7 +18,7 @@ public class RecipeActivity extends AppCompatActivity {
         recipe_name = (TextView) findViewById(R.id.recipe_name);
         recipe_howto= (TextView) findViewById(R.id.recipe_howto);
         recipe_ingredient = (TextView) findViewById(R.id.recipe_ingredient);
-        recipe_view = (ImageView) findViewById(R.id.recipe_view);
+        recipe_view = (ImageView) findViewById(R.id.user_profilePic);
 
         recipe_view.setImageResource(R.drawable.berry_yogurt);
 

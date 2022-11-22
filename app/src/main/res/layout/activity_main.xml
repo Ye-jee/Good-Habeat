@@ -14,13 +14,19 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="20dp"
-            android:scrollbarFadeDuration="0">
+            android:scrollbarFadeDuration="0"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="20dp">
+                android:paddingBottom="40dp">
 
 
                 <ImageView
@@ -37,6 +43,7 @@
                     android:id="@+id/today_menu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="-5dp"
                     android:layout_marginBottom="20dp"
                     android:shadowColor="#155A34"
                     android:shadowDx="0"
@@ -46,32 +53,32 @@
                     android:textColor="#FFFFFF"
                     android:textSize="32sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/menu_list"
+                    app:layout_constraintBottom_toTopOf="@+id/menu_img_area"
                     app:layout_constraintStart_toStartOf="@id/guideline_left" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="30dp"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/today_menu"
                     app:layout_constraintStart_toEndOf="@+id/today_menu"
-                    app:layout_constraintTop_toTopOf="@id/guideline_top"
-                    app:layout_constraintBottom_toTopOf="@id/menu_list">
+                    app:layout_constraintTop_toTopOf="@id/guideline_top">
 
                     <TextView
                         android:id="@+id/today_clock"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
-                        android:text="점심"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
                         android:shadowColor="#616161"
                         android:shadowDx="0"
                         android:shadowDy="0"
-                        android:shadowRadius="4"/>
+                        android:shadowRadius="4"
+                        android:text="점심"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/today_clock_text"
@@ -80,75 +87,72 @@
                         android:text="먹을 시간이에요!"
                         android:textColor="#B0FFFFFF"
                         android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
 
-
-                <LinearLayout
-                    android:id="@+id/menu_list"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/menu_img_area"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="150dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="150dp"
                     android:layout_marginRight="20dp"
-                    android:orientation="horizontal"
-                    android:padding="3dp"
                     android:background="@drawable/round_rec_background2"
                     android:elevation="3dp"
+                    android:padding="5dp"
                     app:layout_constraintBottom_toBottomOf="@+id/back"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:id="@+id/breakfast_main"
-                        android:layout_width="0dp"
+                    <com.example.goodhabeat_view.SwipeableViewPager
+                        android:id="@+id/ImageViewPager_swipleable"
+                        android:layout_width="match_parent"
                         android:layout_height="200dp"
-                        android:layout_weight="1"
-                        android:background="#00FFFFFF"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/broccoli"
-                        app:riv_corner_radius_bottom_left="30dp"
-                        app:riv_corner_radius_top_left="30dp" />
+                        android:layout_marginStart="1dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginEnd="1dp"
+                        android:layout_marginBottom="1dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:id="@+id/lunch_main"
-                        android:layout_width="0dp"
-                        android:layout_height="200dp"
-                        android:layout_weight="1"
-                        android:background="#00FFFFFF"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/salad" />
+                    </com.example.goodhabeat_view.SwipeableViewPager>
 
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:id="@+id/dinner_main"
-                        android:layout_width="0dp"
-                        android:layout_height="200dp"
-                        android:layout_weight="1"
-                        android:background="#00FFFFFF"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/salmon"
-                        app:riv_corner_radius_bottom_right="30dp"
-                        app:riv_corner_radius_top_right="30dp" />
+                    <me.relex.circleindicator.CircleIndicator
+                        android:id="@+id/indicator"
+                        android:layout_width="85dp"
+                        android:layout_height="35dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        app:ci_drawable="@drawable/circle_icon_black"
+                        app:ci_height="5dp"
+                        app:ci_margin="4dp"
+                        app:ci_width="5dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
 
-                </LinearLayout>
+                    </me.relex.circleindicator.CircleIndicator>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ImageView
                     android:id="@+id/borderLine1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="50dp"
                     android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="30dp"
+                    android:layout_marginBottom="50dp"
                     android:background="#80F4F4F4"
                     android:elevation="4dp"
                     android:src="@drawable/border_line"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/menu_list" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/menu_img_area" />
 
 
                 <TextView
@@ -157,104 +161,45 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
                     android:background="@drawable/date_text_background"
-                    android:text="Challenge"
-                    android:textColor="@color/colorWhite"
-                    android:textStyle="bold"
                     android:paddingLeft="10dp"
                     android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
                     android:paddingRight="10dp"
+                    android:paddingBottom="2dp"
+                    android:text="Today"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@id/guideline_left"
                     app:layout_constraintTop_toBottomOf="@+id/borderLine1" />
 
-                <LinearLayout
+
+                <TextView
+                    android:id="@+id/tv_TodayDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="23dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintStart_toEndOf="@id/textView0"
-                    app:layout_constraintTop_toBottomOf="@+id/borderLine1">
-
-
-                    <TextView
-                        android:id="@+id/challenge_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="식단 관리 시작한지"
-                        android:textColor="@color/main_text"
-                        android:textStyle="bold"
-                        android:textSize="14dp"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowDx="0"
-                        android:shadowDy="0"
-                        android:shadowRadius="4"
-                        app:layout_constraintStart_toEndOf="@id/textView0"
-                        app:layout_constraintTop_toBottomOf="@+id/borderLine1" />
-
-                    <TextView
-                        android:id="@+id/challenge_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="3dp"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowRadius="4"
-                        android:text="12"
-                        android:textColor="@color/main_text"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                        app:layout_constraintTop_toBottomOf="@+id/borderLine1" />
-
-                    <TextView
-                        android:id="@+id/challenge_text2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="일 째"
-                        android:textColor="@color/main_text"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowRadius="4" />
-
-                </LinearLayout>
-
+                    android:layout_marginStart="12dp"
+                    android:text="2022년 8월 28일"
+                    android:textColor="@color/theme3"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView0"
+                    app:layout_constraintStart_toEndOf="@+id/textView0"
+                    app:layout_constraintTop_toTopOf="@+id/textView0" />
 
                 <LinearLayout
                     android:id="@+id/progress_container"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:orientation="vertical"
-                    android:layout_marginTop="20dp"
                     app:layout_constraintEnd_toEndOf="@id/guideline_right"
                     app:layout_constraintStart_toStartOf="@id/guideline_left"
                     app:layout_constraintTop_toBottomOf="@id/textView0">
-
-                    <TextView
-                        android:id="@+id/goal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_gravity="right"
-                        android:text="목표달성률"
-                        android:textColor="@color/main_text"
-                        />
-
-                    <ProgressBar
-                        android:id="@+id/goal_main_bar"
-                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp"
-                        android:max="100"
-                        android:progress="40"
-                        android:progressDrawable="@drawable/progressbar_progressbar3"/>
 
                     <TextView
                         android:id="@+id/today_cal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:layout_gravity="right"
                         android:text="오늘 섭취한 총 칼로리량"
                         android:textColor="@color/main_text"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -268,7 +213,7 @@
                         android:layout_marginTop="10dp"
                         android:max="2700"
                         android:progress="1900"
-                        android:progressDrawable="@drawable/progressbar_progressbar3"/>
+                        android:progressDrawable="@drawable/progressbar_progressbar3" />
 
 
                 </LinearLayout>
@@ -280,108 +225,258 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="30dp"
-                    android:src="@drawable/border_line"
                     android:background="#80F4F4F4"
                     android:elevation="4dp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/border_line"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/progress_container"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/progress_container" />
 
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/category_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+                    app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                    app:layout_constraintTop_toBottomOf="@+id/borderLine2">
+
+                    <TextView
+                        android:id="@+id/main_convenience_category"
+                        android:layout_width="92dp"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/main_category_custom"
+                        android:gravity="center"
+                        android:text="간편식"
+                        android:textColor="@color/theme1"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/main_highPro_category"
+                        android:layout_width="90dp"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="20dp"
+                        android:background="@drawable/main_category_custom"
+                        android:gravity="center"
+                        android:text="고단백질"
+                        android:textColor="@color/theme1"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/main_convenience_category"
+                        app:layout_constraintTop_toTopOf="@+id/main_convenience_category" />
+
+                    <TextView
+                        android:id="@+id/main_vitamin_mineral_category"
+                        android:layout_width="90dp"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="19dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/main_category_custom"
+                        android:gravity="center"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="15dp"
+                        android:paddingBottom="5dp"
+                        android:text="비타민/무기질"
+                        android:textColor="@color/theme1"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/main_highPro_category"
+                        app:layout_constraintTop_toTopOf="@+id/main_highPro_category" />
+
+                    <TextView
+                        android:id="@+id/main_lowCal_category"
+                        android:layout_width="90dp"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/main_category_custom"
+                        android:gravity="center"
+                        android:text="저칼로리"
+                        android:textColor="@color/theme1"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/main_convenience_category"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/main_convenience_category" />
+
+                    <TextView
+                        android:id="@+id/main_lowSalt_category"
+                        android:layout_width="90dp"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/main_category_custom"
+                        android:gravity="center"
+                        android:text="저염"
+                        android:textColor="@color/theme1"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/main_highPro_category"
+                        app:layout_constraintStart_toStartOf="@+id/main_highPro_category"
+                        app:layout_constraintTop_toBottomOf="@+id/main_highPro_category" />
+
+                    <TextView
+                        android:id="@+id/main_lowSugar_category"
+                        android:layout_width="90dp"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/main_category_custom"
+                        android:gravity="center"
+                        android:text="저당"
+                        android:textColor="@color/theme1"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/main_vitamin_mineral_category"
+                        app:layout_constraintStart_toStartOf="@+id/main_vitamin_mineral_category"
+                        app:layout_constraintTop_toBottomOf="@+id/main_vitamin_mineral_category" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/borderLine3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="#80F4F4F4"
+                    android:elevation="4dp"
+                    android:src="@drawable/border_line"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/category_container" />
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/season_container"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-22dp"
                     android:layout_marginTop="30dp"
+                    android:layout_marginEnd="-22dp"
+                    android:layout_marginBottom="9dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/guideline_right"
                     app:layout_constraintStart_toStartOf="@id/guideline_left"
-                    app:layout_constraintTop_toBottomOf="@+id/borderLine2">
+                    app:layout_constraintTop_toBottomOf="@+id/borderLine3">
 
 
                     <LinearLayout
                         android:id="@+id/title_season"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:layout_marginStart="20dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
                             android:id="@+id/sdd"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            app:srcCompat="@drawable/four_season" />
+                            app:srcCompat="@drawable/season_icon_summer_02" />
 
                         <TextView
                             android:id="@+id/tv_season"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginStart="10dp"
-                            android:text="겨울에 추천하는 제철 음식"
+                            android:gravity="center"
                             android:shadowColor="#B3B3B3"
                             android:shadowDx="0"
                             android:shadowDy="0"
                             android:shadowRadius="4"
-                            android:gravity="center"
+                            android:text="겨울에 추천하는 제철 음식"
                             android:textColor="@color/main_text"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/season_food_img"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:layout_marginLeft="10dp"
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
                         android:layout_marginTop="20dp"
-                        android:background="@drawable/round_background_2"
-                        android:elevation="3dp"
-                        android:scaleType="centerCrop"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/title_season"
-                        tools:srcCompat="@drawable/strawberryy" />
-
-                    <TextView
-                        android:id="@+id/season_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:shadowColor="#B3B3B3"
-                        android:shadowDx="0"
-                        android:shadowDy="0"
-                        android:shadowRadius="4"
-                        android:text="딸기"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/season_food_img"
-                        app:layout_constraintTop_toBottomOf="@id/title_season"
-                        app:layout_constraintBottom_toTopOf="@id/season_exp"/>
-
-
-                    <TextView
-                        android:id="@+id/season_recipe"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="10dp"
-                        android:text="▶ 레시피 보러 가기"
-                        android:textColor="@color/main_color1"
-                        android:textSize="10sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@id/season_food_img"
-                        app:layout_constraintTop_toBottomOf="@id/season_name"/>
-
-                    <TextView
-                        android:id="@+id/season_exp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:text="@string/str_strawberry"
-                        android:textSize="14sp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/round_rec_background_community"
+                        android:elevation="2dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/season_food_img" />
+                        app:layout_constraintTop_toBottomOf="@+id/title_season">
 
+                        <ImageView
+                            android:id="@+id/season_food_img"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="25dp"
+                            android:background="@drawable/round_background_2"
+                            android:elevation="3dp"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:srcCompat="@drawable/strawberryy" />
+
+                        <TextView
+                            android:id="@+id/season_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:shadowColor="#B3B3B3"
+                            android:shadowDx="0"
+                            android:shadowDy="0"
+                            android:shadowRadius="4"
+                            android:text="딸기"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@+id/season_food_img"
+                            app:layout_constraintStart_toStartOf="@+id/season_food_img"
+                            app:layout_constraintTop_toBottomOf="@+id/season_food_img" />
+
+                        <TextView
+                            android:id="@+id/season_exp"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="35dp"
+                            android:layout_marginEnd="25dp"
+                            android:layout_marginBottom="25dp"
+                            android:text="@string/str_strawberry2"
+                            app:layout_constraintBottom_toTopOf="@+id/season_recipe"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/season_food_img"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/season_recipe"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="25dp"
+                            android:text="▶ 레시피 보러 가기"
+                            android:textColor="@color/main_color1"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/season_food_img"
+                            app:layout_constraintTop_toBottomOf="@+id/season_name" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -412,15 +507,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_end="40dp"/>
+                    app:layout_constraintGuide_end="40dp" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         </ScrollView>
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

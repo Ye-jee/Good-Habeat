@@ -1,37 +1,18 @@
 package com.example.goodhabeat_view;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Point;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MenuSelectFragment extends Fragment {
 
@@ -46,7 +27,7 @@ public class MenuSelectFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_menu_select, container, false);
 
-        menu_plus = (Button) view.findViewById(R.id.menu_plus);
+        menu_plus = (Button) view.findViewById(R.id.menu_plus_change);
         menu1_layout = (LinearLayout) view.findViewById(R.id.menu1_layout);
         menu2_layout = (LinearLayout) view.findViewById(R.id.menu2_layout);
         menu3_layout = (LinearLayout) view.findViewById(R.id.menu3_layout);

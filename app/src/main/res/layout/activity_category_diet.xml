@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="#CDCDCD"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="7"
+        android:text="카테고리 별 식단"
+        android:textColor="@color/dark_sea_green"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toTopOf="@id/guideline_top" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/theme1"
+            app:tabGravity="center"
+            app:tabIndicatorColor="@color/colorWhite"
+            app:tabIndicatorGravity="stretch"
+            app:tabMode="scrollable"
+            app:tabTextColor="@color/colorWhite"
+            app:tabSelectedTextColor="@color/theme1">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1번 탭" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2번 탭" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3번 탭" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4번 탭" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem05"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5번 탭" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem06"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6번 탭" />
+
+        </com.google.android.material.tabs.TabLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="40dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

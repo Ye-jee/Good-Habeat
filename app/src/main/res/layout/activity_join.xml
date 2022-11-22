@@ -21,6 +21,7 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
+        android:scrollbars="none"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="100dp"
@@ -472,52 +473,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:src="@drawable/border_line"
                 android:background="#80F4F4F4"
                 android:elevation="4dp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/border_line"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/progress_container"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="이용자 동의"
-                    android:textColor="@color/theme3"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:shadowColor="#B3B3B3"
-                    android:shadowDx="0"
-                    android:shadowDy="0"
-                    android:shadowRadius="4"/>
-
-                <TextView
-                    android:id="@+id/tvUserAdmin"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:scrollbarFadeDuration="50000"
-                    android:scrollbarSize="10dp"
-                    android:scrollbarStyle="outsideInset"
-                    android:scrollbars="vertical"
-                    android:text="@string/user_admin"
-                    android:textColor="@color/dark_gray"
-                    android:textColorHighlight="@color/textHighlight" />
-
-                <CheckBox
-                    android:id="@+id/cbox_agree"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_weight="1"
-                    android:text="동의합니다." />
-            </LinearLayout>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progress_container" />
 
             <Button
                 android:id="@+id/btn_Join"

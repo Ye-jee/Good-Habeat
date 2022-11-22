@@ -94,7 +94,7 @@
 
 
             <ImageView
-                android:id="@+id/borderLine"
+                android:id="@+id/borderLine_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -123,7 +123,7 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/borderLine" />
+                app:layout_constraintTop_toBottomOf="@+id/borderLine_1" />
 
 
 

@@ -5,201 +5,95 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <TextView
-        android:id="@+id/selectmenu"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:shadowColor="#CDCDCD"
+        android:shadowDx="0"
+        android:shadowDy="0"
         android:shadowRadius="7"
+        android:text="메뉴 선택"
         android:textColor="@color/dark_sea_green"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:text="식단 선택하기"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toTopOf="@id/guideline_top" />
 
-    <TextView
-        android:id="@+id/select_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="2022.10.01~2022.10.07"
-        android:layout_marginBottom="8dp"
-        android:shadowColor="#B3B3B3"
-        android:shadowRadius="2"
-        android:textColor="#9A9A9A"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/selectmenu" />
-
-
-    <RadioGroup
-        android:id="@+id/select_group"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/btn_login_overlap"
-        android:gravity="center"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal"
-        android:padding="5dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/select_date"
-        app:layout_constraintBottom_toTopOf="@id/select_container">
+        app:layout_constraintTop_toBottomOf="@+id/tv_title">
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            app:tabGravity="center"
+            app:tabIndicatorColor="@color/theme1"
+            app:tabIndicatorGravity="stretch"
+            app:tabMode="scrollable"
+            app:tabTextColor="@color/theme2"
+            app:tabSelectedTextColor="@color/white">
 
-        <RadioButton
-            android:id="@+id/mon_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/btn_week"
-            android:button="@null"
-            android:gravity="center"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="5dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="5dp"
-            android:text="월"
-            android:textColor="@drawable/btn_week_text"
-            tools:ignore="TouchTargetSizeCheck" />
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1번 탭" />
 
-        <RadioButton
-            android:id="@+id/tue_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_week"
-            android:button="@null"
-            android:gravity="center"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="5dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="5dp"
-            android:text="화"
-            android:textColor="@drawable/btn_week_text"
-            tools:ignore="TouchTargetSizeCheck" />
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2번 탭" />
 
-        <RadioButton
-            android:id="@+id/wed_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_week"
-            android:button="@null"
-            android:gravity="center"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="5dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="5dp"
-            android:text="수"
-            android:textColor="@drawable/btn_week_text"
-            tools:ignore="TouchTargetSizeCheck" />
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3번 탭" />
 
-        <RadioButton
-            android:id="@+id/thr_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            android:background="@drawable/btn_week"
-            android:button="@null"
-            android:gravity="center"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="5dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="5dp"
-            android:text="목"
-            android:textColor="@drawable/btn_week_text"
-            tools:ignore="TouchTargetSizeCheck" />
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4번 탭" />
 
-        <RadioButton
-            android:id="@+id/fri_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_week"
-            android:button="@null"
-            android:gravity="center"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="5dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="5dp"
-            android:text="금"
-            android:textColor="@drawable/btn_week_text"
-            tools:ignore="TouchTargetSizeCheck" />
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem05"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5번 탭" />
 
-        <RadioButton
-            android:id="@+id/sat_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_week"
-            android:button="@null"
-            android:gravity="center"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="5dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="5dp"
-            android:text="토"
-            android:textColor="@drawable/btn_week_text"
-            tools:ignore="TouchTargetSizeCheck" />
+        </com.google.android.material.tabs.TabLayout>
+    </LinearLayout>
 
-        <RadioButton
-            android:id="@+id/sun_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/btn_week"
-            android:button="@null"
-            android:gravity="center"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="5dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="5dp"
-            android:text="일"
-            android:textColor="@drawable/btn_week_text"
-            tools:ignore="TouchTargetSizeCheck" />
-    </RadioGroup>
-
-    <FrameLayout
-        android:id="@+id/select_container"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="60dp"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/select_group">
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-    </FrameLayout>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <Button
-        android:id="@+id/select_menu_select"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_login_overlap"
-        android:backgroundTint="@color/main_color1"
-        android:text="수정 완료"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right" />
-
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
@@ -228,4 +122,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_end="40dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

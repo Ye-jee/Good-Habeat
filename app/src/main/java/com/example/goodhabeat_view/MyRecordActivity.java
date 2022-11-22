@@ -91,7 +91,7 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
 
         // bmi
         bmi_img = (ImageView) findViewById(R.id.img_bmi);
-        bmi_img.setColorFilter(Color.argb(30,000,000,000));
+        //bmi_img.setColorFilter(Color.argb(30,000,000,000));       //사진 어둡게 함
 
         bmi_num = (TextView) findViewById(R.id.bmi_num);
         bmi = 21.8;
@@ -151,7 +151,7 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
                     startActivity(intent);
 
                 }
-                else if(id == R.id.menu_challenge) {
+                /*else if(id == R.id.menu_challenge) {
                     //Toast.makeText(getApplicationContext(), "챌린지", Toast.LENGTH_SHORT).show();
 
                     //if문으로 챌린지가 설정되어 있지 않은 액티비티/프레그먼트 또는 챌린지가 설정되어 있는 액티비티/프레그먼트로 이동하게 하는 코드 입력 예정
@@ -159,12 +159,17 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
                     Intent intent = new Intent(getApplicationContext(), ChallengeActivity_Not.class);
                     startActivity(intent);
 
-                }
-                /*else if(id == R.id.menu_community) {
+                }*/
+                else if(id == R.id.menu_community) {
                     Toast.makeText(getApplicationContext(), "커뮤니티", Toast.LENGTH_SHORT).show();
 
                     //커뮤니티 화면으로 이동하는 페이지 코드 입력 예정
-                }*/
+                }
+                else if(id == R.id.menu_setting) {
+                    //설정 페이지로 이동하는 코드
+                    Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                    startActivity(intent);
+                }
 
                 return false;
             }

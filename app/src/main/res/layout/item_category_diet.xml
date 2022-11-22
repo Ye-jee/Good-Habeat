@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/round_rec_background4"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/menu_pic_day"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/healthy_diet_ex01"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--app:riv_corner_radius="15dp"-->
+
+        <TextView
+            android:id="@+id/diet_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="4"
+            android:text="삼치간장조림 식단"
+            android:textColor="@color/main_text"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/menu_pic_day"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/diet_food"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="2"
+            android:text="수수밥 근대국 삼치간장조림 취나물볶음 총각김치"
+            android:textColor="#9A9A9A"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/menu_pic_day"
+            app:layout_constraintTop_toBottomOf="@+id/diet_title" />
+
+        <TextView
+            android:id="@+id/diet_information"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="2"
+            android:text="단백질 23g 지방 6g 당 120g"
+            android:textColor="#9A9A9A"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/menu_pic_day"
+            app:layout_constraintTop_toBottomOf="@+id/diet_food" />
+
+        <TextView
+            android:id="@+id/diet_calories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="2"
+            android:text="619kcal"
+            android:textColor="#9A9A9A"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/menu_pic_day"
+            app:layout_constraintTop_toBottomOf="@+id/diet_information" />
+
+        <TextView
+            android:id="@+id/diet_disease"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="12dp"
+            android:shadowColor="#B3B3B3"
+            android:shadowRadius="2"
+            android:text="질병 : 치매 예방"
+            android:textColor="#9A9A9A"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/menu_pic_day"
+            app:layout_constraintTop_toBottomOf="@+id/diet_calories" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.cardview.widget.CardView>

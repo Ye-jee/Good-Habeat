@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/diet_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="#CDCDCD"
+        android:shadowRadius="7"
+        android:text="식단 수정"
+        android:textColor="@color/dark_sea_green"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toTopOf="@id/guideline_top" />
+
+    <TextView
+        android:id="@+id/diet_change_today"
+        android:layout_width="90dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:shadowColor="#B3B3B3"
+        android:shadowRadius="2"
+        android:text="2022.08.28"
+        android:textColor="#9A9A9A"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/diet_add" />
+
+    <RadioGroup
+        android:id="@+id/group_dayMeal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diet_change_today">
+
+        <RadioButton
+            android:id="@+id/someday_breakfast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_radio_button"
+            android:button="@null"
+            android:checked="true"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="8dp"
+            android:text="아침"
+            android:textColor="@drawable/selector_radio_text" />
+
+        <RadioButton
+            android:id="@+id/someday_lunch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-2dp"
+            android:background="@drawable/selector_radio_button"
+            android:button="@null"
+            android:checked="false"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="8dp"
+            android:text="점심"
+            android:textColor="@drawable/selector_radio_text" />
+
+        <RadioButton
+            android:id="@+id/someday_dinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-2dp"
+            android:background="@drawable/selector_radio_button"
+            android:button="@null"
+            android:checked="false"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="8dp"
+            android:text="저녁"
+            android:textColor="@drawable/selector_radio_text" />
+
+    </RadioGroup>
+
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:scrollbars="none"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/group_dayMeal">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/totalKcal_img"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/diet_icon_total_kcal" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="총칼로리량"
+                android:textColor="@color/theme3"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/totalKcal_img"
+                app:layout_constraintStart_toStartOf="@+id/totalKcal_img"
+                app:layout_constraintTop_toBottomOf="@+id/totalKcal_img" />
+
+            <TextView
+                android:id="@+id/totalKcal_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="763kcal"
+                app:layout_constraintEnd_toEndOf="@+id/totalKcal_img"
+                app:layout_constraintStart_toStartOf="@+id/totalKcal_img"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <ImageView
+                android:id="@+id/totalCarb_img"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="30dp"
+                app:layout_constraintStart_toEndOf="@+id/totalKcal_img"
+                app:layout_constraintTop_toTopOf="@+id/totalKcal_img"
+                app:srcCompat="@drawable/diet_icon_total_carb_01" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="총탄수화물량"
+                android:textColor="@color/theme3"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/totalCarb_img"
+                app:layout_constraintStart_toStartOf="@+id/totalCarb_img"
+                app:layout_constraintTop_toBottomOf="@+id/totalCarb_img" />
+
+            <TextView
+                android:id="@+id/totalCarb_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="68g"
+                app:layout_constraintEnd_toEndOf="@+id/totalCarb_img"
+                app:layout_constraintStart_toStartOf="@+id/totalCarb_img"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <ImageView
+                android:id="@+id/totalProt_img"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="30dp"
+                app:layout_constraintStart_toEndOf="@+id/totalCarb_img"
+                app:layout_constraintTop_toTopOf="@+id/totalCarb_img"
+                app:srcCompat="@drawable/diet_icon_total_prot_01" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="총단백질량"
+                android:textColor="@color/theme3"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/totalProt_img"
+                app:layout_constraintStart_toStartOf="@+id/totalProt_img"
+                app:layout_constraintTop_toBottomOf="@+id/totalProt_img" />
+
+            <TextView
+                android:id="@+id/totalProt_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="52g"
+                app:layout_constraintEnd_toEndOf="@+id/totalProt_img"
+                app:layout_constraintStart_toStartOf="@+id/totalProt_img"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <ImageView
+                android:id="@+id/totalFat_img"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/totalProt_img"
+                app:layout_constraintTop_toTopOf="@+id/totalProt_img"
+                app:srcCompat="@drawable/diet_icon_total_fat_01" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="총지방량"
+                android:textColor="@color/theme3"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/totalFat_img"
+                app:layout_constraintStart_toStartOf="@+id/totalFat_img"
+                app:layout_constraintTop_toBottomOf="@+id/totalFat_img" />
+
+            <TextView
+                android:id="@+id/totalFat_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="33g"
+                app:layout_constraintEnd_toEndOf="@+id/totalFat_img"
+                app:layout_constraintStart_toStartOf="@+id/totalFat_img"
+                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </HorizontalScrollView>
+
+
+    <Button
+        android:id="@+id/menu_plus_change"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_login_overlap"
+        android:backgroundTint="@color/dark_sea_green"
+        android:gravity="center"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:text="+ 음식추가"
+        app:layout_constraintEnd_toEndOf="@+id/group_dayMeal"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/group_dayMeal"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+    <Button
+        android:id="@+id/menu_change_complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_login_overlap"
+        android:backgroundTint="@color/dark_sea_green"
+        android:text="수정 완료"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dietAddList_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/menu_change_complete"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/menu_plus_change" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="40dp"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="영양정보"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/group_dayMeal" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -166,7 +166,7 @@ public class ChallengeStartActivity extends AppCompatActivity {
         tv_recommandDiet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ChallengeRecommandDietActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RecommendedDietSurveyActivity.class);
                 startActivity(intent);
             }
         });

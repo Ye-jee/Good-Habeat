@@ -34,7 +34,7 @@ import com.android.volley.toolbox.Volley;
 import java.util.Calendar;
 
 public class JoinActivity extends AppCompatActivity {
-    TextView tvUserAdmin, tvJoinBirth;
+    TextView /*tvUserAdmin,*/ tvJoinBirth;
     EditText etJoinID, etJoinPwd, etJoinPwd_check, etJoinNick, etJoinHeight, etJoinWeight,
             etJoinEmail1, etJoinEmail2;
     Button btnID, btnPwd, btnNick, btnJoin;
@@ -53,7 +53,7 @@ public class JoinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
-        tvUserAdmin = (TextView) findViewById(R.id.tvUserAdmin);
+        //tvUserAdmin = (TextView) findViewById(R.id.tvUserAdmin);
         tvJoinBirth = (TextView) findViewById(R.id.tvJoinBirth);
 
         etJoinID = (EditText) findViewById(R.id.etJoinId);
@@ -94,7 +94,7 @@ public class JoinActivity extends AppCompatActivity {
         actionBar.hide();
 
         //이용약관 텍스트 스크롤
-        tvUserAdmin.setMovementMethod(new ScrollingMovementMethod());
+        //tvUserAdmin.setMovementMethod(new ScrollingMovementMethod());
 
         btnID.setOnClickListener(new View.OnClickListener() {
             @Override
