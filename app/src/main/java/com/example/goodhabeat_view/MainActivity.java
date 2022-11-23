@@ -13,7 +13,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -166,14 +166,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        /*RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        url="http://192.168.0.58:8080/capston/exprot2.jsp";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                url, new Response.Listener<String>() {
-
+        // Volley
+        String url = "http://10.0.2.2:3000/main";
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                System.out.println("response : " + response);
+                System.out.println("---------------------");
+
                 try {
+
+                    /*
+                    // node.js 서버 연동 이전 코드
                     JSONObject mainObj = new JSONObject(response);
                     JSONArray jArray = mainObj.getJSONArray("List");
                     JSONObject food_name1 = jArray.getJSONObject(0);
@@ -182,21 +187,30 @@ public class MainActivity extends AppCompatActivity {
                     season_name.setText(name);
                     //food_season.setText("음식 계절: "+season);
                     season_exp.setText(description);
+                    */
 
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+                }catch (Exception e){ e.printStackTrace(); }
             }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //에러코드
-                    }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
-                });
-        requestQueue.add(stringRequest)*/;
+        // 사용자 지정 정책 --> 타임아웃 에러 해결
+        stringRequest.setRetryPolicy(new com.android.volley.DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        if (requestQueue == null) {
+            Volley.newRequestQueue(getApplicationContext());
+        }
+
+        stringRequest.setShouldCache(false); // 이전 결과가 있어도 새로 요청하여 응답을 보여줌
+        requestQueue.add(stringRequest);
 
 
         //메인 중간에 있는 카테고리 텍스트를 클릭하면, 해당 카테고리 탭에 해당하는 페이지로 이동하는 코드
@@ -359,11 +373,11 @@ public class MainActivity extends AppCompatActivity {
         if(toggle.onOptionsItemSelected(item)) {    //navigation toggle
             //SharedPreference
             preferences = getApplicationContext().getSharedPreferences("userInfo", MODE_PRIVATE);
-            String userName = preferences.getString("name","");
+            String userName = preferences.getString("nickname","");
 
             //NavigationDrawer Header 텍스트값 변경
             tvUserName = (TextView) navHeader.findViewById(R.id.tv_username1);
-            tvUserName.setText(userName+"님");
+            tvUserName.setText(userName+" 님");
 
             return false;
         }
