@@ -133,7 +133,6 @@ public class JoinActivity extends AppCompatActivity {
 
         // 추가 --------------------------------------------------------------------------------------------------------------------------------------------------------
         // (유나 수정 _ 22/11/22) - 중복 검사 코드 추가.  끝.
-
         // 생년월일 입력
 
         DatePickerDialog birthPicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -149,9 +148,9 @@ public class JoinActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 birthPicker.show();
-                // 추가 코드 ----
+                // 추가 코드 --------
                 birth_check = "ok";
-                // ------------
+                // ----------------
             }
         });
 
@@ -342,19 +341,19 @@ public class JoinActivity extends AppCompatActivity {
                     String birth = tvJoinBirth.getText().toString();
                     //--------------------------------------------------------------
                     String height = etJoinHeight.getText().toString();
-                    if(!height.equals("")) height_check = "ok";
-                    else height_check = "no";
-                    System.out.println(height_check+", " +height);
+                        if(!height.equals("")) height_check = "ok";
+                        else height_check = "no";
+                        System.out.println(height_check+", " +height);
                     //--------------------------------------------------------------
                     String weight = etJoinWeight.getText().toString();
-                    if(!weight.equals("")) weight_check = "ok";
-                        else weight_check = "no";
-                    System.out.println(weight_check+", " +weight);
+                        if(!weight.equals("")) weight_check = "ok";
+                            else weight_check = "no";
+                        System.out.println(weight_check+", " +weight);
                     //--------------------------------------------------------------
                     String email = etJoinEmail1.getText().toString() + "@" + etJoinEmail2.getText().toString();
-                    if(!email.equals("") && !email.equals("@") ) email_check = "ok";
-                    else email_check = "no";
-                    System.out.println(email_check+", " +email);
+                        if(!email.equals("") && !email.equals("@") ) email_check = "ok";
+                            else email_check = "no";
+                        System.out.println(email_check+", " +email);
 
 
                     //--------------------------------------------------------------
@@ -404,7 +403,6 @@ public class JoinActivity extends AppCompatActivity {
                         protected Map<String, String> getParams() throws AuthFailureError {
                             Map<String, String> params = new HashMap<>();
                             params.put("join_number_check", join_number_check);
-                            params.put("nickname", nickName);
                             params.put("nickname", nickName);
                             params.put("id", id);
                             params.put("password", pwd);

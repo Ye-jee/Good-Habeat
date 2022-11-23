@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -121,6 +122,36 @@ public class MainActivity extends AppCompatActivity {
         breakfast_main.setImageResource(R.drawable.broccoli);*/
 
         season_food_img.setImageResource(R.drawable.strawberryy);
+
+        //--------------------------------------------------------------------------------------------------------------------
+        //설정 프리퍼런스 실험, 삭제 예정
+
+        String id_preference = "1002";
+        String nickname_preference = "user4";
+        String email_preference = "user4@ghb.com";
+        String birth_preference = "2000-03-15";
+        String weight_preference = "41";
+        String height_preference = "155";
+
+
+        preferences = getApplicationContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("id_pre", id_preference );
+        editor.putString("nickname_pre", nickname_preference );
+        editor.putString("email_pre", email_preference );
+        editor.putString("birth_pre", birth_preference);
+        editor.putString("height_pre", height_preference );
+        editor.putString("weight_pre",weight_preference );
+
+
+        editor.commit();
+
+        //--------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
 
         //상단 이미지 슬라이드 관련 코드
 
