@@ -57,7 +57,7 @@ public class JoinActivity extends AppCompatActivity {
     Calendar calendar = Calendar.getInstance(); // datePickerDialog
 
     // 추가 --------------------------------------------------------------------------------------------------------------------------------------------------------
-    // (유나 수정 _ 22/11/22) - 중복 검사 코드 추가.  끝.
+    // (유나 수정 _ 22/11/22) - 내용(공란) 검사 코드 추가.  끝.
     String id_check = "no", password_check = "no", birth_check = "no", weight_check = "no", height_check = "no",nick_check = "no", email_check = "no" ;
     String join_number_check = "BE UNALBE TO JOIN ";
     //---- --------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -157,7 +157,7 @@ public class JoinActivity extends AppCompatActivity {
 
         //EditText 비밀번호와 비밀번호 확인의 내용이 같은지 비교! 우선 버튼을 통해 - Toast 메시지를 통해 알려줌!
         //(유나 수정 _ 22/11/04) - System.out.println 추가, + 굳이 서버에서 비교할 필요 없음.
-        // (유나 수정 _ 22/11/22) - 중복 검사 코드 추가.  끝.
+        // (유나 수정 _ 22/11/22) - 내용(공란) 검사 코드 추가.  끝.
         btnPwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -207,7 +207,7 @@ public class JoinActivity extends AppCompatActivity {
         // 추가 --------------------------------------------------------------------------------------------------------------------------------------------------------
         //id 중복 확인 버튼
         // (유나 수정 _ 22/11/04) - node.js와 연결은 가능한데 response 응답이 제대로 되질 않음
-        // (유나 수정 _ 22/11/22) - response 응답 가능, 중복 검사 코드 추가.  끝.
+        // (유나 수정 _ 22/11/22) - response 응답 가능, 내용(공란) 검사 코드 추가.  끝.
 
         String url_id = "http://10.0.2.2:3000/id_overlap";
         requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -265,7 +265,7 @@ public class JoinActivity extends AppCompatActivity {
         // 추가 --------------------------------------------------------------------------------------------------------------------------------------------------------
         //닉네임 중복 확인 버튼
         // (유나 수정 _ 22/11/04) - node.js와 연결은 가능한데 response 응답이 제대로 되질 않음
-        // (유나 수정 _ 22/11/22) - response 응답 가능, 중복 검사 코드 추가.  끝.
+        // (유나 수정 _ 22/11/22) - response 응답 가능, 내용(공란) 검사 코드 추가.  끝.
 
 
         String url_nick = "http://10.0.2.2:3000/nick_overlap";
@@ -323,7 +323,7 @@ public class JoinActivity extends AppCompatActivity {
         // (유나 수정 _ 22/10/06) - post 방식 추가, 예지가 작성한 volley 백업 후 삭제함
         // (유나 수정 _ 22/10/09) - btnJoin의 setOnClickListender와 request분리(삭제_그럴 필요 없었음)
         // (유나 수정 _ 22/10/09) - node.js를 통해 db에 회원정보 저장되는 것 확인
-        // (유나 수정 _ 22/11/22) - 중복 검사 추가 확인 완료.  끝.
+        // (유나 수정 _ 22/11/22) - 내용(공란) 검사 추가 확인 완료.  끝.
 
 
         String url_join = "http://10.0.2.2:3000/delivery";

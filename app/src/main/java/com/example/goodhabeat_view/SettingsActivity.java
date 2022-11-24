@@ -46,6 +46,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     SharedPreferences preferences;
     TextView tvUserName, tvUserEmail;
+    TextView again_test, test_result;
 
     EditText editNick, editBirth, editHeight, editWeight ;
     Button save, nick;
@@ -69,6 +70,9 @@ public class SettingsActivity extends AppCompatActivity {
         // 추가 --------------------------------------------------------------------------------------------------------------------------------------------------------
         tvUserName = (TextView)findViewById(R.id.textView28);
         tvUserEmail = (TextView)findViewById(R.id.textView29);
+
+        again_test = (TextView)findViewById(R.id.textView39);
+        test_result = (TextView)findViewById(R.id.textView38);
 
         editNick = (EditText)findViewById(R.id.settingsEditNick) ;
         editBirth = (EditText)findViewById(R.id.settingsEditBirth) ;
@@ -297,9 +301,14 @@ public class SettingsActivity extends AppCompatActivity {
         }); // save 버튼 끝
 
 
-
-
-
+        //식단 설문조사 다시 하기
+        again_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), RecommendedDietSurveyActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 

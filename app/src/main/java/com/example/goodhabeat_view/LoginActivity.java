@@ -111,14 +111,15 @@ public class LoginActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getApplicationContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "login ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                     ){
                         protected Map<String, String> getParams() throws AuthFailureError {
                             Map<String, String> parameters = new HashMap<>();
-                            parameters.put("password", input_pw);
                             parameters.put("id", input_id);
+                            parameters.put("password", input_pw);
+
                             return parameters;
                         }
                     };
