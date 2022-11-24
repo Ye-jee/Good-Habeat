@@ -69,7 +69,8 @@ public class LoginActivity extends AppCompatActivity {
 
         String url = "http://10.0.2.2:3000/login";
 
-        //아이디와 비밀번호를 입력하고, '로그인'을 클릭하면 해당 사용자의 닉네임이 네비게이션뷰에 표시됨t
+
+        //아이디와 비밀번호를 입력하고, '로그인'을 클릭하면 해당 사용자의 닉네임이 네비게이션뷰에 표시됨
         // + 해당 사용자의 메인홈 화면으로 넘어가야 함
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,15 +112,14 @@ public class LoginActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getApplicationContext(), "login ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                     ){
                         protected Map<String, String> getParams() throws AuthFailureError {
                             Map<String, String> parameters = new HashMap<>();
-                            parameters.put("id", input_id);
                             parameters.put("password", input_pw);
-
+                            parameters.put("id", input_id);
                             return parameters;
                         }
                     };
@@ -141,7 +141,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         //'가입하기'를 클릭하면 회원가입을 할 수 있는 액티비티로 넘어감
         tvJoin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,8 +154,9 @@ public class LoginActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-    }
 
+
+    }
 
     //커스텀 토스트 메시지 메소드
     public void CustomToast(String message) {
@@ -177,5 +177,6 @@ public class LoginActivity extends AppCompatActivity {
         toast.setView(layout);
         toast.show();
     }
+
 
 }
