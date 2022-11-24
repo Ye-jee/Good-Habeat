@@ -44,7 +44,7 @@ public class CommunityActivity extends AppCompatActivity {
 
         //삭제버튼은 내 게시글에만 보여야 됨!!! - 리사이클러뷰에서는 어떻게 해야 되지?
 
-        int user_pic[] = {R.drawable.community_person01, R  .drawable.community_person02, R.drawable.community_person03};
+        int user_pic[] = {R.drawable.community_person01, R.drawable.community_person01, R.drawable.community_person01};
         String user_nikName[] = {"user_name1", "로그인 사용자", "user_name2"};
         String create_date[] = {"2022.04.20", "2022.08.28", "2022.10.16"};
         String create_time[] = {"09:22", "10:11", "14:20"};

@@ -1,6 +1,7 @@
 package com.example.goodhabeat_view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,17 @@ public class ImagePagerAdapter extends PagerAdapter {
 
         imageView.setImageResource(images[position]);
         //textView.setText((position+1) + "번 째 이미지입니다.");
+
+
+        //이미지 클릭시 오늘의 식단 페이지로 넘어가는 코드
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), MenuDayActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
+
 
         container.addView(view);
         return view;

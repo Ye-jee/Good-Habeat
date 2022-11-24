@@ -85,11 +85,12 @@
             android:layout_marginBottom="-10dp"
             android:adjustViewBounds="true"
             android:background="@drawable/round_rec_background_community3"
+            android:elevation="4dp"
             android:padding="10dp"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-            app:srcCompat="@drawable/community_writing_icon01" />
+            app:srcCompat="@drawable/community_writing_icon04" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

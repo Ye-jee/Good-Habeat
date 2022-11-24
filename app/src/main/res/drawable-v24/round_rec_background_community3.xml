@@ -6,7 +6,7 @@
         android:color="@color/textHighlight"
         android:width="2dp"/-->>
 
-    <solid android:color="@color/textHighlight" />
+    <solid android:color="@color/theme1" />
 
     <corners
         android:radius="20dp" />

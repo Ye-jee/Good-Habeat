@@ -3,7 +3,6 @@ package com.example.goodhabeat_view;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
@@ -13,25 +12,12 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -45,10 +31,9 @@ public class MainActivity extends AppCompatActivity {
     ImageView dinner_main;*/
 
     //이미지 슬라이드 관련
-    ConstraintLayout menu_image;
     ImagePagerAdapter imageAdapter;
-    SwipeableViewPager swipeableViewPager;
-    //ViewPager viewPager;
+    //SwipeableViewPager swipeableViewPager;
+    ViewPager viewPager;
     CircleIndicator indicator;
 
     //카테고리 별 식단 페이지 이동 관련
@@ -94,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         lunch_main = (ImageView) findViewById(R.id.lunch_main);
         dinner_main = (ImageView) findViewById(R.id.menu_main);*/
 
-        menu_image = (ConstraintLayout) findViewById(R.id.menu_img_area);
 
         categoryText_convenience = (TextView) findViewById(R.id.main_convenience_category);
         categoryText_highPro = (TextView) findViewById(R.id.main_highPro_category);
@@ -124,47 +108,17 @@ public class MainActivity extends AppCompatActivity {
 
         //상단 이미지 슬라이드 관련 코드
 
-        swipeableViewPager = findViewById(R.id.ImageViewPager_swipleable);
+        viewPager = findViewById(R.id.ImageViewPager);
         imageAdapter = new ImagePagerAdapter(this);
-        swipeableViewPager.setAdapter(imageAdapter);
+        viewPager.setAdapter(imageAdapter);
 
         indicator = findViewById(R.id.indicator);
-        indicator.setViewPager(swipeableViewPager);
+        indicator.setViewPager(viewPager);
 
-        //상단 메뉴 사진 클릭시, 오늘의 메뉴 페이지 이동
-        menu_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MenuDayActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        /*swipeableViewPager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
-                startActivity(intent);
-            }
-        });*/
+        //상단 메뉴 사진 클릭시, 오늘의 메뉴 페이지 이동하는 코드는 ImagePagerAdapter에서 작성함
 
-        /*viewPager.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    view.performClick();
-                }
-                return false;
-            }
-        });
 
-        viewPager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
-                startActivity(intent);
-            }
-        });*/
 
         /*RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         url="http://192.168.0.58:8080/capston/exprot2.jsp";
