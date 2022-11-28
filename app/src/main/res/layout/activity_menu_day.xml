@@ -187,6 +187,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/selector_radio_button"
             android:button="@null"
+            android:checked="true"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:paddingLeft="15dp"
@@ -194,7 +195,6 @@
             android:paddingRight="15dp"
             android:paddingBottom="8dp"
             android:text="아침"
-            android:checked="true"
             android:textColor="@drawable/selector_radio_text" />
 
         <RadioButton

@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -20,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,6 +34,9 @@ import com.google.android.material.navigation.NavigationView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -113,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
         season_recipe = (TextView) findViewById(R.id.season_recipe);
         season_exp = (TextView) findViewById(R.id.season_exp);
 
-
         //getSupportActionBar().hide();
 
         /*breakfast_main.setImageResource(R.drawable.salmon);
@@ -123,13 +127,17 @@ public class MainActivity extends AppCompatActivity {
         season_food_img.setImageResource(R.drawable.strawberryy);
 
         //상단 이미지 슬라이드 관련 코드
-
         swipeableViewPager = findViewById(R.id.ImageViewPager_swipleable);
         imageAdapter = new ImagePagerAdapter(this);
         swipeableViewPager.setAdapter(imageAdapter);
 
         indicator = findViewById(R.id.indicator);
         indicator.setViewPager(swipeableViewPager);
+
+        //SharedPreference
+        preferences = getApplicationContext().getSharedPreferences("userInfo", MODE_PRIVATE);
+        String userName = preferences.getString("nickname","");
+        System.out.println("main 들어왔음! preferences nickname : " + userName );
 
         //상단 메뉴 사진 클릭시, 오늘의 메뉴 페이지 이동
         menu_image.setOnClickListener(new View.OnClickListener() {
@@ -167,15 +175,23 @@ public class MainActivity extends AppCompatActivity {
         });*/
 
         // Volley
+        // main 입장 시 사용자 id가 서버로 전송됨
+        // 사용자 닉네임 전송 -> nickname 필드값이 동일한 user_id 찾기 -> 서버에서 찾은 user_id로 오늘의 식단 기능에 활용
         String url = "http://10.0.2.2:3000/main";
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println("response : " + response);
-                System.out.println("---------------------");
+                //System.out.println("/main response : " + response);
+                //System.out.println("---------------------");
 
                 try {
+                    //System.out.println("파싱한 아이디 : " + response);
+                    String user_id = response;
+                    preferences = getApplicationContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("user_id", user_id);
+                    editor.commit();
 
                     /*
                     // node.js 서버 연동 이전 코드
@@ -196,7 +212,14 @@ public class MainActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+        }
+        ){
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parameters = new HashMap<>();
+                parameters.put("nickname", userName);
+                return parameters;
+            }
+        };
 
         // 사용자 지정 정책 --> 타임아웃 에러 해결
         stringRequest.setRetryPolicy(new com.android.volley.DefaultRetryPolicy(

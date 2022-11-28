@@ -1,24 +1,55 @@
 package com.example.goodhabeat_view;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.cloudinary.android.MediaManager;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class MenuDayActivity extends AppCompatActivity {
 
+    public static String todayDateFormat = "yyyy년 MM월 dd일";
+
     RadioGroup group_dayMeal;
     RadioButton today_bf, today_lc, today_dn;
+    String meal = "1";
 
     SharedPreferences preferences;
 
@@ -29,18 +60,12 @@ public class MenuDayActivity extends AppCompatActivity {
     Button diet_modifyBtn;
     Button diet_addBtn;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_day);
 
         getSupportActionBar().hide();
-
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.menuDay_container);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        ArrayList<MenuDayData> menu_day_data = new ArrayList<>();
-
 
         todayDate = (TextView) findViewById(R.id.todayDate);
 
@@ -52,56 +77,32 @@ public class MenuDayActivity extends AppCompatActivity {
         diet_modifyBtn = (Button) findViewById(R.id.diet_modifyBtn);    // 식단 수정 버튼
         diet_addBtn = (Button) findViewById(R.id.diet_addBtn);          //식단 추가 버튼
 
-        // 오늘의 요일 구하기 (임시 데이터용 코드 -> 나중에 MySQL로 DB 연결)
-        // 이번 주 식단 페이지 처음 들어갔을 때, 요일 버튼 클릭 전 '오늘'에 해당하는 식단을 먼저 보여줄 수 없을까 해서 일단 넣어봄
-        // Fragment를 사용할지, Activity에 직접 RecyclerView를 넣을지에 따라 필요없을 수도 있음
-        /*long now_time = System.currentTimeMillis(); // 현재 시간
-        Date date = new Date(now_time); // Date 형식으로 Convert(변환)
+        // 초기 화면 (아침 식단)
+        VolleySelectMeal(meal);
 
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);*/
+        // meal 라디오 버튼
+        group_dayMeal.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                RadioButton meal_name = radioGroup.findViewById(i);
+                if(meal_name.getText().toString().equals("아침")) {
+                    meal = "1";
+                    //Toast.makeText(MenuDayActivity.this, "아침 클릭", Toast.LENGTH_SHORT).show();
+                    VolleySelectMeal(meal);
+                } else if(meal_name.getText().toString().equals("점심")) {
+                    meal = "2";
+                    //Toast.makeText(MenuDayActivity.this, "점심 클릭", Toast.LENGTH_SHORT).show();
+                    VolleySelectMeal(meal);
+                } else if(meal_name.getText().toString().equals("저녁")) {
+                    meal = "3";
+                    //Toast.makeText(MenuDayActivity.this, "저녁 클릭", Toast.LENGTH_SHORT).show();
+                    VolleySelectMeal(meal);
+                }
+            }
+        });
 
-        /*todayWeek = cal.get(Calendar.DAY_OF_WEEK);
-
-        switch (todayWeek) {
-            case 1 :
-                today_week = "sunday";
-                break;
-            case 2 :
-                today_week = "monday";
-                break;
-            case 3 :
-                today_week = "tuesday";
-                break;
-            case 4 :
-                today_week = "wednesday";
-                break;
-            case 5 :
-                today_week = "monday";
-                break;
-            case 6 :
-                today_week = "tuesday";
-                break;
-            case 7 :
-                today_week = "wednesday";
-                break;
-        }*/
-
-
-        int menu_pic_id[] = {R.drawable.berry_yogurt, R.drawable.tomato, R.drawable.orange};
-        String menu_name[] = {"딸기 요거트", "토마토 샐러드", "오렌지 주스"};
-        String menu_text[] = {"딸기 요거트 입니다. 딸기를 넣은 요거트 입니다.",
-                    "토마토 샐러드 입니다. 토마토를 넣은 샐러드 입니다.",
-                    "오렌지 주스 입니다. 오렌지로 만든 주스 입니다."};
-
-        for (int i = 0; i <menu_pic_id.length; i++) {
-            MenuDayData dataSet = new MenuDayData(menu_pic_id[i], menu_name[i], menu_text[i]);
-            menu_day_data.add(dataSet);
-        }
-
-        recyclerView.setAdapter(new MenuDayRecyclerViewAdapter(menu_day_data));
-
-
+        // 오늘 날짜 출력
+        todayDate.setText(getCurrentDate());
 
         // 식단 수정 페이지로 이동
         diet_modifyBtn.setOnClickListener(new View.OnClickListener() {
@@ -122,4 +123,84 @@ public class MenuDayActivity extends AppCompatActivity {
         });
 
     }
+
+    // 외부 함수
+    public void VolleySelectMeal(String meal) {
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.menuDay_container);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        ArrayList<MenuDayData> menu_day_data = new ArrayList<>();
+
+        //SharedPreference
+        preferences = getApplicationContext().getSharedPreferences("userInfo", MODE_PRIVATE);
+        String userId = preferences.getString("user_id","");
+
+        // Volley
+        String url = "http://10.0.2.2:3000/today_diet";
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //System.out.println("/today_diet response : " + response);
+                //System.out.println("---------------------");
+
+                try {
+                    JSONArray resArray = new JSONArray(response);
+
+                    for(int i=0; i<resArray.length(); i++) {
+                        JSONObject dietObj = resArray.getJSONObject(i);
+                        //System.out.println("dietObj[" + i + "] : " + dietObj);
+
+                        String recipe_image = dietObj.getString("recipe_image");
+                        String menu_name = dietObj.getString("menu_name");
+                        String calorie = dietObj.getString("calorie");
+                        String carbo = dietObj.getString("carbohydrate");
+                        String protein = dietObj.getString("protein");
+                        String fat = dietObj.getString("fat");
+
+                        MenuDayData dataSet = new MenuDayData(recipe_image, menu_name, calorie + "Kcal", "탄수화물 " + carbo + "g ", "단백질 " + protein + "g ", "지방 " + fat + "g");
+                        menu_day_data.add(dataSet);
+                    }
+
+                    recyclerView.setAdapter(new MenuDayRecyclerViewAdapter(getApplicationContext(), menu_day_data));
+
+                }catch (Exception e){ e.printStackTrace(); }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        ){
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parameters = new HashMap<>();
+                parameters.put("user_id", userId);
+                parameters.put("meal", meal);
+                return parameters;
+            }
+        };
+
+        // 사용자 지정 정책 --> 타임아웃 에러 해결
+        stringRequest.setRetryPolicy(new com.android.volley.DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        if (requestQueue == null) {
+            Volley.newRequestQueue(getApplicationContext());
+        }
+
+        stringRequest.setShouldCache(false); // 이전 결과가 있어도 새로 요청하여 응답을 보여줌
+        requestQueue.add(stringRequest);
+
+    }
+
+    // 오늘 날짜 출력
+    public static String getCurrentDate() {
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat format = new SimpleDateFormat(todayDateFormat, Locale.getDefault());
+        return format.format(currentTime);
+    }
+
 }
