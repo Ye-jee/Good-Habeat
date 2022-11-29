@@ -3,7 +3,6 @@ package com.example.goodhabeat_view;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
@@ -16,7 +15,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,9 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,10 +46,9 @@ public class MainActivity extends AppCompatActivity {
     ImageView dinner_main;*/
 
     //이미지 슬라이드 관련
-    ConstraintLayout menu_image;
     ImagePagerAdapter imageAdapter;
-    SwipeableViewPager swipeableViewPager;
-    //ViewPager viewPager;
+    //SwipeableViewPager swipeableViewPager;
+    ViewPager viewPager;
     CircleIndicator indicator;
 
     //카테고리 별 식단 페이지 이동 관련
@@ -99,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
         lunch_main = (ImageView) findViewById(R.id.lunch_main);
         dinner_main = (ImageView) findViewById(R.id.menu_main);*/
 
-        menu_image = (ConstraintLayout) findViewById(R.id.menu_img_area);
 
         categoryText_convenience = (TextView) findViewById(R.id.main_convenience_category);
         categoryText_highPro = (TextView) findViewById(R.id.main_highPro_category);
@@ -127,52 +121,22 @@ public class MainActivity extends AppCompatActivity {
         season_food_img.setImageResource(R.drawable.strawberryy);
 
         //상단 이미지 슬라이드 관련 코드
-        swipeableViewPager = findViewById(R.id.ImageViewPager_swipleable);
+
+        viewPager = findViewById(R.id.ImageViewPager);
         imageAdapter = new ImagePagerAdapter(this);
-        swipeableViewPager.setAdapter(imageAdapter);
+        viewPager.setAdapter(imageAdapter);
 
         indicator = findViewById(R.id.indicator);
-        indicator.setViewPager(swipeableViewPager);
+        indicator.setViewPager(viewPager);
+
+        //상단 메뉴 사진 클릭시, 오늘의 메뉴 페이지 이동하는 코드는 ImagePagerAdapter에서 작성함
+
 
         //SharedPreference
         preferences = getApplicationContext().getSharedPreferences("userInfo", MODE_PRIVATE);
         String userName = preferences.getString("nickname","");
         System.out.println("main 들어왔음! preferences nickname : " + userName );
 
-        //상단 메뉴 사진 클릭시, 오늘의 메뉴 페이지 이동
-        menu_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MenuDayActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        /*swipeableViewPager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
-                startActivity(intent);
-            }
-        });*/
-
-        /*viewPager.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    view.performClick();
-                }
-                return false;
-            }
-        });
-
-        viewPager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
-                startActivity(intent);
-            }
-        });*/
 
         // Volley
         // main 입장 시 사용자 id가 서버로 전송됨
@@ -375,9 +339,13 @@ public class MainActivity extends AppCompatActivity {
 
                 }*/
                 else if(id == R.id.menu_community) {
-                    Toast.makeText(getApplicationContext(), "커뮤니티", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "커뮤니티", Toast.LENGTH_SHORT).show();
 
                     //커뮤니티 화면으로 이동하는 페이지 코드 입력 예정
+                    //커뮤니티 페이지로 이동하는 코드
+                    Intent intent = new Intent(getApplicationContext(), CommunityActivity.class);
+                    startActivity(intent);
+
                 }
                 else if(id == R.id.menu_setting) {
                     //설정 페이지로 이동하는 코드

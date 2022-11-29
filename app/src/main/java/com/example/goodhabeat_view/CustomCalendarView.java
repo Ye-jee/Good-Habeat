@@ -165,9 +165,9 @@ public class CustomCalendarView extends LinearLayout {
                 time_lunch = (TextView) bottomSheetView.findViewById(R.id.time_lunch);
                 time_dinner = (TextView) bottomSheetView.findViewById(R.id.time_dinner);
 
-                // 메뉴 취소선
-                menu_break.setPaintFlags(menu_break.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG); //취소선
-                menu_lunch.setPaintFlags(menu_lunch.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG); //취소선
+                // 메뉴 취소선 (취소선은 없애기로 결정)
+                //menu_break.setPaintFlags(menu_break.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG); //취소선
+                //menu_lunch.setPaintFlags(menu_lunch.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG); //취소선
 
                 // ProgressBar 설정
                 cal_progress = (ProgressBar) bottomSheetView.findViewById(R.id.cal_amount);

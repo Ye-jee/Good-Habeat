@@ -18,7 +18,7 @@ import com.android.volley.toolbox.Volley;
 
 public class RecommendedDietResultActivity extends AppCompatActivity {
 
-    TextView tv_conven, tv_lowCal, tv_highCal, tv_lowSalt, tv_lowSugar, tv_lowFat;
+    TextView tv_conven, tv_highProt, tv_vitamin, tv_lowCal, tv_lowSalt, tv_lowSugar;
 
     Button btn_selectCustomDiet;
 
@@ -30,11 +30,11 @@ public class RecommendedDietResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recommanded_diet_result);
 
         tv_conven = (TextView) findViewById(R.id.tv_conven);
+        tv_highProt = (TextView) findViewById(R.id.tv_highProt);
+        tv_vitamin = (TextView) findViewById(R.id.tv_vitamin);
         tv_lowCal = (TextView) findViewById(R.id.tv_lowCal);
-        tv_highCal = (TextView) findViewById(R.id.tv_highCal);
         tv_lowSalt = (TextView) findViewById(R.id.tv_lowSalt);
         tv_lowSugar = (TextView) findViewById(R.id.tv_lowSugar);
-        tv_lowFat = (TextView) findViewById(R.id.tv_lowFat);
 
         btn_selectCustomDiet = (Button) findViewById(R.id.btn_selectCustomDiet);
 
@@ -127,12 +127,16 @@ public class RecommendedDietResultActivity extends AppCompatActivity {
         btn_selectCustomDiet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CustomToast("맞춤 식단 설정이 완료되었습니다.");
+                //CustomToast("맞춤 식단 설정이 완료되었습니다.");
 
                 //가짜 데이터를 챌린지를 시작하는 페이지에 전달하는 코드
-                String customDietResult = "간편식, 저칼로리, 저염식";
+                /*String customDietResult = "간편식, 저칼로리, 저염식";
                 Intent intent = new Intent(getApplicationContext(), ChallengeStartActivity.class);
                 intent.putExtra("customResult", customDietResult);
+                startActivity(intent);*/
+
+                //로그인 페이지로 이동하는 코드
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             }
         });

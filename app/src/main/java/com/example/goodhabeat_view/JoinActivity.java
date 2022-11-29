@@ -1,6 +1,5 @@
 package com.example.goodhabeat_view;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +7,6 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -20,7 +18,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,7 +65,7 @@ public class JoinActivity extends AppCompatActivity {
         btnID = (Button) findViewById(R.id.btn_idCheck);
         btnPwd = (Button) findViewById(R.id.btn_PwdCheck);
         btnNick = (Button) findViewById(R.id.btn_nickCheck);
-        btnJoin = (Button) findViewById(R.id.btn_Join);
+        btnJoin = (Button) findViewById(R.id.btn_join);
 
         rgGender = (RadioGroup) findViewById(R.id.radioGender);
         rbFemale = (RadioButton) findViewById(R.id.rbtn_female);
@@ -185,7 +182,7 @@ public class JoinActivity extends AppCompatActivity {
         btnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String id = etJoinID.getText().toString();
+                /*String id = etJoinID.getText().toString();
                 String pwd = etJoinPwd.getText().toString();
                 String nickName = etJoinNick.getText().toString();
                 String birth = tvJoinBirth.getText().toString();
@@ -218,7 +215,7 @@ public class JoinActivity extends AppCompatActivity {
                             public void onErrorResponse(VolleyError error) {
                                 Toast.makeText(getApplicationContext(), "에러 원인 :" + error.toString(), Toast.LENGTH_SHORT).show();
                             }
-                        });
+                        });*/
 
                 /*stringRequest.setRetryPolicy(new DefaultRetryPolicy(
                         1000000,
@@ -227,8 +224,8 @@ public class JoinActivity extends AppCompatActivity {
 
                 //requestQueue.add(stringRequest);
 
-                CustomToast("회원가입이 완료되었습니다.");
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                CustomToast("회원가입이 완료되었습니다. 추천식단 설문조사 페이지로 이동합니다.");
+                Intent intent = new Intent(getApplicationContext(), RecommendedDietSurveyActivity.class);
                 startActivity(intent);
             }
         });

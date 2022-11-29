@@ -8,6 +8,7 @@
 
     <ScrollView
         android:id="@+id/mainContainer"
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -328,7 +329,7 @@
                                 android:layout_marginTop="10dp"
                                 android:shadowColor="#B3B3B3"
                                 android:shadowRadius="4"
-                                android:text="저당 | 저칼로리"
+                                android:text="간편식 | 저당 | 저칼로리"
                                 android:textColor="@color/theme1"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
