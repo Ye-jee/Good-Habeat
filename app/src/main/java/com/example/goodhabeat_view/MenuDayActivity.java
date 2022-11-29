@@ -80,6 +80,7 @@ public class MenuDayActivity extends AppCompatActivity {
         // 초기 화면 (아침 식단)
         VolleySelectMeal(meal);
 
+
         // meal 라디오 버튼
         group_dayMeal.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

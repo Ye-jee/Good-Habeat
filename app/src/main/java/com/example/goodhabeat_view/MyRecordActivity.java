@@ -54,11 +54,8 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
     // (아직 구현 X) bmi_status : 계산된 bmi 숫자를 이용해 정상, 과체중, 비만 등의 상태를 if 문으로 setText
     double bmi;
 
-    LinearLayout challenge_record;
-
     CircleProgressBar circleProgressBar;
     CustomCalendarView customCalendarView;
-
 
     //네비게이션 관련 코드
     DrawerLayout drawerLayout;
@@ -79,15 +76,6 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
         customCalendarView = (CustomCalendarView) findViewById(R.id.custom_calendar_view);
         //GridView gridView = (GridView) customCalendarView.findViewById(R.id.gridView);
 
-        // 챌린지 기록
-        challenge_record = (LinearLayout) findViewById(R.id.challenge_record);
-        challenge_record.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ChallengeRecordActivity.class);
-                startActivity(intent);
-            }
-        });
 
         // bmi
         bmi_img = (ImageView) findViewById(R.id.img_bmi);
@@ -97,7 +85,7 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
         bmi = 21.8;
         if (bmi >= 18 && bmi <= 23 )
             bmi_num.setTextColor(Color.parseColor("#8FBC8B"));
-            //bmi_img.setColorFilter(Color.parseColor("#778FBC8B"));
+        //bmi_img.setColorFilter(Color.parseColor("#778FBC8B"));
 
 
 
@@ -212,5 +200,4 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
     }
 
 }
-
 
