@@ -31,15 +31,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ChallengeRecordActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".RecipeActivity"
             android:exported="true">
             <intent-filter>
@@ -76,15 +67,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ChallengeActivity_Setting"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".RecommendedDietResultActivity"
             android:exported="true">
             <intent-filter>
@@ -95,24 +77,6 @@
         </activity>
         <activity
             android:name=".RecommendedDietSurveyActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ChallengeStartActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ChallengeActivity_Not"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
