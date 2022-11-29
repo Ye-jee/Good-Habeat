@@ -116,8 +116,10 @@ public class MenuDayRecyclerViewAdapter extends RecyclerView.Adapter<MenuDayRecy
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int position = getAdapterPosition();
+
                     Intent intent = new Intent(itemView.getContext(), RecipeActivity.class);
-                    //intent.putExtra("",MenuDayData.get(position).getMenuName());
+                    intent.putExtra("menuName", data.get(position).getMenuName());
                     itemContext.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             });
