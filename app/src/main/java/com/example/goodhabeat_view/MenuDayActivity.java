@@ -90,9 +90,9 @@ public class MenuDayActivity extends AppCompatActivity {
 
         int menu_pic_id[] = {R.drawable.berry_yogurt, R.drawable.tomato, R.drawable.orange};
         String menu_name[] = {"딸기 요거트", "토마토 샐러드", "오렌지 주스"};
-        String menu_text[] = {"딸기 요거트 입니다. 딸기를 넣은 요거트 입니다.",
-                    "토마토 샐러드 입니다. 토마토를 넣은 샐러드 입니다.",
-                    "오렌지 주스 입니다. 오렌지로 만든 주스 입니다."};
+        String menu_text[] = {"딸기는 비타민C 함유량이 높고 심장 건강에 좋습니다",
+                    "토마토는 다양한 영양소를 함유하고 있고 시력 개선에 도움이 됩니다",
+                    "오렌지는 많은 영양소를 함유하고 있고 면역기능을 향상시켜 줍니다"};
 
         for (int i = 0; i <menu_pic_id.length; i++) {
             MenuDayData dataSet = new MenuDayData(menu_pic_id[i], menu_name[i], menu_text[i]);
