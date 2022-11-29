@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class RecipeActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String menuName = intent.getStringExtra("menuName");
+        String foodName = intent.getStringExtra("foodName");
         //System.out.println("getStringExtra test : " + menuName);
         //System.out.println("---------------------");
 
@@ -47,20 +49,19 @@ public class RecipeActivity extends AppCompatActivity {
         recipe_howto= (TextView) findViewById(R.id.recipe_howto);
         //recipe_view = (ImageView) findViewById(R.id.user_profilePic);
 
-        if (menuName != null) {
+        // Volley
+        if(menuName != null) {
             String url = "http://10.0.2.2:3000/today_diet/recipe";
-            VolleyRecipeUrl(url);
-        } // else if (page.equal(season)) { ... }
-
+            VolleyRecipeUrl(url, menuName);
+        } else if(foodName != null) {
+            String url = "http://10.0.2.2:3000/season_food/recipe";
+            VolleyRecipeUrl(url, foodName);
+        }
 
     }
 
     // 외부 함수
-    public void VolleyRecipeUrl(String url) {
-        Intent intent = getIntent();
-        String menuName = intent.getStringExtra("menuName");
-
-        // Volley
+    public void VolleyRecipeUrl(String url, String name) {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -101,7 +102,7 @@ public class RecipeActivity extends AppCompatActivity {
         ){
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parameters = new HashMap<>();
-                parameters.put("menu_name", menuName);
+                parameters.put("menu_name", name);
                 return parameters;
             }
         };
