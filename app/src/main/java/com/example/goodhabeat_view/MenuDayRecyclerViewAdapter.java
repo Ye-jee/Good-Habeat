@@ -4,8 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.Image;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +23,15 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloudinary.android.MediaManager;
 import com.squareup.picasso.Picasso;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +39,8 @@ import java.util.Map;
 public class MenuDayRecyclerViewAdapter extends RecyclerView.Adapter<MenuDayRecyclerViewAdapter.ViewHolder> {
     Context itemContext;
     ArrayList<MenuDayData> data;
+
+    Bitmap bitmap;
 
     public MenuDayRecyclerViewAdapter(Context itemContext, ArrayList<MenuDayData> data) {
         this.itemContext = itemContext;
@@ -83,7 +94,7 @@ public class MenuDayRecyclerViewAdapter extends RecyclerView.Adapter<MenuDayRecy
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final MenuDayData item = data.get(position);
-        holder.menuPicUrl.setText(item.getMenuPicUrl());
+        setURLImage(item.getMenuPicUrl(), holder.menuImage); // 이미지 세팅
         holder.menuName.setText(item.getMenuName());
         holder.menuCal.setText(item.getMenuCal());
         holder.menuCarbo.setText(item.getMenuCarbo());
@@ -95,7 +106,7 @@ public class MenuDayRecyclerViewAdapter extends RecyclerView.Adapter<MenuDayRecy
     public int getItemCount() { return data.size(); }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView menuPicUrl;
+        private ImageView menuImage;
         private TextView menuName;
         private TextView menuCal;
         private TextView menuCarbo;
@@ -104,9 +115,7 @@ public class MenuDayRecyclerViewAdapter extends RecyclerView.Adapter<MenuDayRecy
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            menuPicUrl = (TextView) itemView.findViewById(R.id.menu_pic_day);
-            //Uri imagePath = data.getData();
-            //Picasso.get().load(imagePath).into(menuPicUrl);
+            menuImage = (ImageView) itemView.findViewById(R.id.menu_pic_day);
             menuName = (TextView) itemView.findViewById(R.id.menu_name);
             menuCal = (TextView) itemView.findViewById(R.id.menu_cal);
             menuCarbo = (TextView) itemView.findViewById(R.id.menu_carbo);
@@ -127,36 +136,52 @@ public class MenuDayRecyclerViewAdapter extends RecyclerView.Adapter<MenuDayRecy
 
     }
 
-    // 이미지
-    /*
-    private void initConfig() {
-        Map config = new HashMap();
-        config.put("cloud_name", "goodhabeat");
-        config.put("api_key", "631594594435193");
-        config.put("api_secret", "2YNh2GmCs2CQ8NFu6JS3QONbZDg");
-        //config.put("secure", true);
-        MediaManager.init(this, config);
-    }
-    */
-
-    /*
-    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    // 이미지
-                    Uri imagePath;
-
-                    if(result.getResultCode() == Activity.RESULT_OK) {
-                        // There are no request codes
-                        Intent data = result.getData();
-                        imagePath = data.getData();
-                        Picasso.get().load(imagePath).into();
+    // 외부 함수
+    private void setURLImage(String recipe_image, ImageView menuImage) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    bitmap = getBitmap(recipe_image);
+                }catch (Exception e){
+                    e.printStackTrace();
+                } finally {
+                    if(bitmap != null) {
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                menuImage.setImageBitmap(bitmap);
+                            }
+                        });
                     }
-                 }
+                }
             }
-    );
-    */
+        }).start();
+    }
 
+    private Bitmap getBitmap(String url) {
+        URL imgUrl = null;
+        HttpURLConnection connection = null;
+        InputStream is = null;
+
+        Bitmap retBitmap = null;
+
+        try{
+            imgUrl = new URL(url);
+            connection = (HttpURLConnection) imgUrl.openConnection();
+            connection.setDoInput(true); //url로 input받는 flag 허용
+            connection.connect(); //연결
+            is = connection.getInputStream();
+            retBitmap = BitmapFactory.decodeStream(is);
+
+        }catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            if(connection!=null) {
+                connection.disconnect();
+            }
+            return retBitmap;
+        }
+    }
 }

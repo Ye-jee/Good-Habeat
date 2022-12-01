@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.ImageView;
@@ -23,6 +25,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +35,8 @@ import java.util.Map;
 public class RecipeActivity extends AppCompatActivity {
 
     TextView recipe_name, recipe_howto, recipe_ingredient;
-    //ImageView recipe_view;
+    ImageView recipe_view;
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +53,7 @@ public class RecipeActivity extends AppCompatActivity {
         recipe_name = (TextView) findViewById(R.id.recipe_name);
         recipe_ingredient = (TextView) findViewById(R.id.recipe_ingredient);
         recipe_howto= (TextView) findViewById(R.id.recipe_howto);
-        //recipe_view = (ImageView) findViewById(R.id.user_profilePic);
+        recipe_view = (ImageView) findViewById(R.id.user_profilePic);
 
         // Volley
         if(menuName != null) {
@@ -76,11 +82,12 @@ public class RecipeActivity extends AppCompatActivity {
                         JSONObject recipeObj = resArray.getJSONObject(i);
 
                         String menu_name = recipeObj.getString("menu_name");
-                        //String recipe_image = recipeObj.getString("recipe_image");
+                        String recipe_image = recipeObj.getString("recipe_image");
                         String ingredient = recipeObj.getString("ingredient");
                         String recipe_description = recipeObj.getString("recipe_description");
 
                         recipe_name.setText(menu_name);
+                        setURLImage(recipe_image); // 이미지 세팅
 
                         // 구분자로 문자열 분리
                         String[] str_ingredient = ingredient.split("@");
@@ -121,6 +128,55 @@ public class RecipeActivity extends AppCompatActivity {
         stringRequest.setShouldCache(false); // 이전 결과가 있어도 새로 요청하여 응답을 보여줌
         requestQueue.add(stringRequest);
 
+    }
+
+    // 외부 함수
+    private void setURLImage(String recipe_image) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    bitmap = getBitmap(recipe_image);
+                }catch (Exception e){
+                    e.printStackTrace();
+                } finally {
+                    if(bitmap != null) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                recipe_view.setImageBitmap(bitmap);
+                            }
+                        });
+                    }
+                }
+            }
+        }).start();
+    }
+
+    private Bitmap getBitmap(String url) {
+        URL imgUrl = null;
+        HttpURLConnection connection = null;
+        InputStream is = null;
+
+        Bitmap retBitmap = null;
+
+        try{
+            imgUrl = new URL(url);
+            connection = (HttpURLConnection) imgUrl.openConnection();
+            connection.setDoInput(true); //url로 input받는 flag 허용
+            connection.connect(); //연결
+            is = connection.getInputStream();
+            retBitmap = BitmapFactory.decodeStream(is);
+
+        }catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            if(connection!=null) {
+                connection.disconnect();
+            }
+            return retBitmap;
+        }
     }
 
 }

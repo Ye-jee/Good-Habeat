@@ -14,11 +14,10 @@
 
         <!--app:riv_corner_radius="15dp"-->
 
-        <TextView
+        <ImageView
             android:id="@+id/menu_pic_day"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@color/textHighlight"
             android:scaleType="centerCrop"
             android:src="@drawable/a"
             app:layout_constraintBottom_toBottomOf="parent"
