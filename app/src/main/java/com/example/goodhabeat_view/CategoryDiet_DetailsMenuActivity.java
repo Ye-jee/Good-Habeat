@@ -1,6 +1,7 @@
 package com.example.goodhabeat_view;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,7 +36,20 @@ public class CategoryDiet_DetailsMenuActivity extends AppCompatActivity {
             categoryDiet_detailMenuData.add(dataSet);
         }
 
-        recyclerView.setAdapter(new CategoryDiet_DetailMenuData_RecyclerViewAdapter(categoryDiet_detailMenuData));
+        //클릭 이벤트를 구현을 위한 추가코드
+        CategoryDiet_DetailMenuData_RecyclerViewAdapter categoryDiet_detailMenuData_recyclerViewAdapter = new CategoryDiet_DetailMenuData_RecyclerViewAdapter(categoryDiet_detailMenuData);
+
+        categoryDiet_detailMenuData_recyclerViewAdapter.setOnItemClickListener(new CategoryDiet_DetailMenuData_RecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClicked(int postion, String data) {
+                Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
+
+                //이제 해당 아이템 메뉴 이름에 맞는 레시피 페이지로 넘어가야 함
+            }
+        });
+
+
+        recyclerView.setAdapter(categoryDiet_detailMenuData_recyclerViewAdapter);
 
 
     }

@@ -79,15 +79,15 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
         customCalendarView = (CustomCalendarView) findViewById(R.id.custom_calendar_view);
         //GridView gridView = (GridView) customCalendarView.findViewById(R.id.gridView);
 
-        // 챌린지 기록
-        challenge_record = (LinearLayout) findViewById(R.id.challenge_record);
+        // 챌린지 기록 - 이제 필요없음
+        /*challenge_record = (LinearLayout) findViewById(R.id.challenge_record);
         challenge_record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ChallengeRecordActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         // bmi
         bmi_img = (ImageView) findViewById(R.id.img_bmi);
