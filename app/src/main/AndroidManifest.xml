@@ -114,8 +114,6 @@
         <activity
             android:name=".IntroActivity"
             android:exported="true" >
-            android:name=".introActivity"
-            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -125,8 +123,6 @@
         <activity
             android:name=".DietChangeActivity"
             android:exported="true" >
-            android:name=".introActivity"
-            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -136,8 +132,6 @@
         <activity
             android:name=".DietAddActivity"
             android:exported="true" >
-            android:name=".introActivity"
-            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -147,8 +141,6 @@
         <activity
             android:name=".CommunityActivity"
             android:exported="true" >
-            android:name=".introActivity"
-            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -158,8 +150,6 @@
         <activity
             android:name=".CommunityWritingActivity"
             android:exported="true" >
-            android:name=".introActivity"
-            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -169,8 +159,6 @@
         <activity
             android:name=".PasswordChangeActivity"
             android:exported="true" >
-            android:name=".introActivity"
-            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
