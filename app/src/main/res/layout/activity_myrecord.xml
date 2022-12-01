@@ -8,6 +8,7 @@
 
     <ScrollView
         android:id="@+id/mainContainer"
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -47,8 +48,8 @@
                     android:id="@+id/record_view"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     android:orientation="vertical"
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
@@ -87,7 +88,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="20dp"
+                            android:layout_marginLeft="15dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
@@ -145,7 +146,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="20dp"
+                            android:layout_marginLeft="15dp"
                             android:gravity="center_vertical"
                             android:orientation="vertical">
 
@@ -306,10 +307,10 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="20dp">
+                            android:layout_marginLeft="15dp">
 
                             <TextView
-                                android:id="@+id/textView43"
+                                android:id="@+id/user_custom_myrecode"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
@@ -322,21 +323,21 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                android:id="@+id/textView42"
+                                android:id="@+id/test_result_myrecode"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:shadowColor="#B3B3B3"
                                 android:shadowRadius="4"
-                                android:text="저당 | 저칼로리"
+                                android:text="간편식 | 저당 | 저칼로리"
                                 android:textColor="@color/theme1"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
-                                app:layout_constraintStart_toStartOf="@+id/textView43"
-                                app:layout_constraintTop_toBottomOf="@+id/textView43" />
+                                app:layout_constraintStart_toStartOf="@+id/user_custom_myrecode"
+                                app:layout_constraintTop_toBottomOf="@+id/user_custom_myrecode" />
 
                             <TextView
-                                android:id="@+id/textView44"
+                                android:id="@+id/replay_custom_myrecode"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
@@ -348,7 +349,7 @@
                                 android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/textView42" />
+                                app:layout_constraintTop_toBottomOf="@+id/test_result_myrecode" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>

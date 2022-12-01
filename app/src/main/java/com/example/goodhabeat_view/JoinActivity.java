@@ -8,7 +8,6 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -20,7 +19,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,7 +79,7 @@ public class JoinActivity extends AppCompatActivity {
         btnID = (Button) findViewById(R.id.btn_idCheck);
         btnPwd = (Button) findViewById(R.id.btn_PwdCheck);
         btnNick = (Button) findViewById(R.id.btn_nickCheck);
-        btnJoin = (Button) findViewById(R.id.btn_Join);
+        btnJoin = (Button) findViewById(R.id.btn_join);
 
         /*--
         //성별 임시 삭제
@@ -115,7 +113,6 @@ public class JoinActivity extends AppCompatActivity {
 =======
         //tvUserAdmin.setMovementMethod(new ScrollingMovementMethod());
 
->>>>>>> 2f7e9c0e44ee8b17ff98f657ffe8bd352e64a03d
         btnID.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -216,6 +213,7 @@ public class JoinActivity extends AppCompatActivity {
         btnID.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String id = etJoinID.getText().toString();
 
                 StringRequest request = new StringRequest(
@@ -249,7 +247,6 @@ public class JoinActivity extends AppCompatActivity {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<>();
-
                         params.put("id", id);
 
                         return params;
@@ -258,7 +255,7 @@ public class JoinActivity extends AppCompatActivity {
                 requestQueue.add(request);
 
             }
-        }); // btnID 클릭 리스너 버튼 끝 */
+        }); // btnID 클릭 리스너 버튼 끝
 
 
 
@@ -386,7 +383,9 @@ public class JoinActivity extends AppCompatActivity {
                                     }catch (Exception e){
                                         e.printStackTrace();
                                     }
-
+                                    CustomToast("회원가입이 완료되었습니다. 추천식단 설문조사 페이지로 이동합니다.");
+                                    Intent intent = new Intent(getApplicationContext(), RecommendedDietSurveyActivity.class);
+                                    startActivity(intent);
                                     Toast.makeText(getApplicationContext(), "회원가입 완료!", Toast.LENGTH_SHORT).show();
                                 }
                             },
@@ -427,7 +426,9 @@ public class JoinActivity extends AppCompatActivity {
 
         }); // btnJoin 클릭 리스너 버튼 끝 */
     } //onCreate 끝
-    
+
+
+
     
     // 외부 함수
     public void CustomToast(String message){
@@ -451,6 +452,5 @@ public class JoinActivity extends AppCompatActivity {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(tv.getWindowToken(), 0);
         return true;
-    }
+    }}
 
-}

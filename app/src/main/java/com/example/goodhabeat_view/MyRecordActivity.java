@@ -1,6 +1,7 @@
 package com.example.goodhabeat_view;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -24,6 +25,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.dinuscxj.progressbar.CircleProgressBar;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -40,24 +48,43 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MyRecordActivity extends AppCompatActivity implements CircleProgressBar.ProgressFormatter {
+    RequestQueue requestQueue;
+    SharedPreferences preferences;
+    String nick_confirm = "0";
 
     private LineChart lineChart;
     private static final String DEFAULT_PATTERN = "%d%%";
 
     ImageView bmi_img;
-    TextView bmi_num, bmi_status;
-    // (아직 구현 X) bmi_status : 계산된 bmi 숫자를 이용해 정상, 과체중, 비만 등의 상태를 if 문으로 setText
-    double bmi;
+
 
     LinearLayout challenge_record;
 
     CircleProgressBar circleProgressBar;
     CustomCalendarView customCalendarView;
+
+    //BMI -----------------------
+    TextView bmi_status, bmi_num, info_height, info_weight, btn_set_info;
+    double bmi;
+    //---------------------------
+
+    //user custom ---------------
+    TextView user_custom_myrecode, test_result_myrecode, replay_custom_myrecode;
+    String id_get, nick_get, email_get, birth_get, height_get, weight_get;
+    String con_get, hp_get, v_get, lc_get, lsa_get, lsu_get;
+    String con_string, hp_string, v_string, lc_string, lsa_string, lsu_string;
+    StringBuilder String_sum = new StringBuilder("");
+    //----------------------------
 
 
     //네비게이션 관련 코드
@@ -67,18 +94,19 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
     //네비게이션 드로우어 헤더
     View navHeader;
 
-    SharedPreferences preferences;
     TextView tvUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myrecord);
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
 
         // 캘린더
         customCalendarView = (CustomCalendarView) findViewById(R.id.custom_calendar_view);
         //GridView gridView = (GridView) customCalendarView.findViewById(R.id.gridView);
 
+        /*
         // 챌린지 기록
         challenge_record = (LinearLayout) findViewById(R.id.challenge_record);
         challenge_record.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +116,109 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
                 startActivity(intent);
             }
         });
+         */
 
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------
+        //프리퍼런스로 로그인한 닉네임 가져오기
+        preferences = getApplicationContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String nickname_get = preferences.getString("nickname", "nickname 오류" );
+        System.out.println(nickname_get);
+
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------
+        //BMI
+
+        bmi_status=(TextView)findViewById(R.id.bmi_status);
+        bmi_num=(TextView)findViewById(R.id.bmi_num);
+        info_height=(TextView)findViewById(R.id.info_height);
+        info_weight=(TextView)findViewById(R.id.info_weight);
+        btn_set_info=(TextView)findViewById(R.id.btn_set_info);
+
+
+        //닉네임 확인
+        String url_nickCheck = "http://10.0.2.2:3000/nick_check";
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                url_nickCheck,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            nick_confirm = "ok";
+
+                            System.out.println("응답완료: "+response);
+                            JSONArray jsonarray = new JSONArray(response);
+                            //JSONArray jArray = mainObj.getJSONArray("");
+                            JSONObject setting_json = jsonarray.getJSONObject(0);
+                            height_get = setting_json.getString("height");
+                            weight_get = setting_json.getString("weight");
+
+                            double Dweight = Double.parseDouble(weight_get);
+                            double Dheight = Double.parseDouble(height_get);
+                            bmi = (Dweight/(Dheight * Dheight))*10000 ;
+                            info_height.setText(height_get);
+                            info_weight.setText(weight_get);
+                            System.out.println(bmi);
+                            double bmi_result = Math.round(bmi * 100) / 100.0;
+                            bmi_num.setText(Double.toString(bmi_result));
+
+                            if (bmi_result <= 18.5){
+                                bmi_status.setText("저체중으로 ");
+                            }
+                            if(18.6 <= bmi_result){
+                                if(bmi_result<23){
+                                    bmi_status.setText("정상으로 ");
+                                }
+                            }
+                            if(23<= bmi_result){
+                                if(bmi_result<25){
+                                    bmi_status.setText("과체중으로 ");
+                                }
+                            }
+                            if(25<= bmi_result){
+                                if(bmi_result<30){
+                                    bmi_status.setText("비만으로 ");
+                                }
+                            }
+                            if(35<= bmi_result){
+                                bmi_status.setText("과체중으로 ");
+                            }
+
+                        }catch (Exception e){ e.printStackTrace(); }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("실패 이유: "+error.getMessage());
+                    }
+                }
+        ) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("nick_check", nickname_get);
+
+                return params;
+            }
+        };
+        requestQueue.add(request);
+
+
+        // 키, 몸무게 다시 하기
+        btn_set_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //기존 BMI 코드 (주석처리 함)
+        /*
         // bmi
         bmi_img = (ImageView) findViewById(R.id.img_bmi);
         //bmi_img.setColorFilter(Color.argb(30,000,000,000));       //사진 어둡게 함
@@ -99,7 +229,107 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
             bmi_num.setTextColor(Color.parseColor("#8FBC8B"));
             //bmi_img.setColorFilter(Color.parseColor("#778FBC8B"));
 
+         */
 
+
+
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------
+        //user custom
+        user_custom_myrecode = (TextView)findViewById(R.id.user_custom_myrecode);
+        test_result_myrecode = (TextView)findViewById(R.id.test_result_myrecode);
+        replay_custom_myrecode = (TextView)findViewById(R.id.replay_custom_myrecode);
+
+        user_custom_myrecode.setText(nickname_get+"님에게 추천하는 식단");
+
+        //추천식단 보여주기 (user_custom)
+        String url_custom = "http://10.0.2.2:3000/user_id";
+        StringRequest request1 = new StringRequest(
+                Request.Method.POST,
+                url_custom,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            System.out.println("응답완료: "+response);
+                            JSONArray jsonArray = new JSONArray(response);
+                            JSONObject custom_json = jsonArray.getJSONObject(0);
+
+                            con_get = custom_json.getString("convenience");
+                            if(con_get.equals("1"))
+                            {con_string = "간편식 | ";
+                                String_sum.append(con_string);
+                                System.out.println("1"+String_sum);}
+
+
+                            hp_get = custom_json.getString("high_protein");
+                            if(hp_get.equals("1"))
+                            {hp_string = "고단백질 | ";
+                                String_sum.append(hp_string);
+                                System.out.println("2"+String_sum);}
+
+
+                            v_get = custom_json.getString("vitamin");
+                            if(v_get.equals("1"))
+                            {v_string = "비타민/무기질 | ";
+                                String_sum.append(v_string);
+                                System.out.println("3"+String_sum);}
+
+
+                            lc_get = custom_json.getString("low_calorie");
+                            if(lc_get.equals("1"))
+                            {lc_string = "저칼로리 | ";
+                                String_sum.append(lc_string);
+                                System.out.println("4"+String_sum);}
+
+
+                            lsa_get = custom_json.getString("low_salt");
+                            if(lsa_get.equals("1"))
+                            {lsa_string = "저염 | ";
+                                String_sum.append(lsa_string);
+                                System.out.println("5"+String_sum);}
+
+
+                            lsu_get = custom_json.getString("low_sugar");
+                            if(lsu_get.equals("1"))
+                            {lsu_string = "저당 | ";
+                                String_sum.append(lsu_string);
+                                System.out.println("6"+String_sum);}
+
+                            test_result_myrecode.setText(String_sum.substring(0, String_sum.length()-2));
+
+
+                        }catch (Exception e){ e.printStackTrace(); }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error.getMessage());
+                    }
+                }
+        ) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("nick_check", nickname_get);
+
+                return params;
+            }
+        };
+        requestQueue.add(request1);
+
+
+        //식단 설문조사 다시 하기
+        replay_custom_myrecode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), RecommendedDietSurveyActivity.class);
+                startActivity(intent);
+            }
+        });
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // Action Bar ///////////////////////////////////////////////////////////////////
         //drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer);
@@ -161,9 +391,13 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
 
                 }*/
                 else if(id == R.id.menu_community) {
-                    Toast.makeText(getApplicationContext(), "커뮤니티", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "커뮤니티", Toast.LENGTH_SHORT).show();
 
                     //커뮤니티 화면으로 이동하는 페이지 코드 입력 예정
+                    //커뮤니티 페이지로 이동하는 코드
+                    Intent intent = new Intent(getApplicationContext(), CommunityActivity.class);
+                    startActivity(intent);
+
                 }
                 else if(id == R.id.menu_setting) {
                     //설정 페이지로 이동하는 코드

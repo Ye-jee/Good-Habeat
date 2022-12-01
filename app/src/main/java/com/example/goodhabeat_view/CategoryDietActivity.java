@@ -1,6 +1,9 @@
 package com.example.goodhabeat_view;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,9 +14,13 @@ import com.google.android.material.tabs.TabLayout;
 public class CategoryDietActivity extends AppCompatActivity {
 
     ViewPager viewPager;
-    com.example.goodhabeat_view.ViewPagerAdapter viewPagerAdapter;
+    ViewPagerAdapter viewPagerAdapter;
 
     TabLayout tabLayout;
+
+
+    //화면 터치시 레시피 페이지로 이동 관련 코드
+    LinearLayout viewPagerOfLayout;
 
 
     @Override
@@ -58,6 +65,16 @@ public class CategoryDietActivity extends AppCompatActivity {
 
 
 
+        //탭 아래 화면 터치시 레시피 페이지로 이동 관련 코드
+        viewPagerOfLayout = (LinearLayout) findViewById(R.id.viewPager_ofLayout);
+        viewPagerOfLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //새로 만든 레시피 페이지로 이동하게 하는 코드
+                Intent intent = new Intent(getApplicationContext(), RecipeActivity_forThesis.class);
+                startActivity(intent);
+           }
+        });
 
     }
 }

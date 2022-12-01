@@ -34,6 +34,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -50,11 +51,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 public class CustomCalendarView extends LinearLayout {
+    RequestQueue requestQueue;
+    SharedPreferences preferences;
 
     ImageButton NextButton, PreviousButton;
     TextView CurrentDate;
@@ -66,6 +71,9 @@ public class CustomCalendarView extends LinearLayout {
     ImageView check_break, check_lunch, check_dinner;
     String txtMenuBreak, txtMenuLunch, txtMenuDinner;
 
+    String Smenu_break, Smenu_lunch, Smenu_dinner;
+    String Stime_break, Stime_lunch, Stime_dinner;
+
     ProgressBar cal_progress, carbo_progress, protein_progress, fat_progress;
     TextView tv_cal_num, tv_carbo_num, tv_protein_num, tv_fat_num;
 
@@ -75,17 +83,22 @@ public class CustomCalendarView extends LinearLayout {
     SimpleDateFormat dateFormat_kor = new SimpleDateFormat("yyyy년 MMM", Locale.KOREA);
     SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy", Locale.KOREA);
     SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM", Locale.KOREA);
+    SimpleDateFormat monthFormat_data = new SimpleDateFormat("MM", Locale.KOREA);
     SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.KOREA);
     SimpleDateFormat eventDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
-    SimpleDateFormat dayOfMonthFormat = new SimpleDateFormat("d", Locale.KOREA);
+    SimpleDateFormat dayOfMonthFormat = new SimpleDateFormat("dd", Locale.KOREA);
 
     MyGridAdapter myGridAdapter;
     AlertDialog alertDialog;
     List<Date> dates = new ArrayList<>();
     List<Events> eventsList = new ArrayList<>();
 
-    SharedPreferences preferences;
     DBOpenHelper dbOpenHelper;
+
+    Date currentTime = Calendar.getInstance().getTime();
+    public static String todayDateFormat = "yyyy-MM-dd";
+    public static String getMonthFormat = "MM"; // 월
+    public static String getTimeFormat = "HH"; // 시간(24시간)
 
     public CustomCalendarView(Context context) {
         super(context);
@@ -113,6 +126,13 @@ public class CustomCalendarView extends LinearLayout {
             }
         });
 
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------
+        //프리퍼런스로 로그인한 닉네임 가져오기
+        preferences = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String nickname_get = preferences.getString("nickname", "nickname 오류" );
+        System.out.println(nickname_get);
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -120,21 +140,53 @@ public class CustomCalendarView extends LinearLayout {
                 AlertDialog.Builder builder= new AlertDialog.Builder(context);
                 builder.setCancelable(true);
 
+                final String yesterday = eventDateFormat.format(dates.get(position - 1));
+                final String y_month = monthFormat_data.format(dates.get(position - 1));
+                final String y_year = yearFormat.format(dates.get(position - 1));
+                final String y_dayOfMonth = dayOfMonthFormat.format(dates.get(position - 1));
+
                 final String date = eventDateFormat.format(dates.get(position));
-                final String month = monthFormat.format(dates.get(position));
+                final String month = monthFormat_data.format(dates.get(position));
                 final String year = yearFormat.format(dates.get(position));
                 final String dayOfMonth = dayOfMonthFormat.format(dates.get(position));
+
+                final String tomorrow = eventDateFormat.format(dates.get(position + 1));
+                final String t_month = monthFormat_data.format(dates.get(position + 1));
+                final String t_year = yearFormat.format(dates.get(position + 1));
+                final String t_dayOfMonth = dayOfMonthFormat.format(dates.get(position + 1));
 
                 // 날짜 정보 저장 및 토스트 출력 (Preferences)
                 preferences = getContext().getSharedPreferences("dateInfo", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("yesterdayYear", y_year);
+                editor.putString("yesterdayMonth", y_month);
+                editor.putString("yesterdayDate", y_dayOfMonth);
+
+
+                editor.putString("todayYear", year);
                 editor.putString("todayMonth", month);
                 editor.putString("todayDate", dayOfMonth);
-                editor.commit();
 
+                editor.putString("tomorrowYear", t_year);
+                editor.putString("tomorrowMonth", t_month);
+                editor.putString("tomorrowDate", t_dayOfMonth);
+
+                editor.commit();
+                String yy = preferences.getString("yesterdayYear", y_year);
+                String ym = preferences.getString("yesterdayMonth", y_month);
+                String yd = preferences.getString("yesterdayDate", y_dayOfMonth);
+
+                String y = preferences.getString("todayYear", year);
                 String m = preferences.getString("todayMonth", month);
                 String d = preferences.getString("todayDate", dayOfMonth);
+
+                String ty = preferences.getString("tomorrowYear", t_year);
+                String tm = preferences.getString("tomorrowMonth", t_month);
+                String td = preferences.getString("tomorrowDate", t_dayOfMonth);
                 //Toast.makeText(getContext(), m + " " + d + "일", Toast.LENGTH_LONG).show();
+                System.out.println("선택한 어제 날짜: "+yy + "-" + ym + "-" + yd);
+                System.out.println("선택한 날짜: "+y + "-" + m + "-" + d);
+                System.out.println("선택한 내일 날짜: "+ty + "-" + tm + "-" + td);
 
 
                 // bottom sheet dialog
@@ -149,6 +201,69 @@ public class CustomCalendarView extends LinearLayout {
 
                 bottomSheetDialog.setContentView(bottomSheetView);
                 bottomSheetDialog.show();
+
+                //--------------------------------------------------------------------------------------------------------------------------------------------------------
+                //날짜 별 식단
+                String SelectDate = y + "-" + m + "-" + d;
+                String SelectTomorrowDate = ty + "-" + tm + "-" + td;
+                String SelectYesterdayDate = ty + "-" + tm + "-" + td;
+
+                String url_user_detail = "http://10.0.2.2:3000/user_diet";
+                requestQueue = Volley.newRequestQueue(getContext());
+                SimpleDateFormat systemTime = new SimpleDateFormat(getTimeFormat, Locale.getDefault());
+                String system_time = systemTime.format(currentTime); // 문자열을 정수로 변경
+
+                    StringRequest request = new StringRequest(
+                            Request.Method.POST,
+                            url_user_detail,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    try {
+                                        System.out.println("응답완료: "+response);
+                                        JSONArray json_array = new JSONArray(response);
+
+                                        for(int i=0; i<response.length(); i++){
+                                        JSONObject diet_json = json_array.getJSONObject(i);
+                                         // height_get = diet_json.getString("detail_time");
+                                        //weight_get = diet_json.getString("meal");
+
+                                            //String Smenu_break, Smenu_lunch, Smenu_dinner;
+                                            //String Stime_break, Stime_lunch, Stime_dinner;
+
+                                        }
+
+
+
+                                    }catch (Exception e){ e.printStackTrace(); }
+                                    }
+                                },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        System.out.println("응답실패: "+error.getMessage());
+                                    }
+                                }
+                        ) {
+                            @Nullable
+                            @Override
+                            protected Map<String, String> getParams() throws AuthFailureError {
+                                Map<String, String> params = new HashMap<>();
+
+                                params.put("nick_check", nickname_get);
+                                params.put("SelectDate", SelectDate);
+                                params.put("SelectTomorrowDate", SelectTomorrowDate);
+                                params.put("SelectYesterdayDate", SelectYesterdayDate);
+
+
+                                return params;
+                            }
+                        };
+                        requestQueue.add(request);
+
+
+
+                //(구버전)날짜 별 식단
 
                 // 날짜 별 식단
                 tvToday = (TextView) bottomSheetView.findViewById(R.id.tvToday);
@@ -165,9 +280,11 @@ public class CustomCalendarView extends LinearLayout {
                 time_lunch = (TextView) bottomSheetView.findViewById(R.id.time_lunch);
                 time_dinner = (TextView) bottomSheetView.findViewById(R.id.time_dinner);
 
-                // 메뉴 취소선
-                menu_break.setPaintFlags(menu_break.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG); //취소선
-                menu_lunch.setPaintFlags(menu_lunch.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG); //취소선
+                // 메뉴 취소선 (취소선은 없애기로 결정)
+                //menu_break.setPaintFlags(menu_break.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG); //취소선
+                //menu_lunch.setPaintFlags(menu_lunch.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG); //취소선
+
+                //--------------------------------------------------------------------------------------------------------------------------------------------------------
 
                 // ProgressBar 설정
                 cal_progress = (ProgressBar) bottomSheetView.findViewById(R.id.cal_amount);
@@ -197,7 +314,7 @@ public class CustomCalendarView extends LinearLayout {
 
 
                 // 날짜 변경
-                tvToday.setText(m + " " + d + "일");
+                tvToday.setText(m + "월 " + d + "일");
                 
                 RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
