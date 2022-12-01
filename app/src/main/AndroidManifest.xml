@@ -156,28 +156,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MenuDayActivity_forThesis"
-            android:exported="true" >
-            android:name=".introActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".RecipeActivity_forThesis"
-            android:exported="true" >
-            android:name=".introActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".CommunityWritingActivity"
             android:exported="true" >
             android:name=".introActivity"
