@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-public class IntroActivity extends AppCompatActivity {
-
-    //인트로 액티비티 알파벳 변경함 -> intro에서 Intro로!
+public class introActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
