@@ -18,7 +18,7 @@ public class MenuSelectActivity extends AppCompatActivity {
     TabLayout tabLayout;
 
 
-    Button selectCompleteBtn;
+    //Button selectCompleteBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class MenuSelectActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
 
-        selectCompleteBtn = (Button) findViewById(R.id.select_completeBtn);
+        /*selectCompleteBtn = (Button) findViewById(R.id.select_completeBtn);
 
         selectCompleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +45,7 @@ public class MenuSelectActivity extends AppCompatActivity {
                 //메뉴 선택을 완료하고 버튼을 클릭해 다시 이전 페이지(식단 설정/추가 페이지)로 이동하는 코드
                 finish();
             }
-        });
+        });*/
 
 
 

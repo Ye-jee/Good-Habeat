@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,9 +23,8 @@ public class DietFragment_convenience extends Fragment {
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.convenienceDiet_container);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        ArrayList<com.example.goodhabeat_view.CategoryDietData> category_menu_data = new ArrayList<>();
+        ArrayList<CategoryDietData> category_diet_data = new ArrayList<>();
 
-        //int menu_img[] = {R.drawable.healthy_diet_tomato_tteokbokki, R.drawable.healthy_diet_konjac_nodles, R.drawable.healthy_diet_mushroom_salad};
         String diet_title[] = {"토마토 떡볶이", "곤약 콩국수", "모듬버섯 샐러드"};
         String diet_food[] = {"토마토 떡볶이", "곤약 콩국수", "모듬버섯 샐러드"};
         //참조한 식단 정보에서는 탄수화물 정보 대신 당 정보를 제공해서, 탄수화물 정보를 그냥 아무 값이나 입력한 것임
@@ -35,12 +35,22 @@ public class DietFragment_convenience extends Fragment {
         String diet_disease[] = {"뇌졸중", "유방암", "당뇨병"};
 
         for(int i = 0; i<diet_title.length; i++) {
-            com.example.goodhabeat_view.CategoryDietData dataSet = new com.example.goodhabeat_view.CategoryDietData(diet_title[i], diet_food[i], diet_carbo[i], diet_protein[i], diet_fat[i], diet_calories[i], diet_disease[i]);
-            category_menu_data.add(dataSet);
+            CategoryDietData dataSet = new CategoryDietData(diet_title[i], diet_food[i], diet_carbo[i], diet_protein[i], diet_fat[i], diet_calories[i], diet_disease[i]);
+            category_diet_data.add(dataSet);
         }
 
+        //클릭 이벤트를 구현을 위한 추가코드
+        CategoryDietRecyclerViewAdapter categoryDietRecyclerViewAdapter = new CategoryDietRecyclerViewAdapter(category_diet_data);
+        categoryDietRecyclerViewAdapter.setOnItemClickListener(new CategoryDietRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClicked(int postion, String data1, String data2) {
+                Toast.makeText(getContext(), data1 + "\n" + data2, Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        recyclerView.setAdapter(new com.example.goodhabeat_view.CategoryDietRecyclerViewAdapter(category_menu_data));
+        recyclerView.setAdapter(categoryDietRecyclerViewAdapter);
+
+
 
         return view;
     }

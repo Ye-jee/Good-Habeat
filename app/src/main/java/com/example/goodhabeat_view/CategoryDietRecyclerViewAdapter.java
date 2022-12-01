@@ -22,8 +22,25 @@ public class CategoryDietRecyclerViewAdapter extends RecyclerView.Adapter<Catego
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category_diet, parent, false);
 
+        CategoryDietRecyclerViewAdapter.ViewHolder categoryDiet_viewHolder = new CategoryDietRecyclerViewAdapter.ViewHolder(view);
 
-        return new ViewHolder(view);
+        //클릭 이벤트 구현을 위해 추가된 코드
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String data1 = "";
+                String data2 = "";
+                int position = categoryDiet_viewHolder.getAdapterPosition();
+
+                if(position != RecyclerView.NO_POSITION) {  //순서가 없지 않을 때 즉 그냥 아이템을 클릭할 시에
+                    data1 = categoryDiet_viewHolder.getDiet_title().getText().toString();
+                    data2 = categoryDiet_viewHolder.getDiet_food().getText().toString();
+                }
+                itemClickListener.onItemClicked(position, data1, data2);
+            }
+        });
+
+        return categoryDiet_viewHolder;
     }
 
     @Override
@@ -41,6 +58,22 @@ public class CategoryDietRecyclerViewAdapter extends RecyclerView.Adapter<Catego
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+
+
+    //클릭 이벤트 구현을 위해 추가된 코드
+    //OnItemClickListener 인터페이스 선언
+    public interface OnItemClickListener {
+        void onItemClicked(int postion, String data1, String data2);
+    }
+
+    //OnItemClickListener 참조 변수 선언
+    private OnItemClickListener itemClickListener;
+
+    //OnItemClickListener 전달 메소드
+    public void setOnItemClickListener (OnItemClickListener listener) {
+        itemClickListener = listener;
     }
 
 
@@ -65,6 +98,14 @@ public class CategoryDietRecyclerViewAdapter extends RecyclerView.Adapter<Catego
             diet_calories = (TextView) itemView.findViewById(R.id.diet_calories);
             diet_disease = (TextView) itemView.findViewById(R.id.diet_disease);
 
+        }
+
+        public TextView getDiet_title() {
+            return diet_title;
+        }
+
+        public TextView getDiet_food() {
+            return diet_food;
         }
     }
 }

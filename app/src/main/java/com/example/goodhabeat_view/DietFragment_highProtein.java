@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,7 +23,7 @@ public class DietFragment_highProtein extends Fragment {
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.highproteinDiet_container);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        ArrayList<com.example.goodhabeat_view.CategoryDietData> category_menu_data = new ArrayList<>();
+        ArrayList<CategoryDietData> category_diet_data = new ArrayList<>();
 
         String diet_title[] = {"삼치간장조림 식단", "닭가슴살양배추찜 식단", "차조밥 식단"};
         String diet_food[] = {"수수밥, 근대국, 삼치간장조림, 취나물볶음, 총각김치", "닭가슴살양배추찜, 무국, 멸치깻잎찜, 겨자곤약무침", "차조밥, 콩나물국, 달걀채소말이, 마늘쫑건새우볶음, 감자조림, 배추김치"};
@@ -34,11 +35,20 @@ public class DietFragment_highProtein extends Fragment {
         String diet_disease[] = {"치매 ", "위장병", "골다공증"};
 
         for(int i = 0; i<diet_title.length; i++) {
-            com.example.goodhabeat_view.CategoryDietData dataSet = new com.example.goodhabeat_view.CategoryDietData(diet_title[i], diet_food[i], diet_carbo[i], diet_protein[i], diet_fat[i], diet_calories[i], diet_disease[i]);
-            category_menu_data.add(dataSet);
+            CategoryDietData dataSet = new CategoryDietData(diet_title[i], diet_food[i], diet_carbo[i], diet_protein[i], diet_fat[i], diet_calories[i], diet_disease[i]);
+            category_diet_data.add(dataSet);
         }
 
-        recyclerView.setAdapter(new com.example.goodhabeat_view.CategoryDietRecyclerViewAdapter(category_menu_data));
+        //클릭 이벤트를 구현을 위한 추가코드
+        CategoryDietRecyclerViewAdapter categoryDietRecyclerViewAdapter = new CategoryDietRecyclerViewAdapter(category_diet_data);
+        categoryDietRecyclerViewAdapter.setOnItemClickListener(new CategoryDietRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClicked(int postion, String data1, String data2) {
+                Toast.makeText(getContext(), data1 + "\n" + data2, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        recyclerView.setAdapter(categoryDietRecyclerViewAdapter);
 
         return view;
     }
