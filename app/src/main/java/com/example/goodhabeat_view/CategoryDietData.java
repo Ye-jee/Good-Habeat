@@ -1,7 +1,6 @@
 package com.example.goodhabeat_view;
 
 public class CategoryDietData {
-
     String diet_Title;
     String diet_Food;
     String diet_Carbo;
@@ -20,33 +19,19 @@ public class CategoryDietData {
         this.diet_Disease = diet_Disease;
     }
 
+    public String getDiet_Title() { return diet_Title; }
 
-    public String getDiet_Title() {
-        return diet_Title;
-    }
+    public String getDiet_Food() { return diet_Food; }
 
-    public String getDiet_Food() {
-        return diet_Food;
-    }
+    public String getDiet_Carbo() { return diet_Carbo; }
 
-    public String getDiet_Carbo() {
-        return diet_Carbo;
-    }
+    public String getDiet_Protein() { return diet_Protein; }
 
-    public String getDiet_Protein() {
-        return diet_Protein;
-    }
+    public String getDiet_Fat() { return diet_Fat; }
 
-    public String getDiet_Fat() {
-        return diet_Fat;
-    }
+    public String getDiet_Calories() { return diet_Calories; }
 
-    public String getDiet_Calories() {
-        return diet_Calories;
-    }
+    public String getDiet_Disease() { return diet_Disease; }
 
-    public String getDiet_Disease() {
-        return diet_Disease;
-    }
 }
 
