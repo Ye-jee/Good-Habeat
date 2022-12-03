@@ -157,8 +157,9 @@ public class MenuDayActivity extends AppCompatActivity {
                         String carbo = dietObj.getString("carbohydrate");
                         String protein = dietObj.getString("protein");
                         String fat = dietObj.getString("fat");
+                        String intent_meal = meal;
 
-                        MenuDayData dataSet = new MenuDayData(recipe_image, menu_name, calorie + "Kcal", "탄수화물 " + carbo + "g ", "단백질 " + protein + "g ", "지방 " + fat + "g");
+                        MenuDayData dataSet = new MenuDayData(recipe_image, menu_name, calorie + "Kcal", "탄수화물 " + carbo + "g ", "단백질 " + protein + "g ", "지방 " + fat + "g", intent_meal);
                         menu_day_data.add(dataSet);
                     }
 

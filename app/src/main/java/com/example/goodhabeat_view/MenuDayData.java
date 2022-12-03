@@ -7,14 +7,16 @@ public class MenuDayData {
     String menuCarbo;
     String menuProtein;
     String menuFat;
+    String meal; // intent 정보
 
-    public MenuDayData(String menuPicUrl, String menuName, String menuCal, String menuCarbo, String menuProtein, String menuFat) {
+    public MenuDayData(String menuPicUrl, String menuName, String menuCal, String menuCarbo, String menuProtein, String menuFat, String meal) {
         this.menuPicUrl = menuPicUrl;
         this.menuName = menuName;
         this.menuCal = menuCal;
         this.menuCarbo = menuCarbo;
         this.menuProtein = menuProtein;
         this.menuFat = menuFat;
+        this.meal = meal;
     }
 
     public String getMenuPicUrl() { return menuPicUrl; }
@@ -34,5 +36,7 @@ public class MenuDayData {
 
     public String getMenuFat() { return menuFat; }
     public void setMenuFat(String menuFat) { this.menuFat = menuFat; }
+
+    public String getMeal() { return meal; }
 
 }
