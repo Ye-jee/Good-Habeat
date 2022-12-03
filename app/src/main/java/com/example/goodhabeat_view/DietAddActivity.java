@@ -80,7 +80,7 @@ public class DietAddActivity extends AppCompatActivity {
         add_completeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MenuDayActivity_forThesis.class);
+                Intent intent = new Intent(getApplicationContext(), MenuDayActivity.class);
                 startActivity(intent);
             }
         });

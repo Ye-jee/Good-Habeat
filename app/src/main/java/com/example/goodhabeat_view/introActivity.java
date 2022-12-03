@@ -10,11 +10,16 @@ import android.os.Handler;
 
 public class IntroActivity extends AppCompatActivity {
 
+<<<<<<< HEAD
 
     SharedPreferences preferences;
 
     //인트로 액티비티 알파벳 변경함 -> intro에서 Intro로!
 
+=======
+    SharedPreferences preferences;
+
+>>>>>>> 9c1bab2ef8e6cc8e861829749547c26eb1a073af
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

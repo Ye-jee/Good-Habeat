@@ -72,7 +72,6 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
     ImageView bmi_img;
 
 
-    LinearLayout challenge_record;
 
     CircleProgressBar circleProgressBar;
     CustomCalendarView customCalendarView;
@@ -119,6 +118,7 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
         customCalendarView = (CustomCalendarView) findViewById(R.id.custom_calendar_view);
         //GridView gridView = (GridView) customCalendarView.findViewById(R.id.gridView);
 
+
         /*
         // 챌린지 기록
         challenge_record = (LinearLayout) findViewById(R.id.challenge_record);
@@ -130,6 +130,7 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
             }
         });
          */
+
 
         //--------------------------------------------------------------------------------------------------------------------------------------------------------
         //프리퍼런스로 로그인한 닉네임 가져오기

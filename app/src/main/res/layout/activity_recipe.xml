@@ -81,11 +81,10 @@
                 android:layout_marginTop="20dp"
                 android:background="@color/colorWhite"
                 android:padding="5dp"
-                android:text="재료재료재료"
-                android:textSize="16sp"
-                android:textColor="#9A9A9A"
                 android:shadowColor="#B3B3B3"
                 android:shadowRadius="2"
+                android:textColor="#9A9A9A"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -94,16 +93,14 @@
                 android:id="@+id/borderLine_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="50dp"
                 android:background="#80F4F4F4"
                 android:elevation="4dp"
                 android:src="@drawable/border_line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recipe_ingredient"/>
+                app:layout_constraintTop_toBottomOf="@id/recipe_ingredient" />
 
 
             <TextView
@@ -129,7 +126,6 @@
                 android:padding="5dp"
                 android:shadowColor="#B3B3B3"
                 android:shadowRadius="2"
-                android:text="1. 조리방법"
                 android:textColor="#9A9A9A"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
