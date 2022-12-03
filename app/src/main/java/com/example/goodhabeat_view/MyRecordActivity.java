@@ -92,7 +92,7 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
 
     //user custom ---------------
     TextView user_custom_myrecode, test_result_myrecode, replay_custom_myrecode;
-    String id_get, nick_get, email_get, birth_get, height_get, weight_get;
+    String height_get, weight_get;
     String con_get, hp_get, v_get, lc_get, lsa_get, lsu_get;
     String con_string, hp_string, v_string, lc_string, lsa_string, lsu_string;
     StringBuilder String_sum = new StringBuilder("");

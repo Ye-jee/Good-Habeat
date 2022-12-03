@@ -1,10 +1,12 @@
 package com.example.goodhabeat_view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +29,8 @@ public class CommunityActivity extends AppCompatActivity {
     //네비게이션 드로우어 헤더
     View navHeader;
 
+    ImageButton writing_imgBtn;
+
     SharedPreferences preferences;
     TextView tvUserName;
 
@@ -34,6 +38,30 @@ public class CommunityActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community);
+
+        writing_imgBtn = (ImageButton)findViewById(R.id.writing_imgBtn);
+
+        writing_imgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CommunityWritingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------
+        //프리퍼런스로 로그인한 닉네임 가져오기
+        preferences = getApplicationContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String nickname_get = preferences.getString("nickname", "nickname 오류" );
+        System.out.println(nickname_get);
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
 
         //타이틀바 없애는 코드
         getSupportActionBar().hide();
