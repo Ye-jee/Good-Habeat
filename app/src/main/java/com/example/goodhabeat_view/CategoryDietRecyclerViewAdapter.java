@@ -1,5 +1,7 @@
 package com.example.goodhabeat_view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +15,11 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 public class CategoryDietRecyclerViewAdapter extends RecyclerView.Adapter<CategoryDietRecyclerViewAdapter.ViewHolder>{
+    Context itemContext;
     ArrayList<com.example.goodhabeat_view.CategoryDietData> data;
 
-    public CategoryDietRecyclerViewAdapter(ArrayList<com.example.goodhabeat_view.CategoryDietData> data) {
+    public CategoryDietRecyclerViewAdapter(Context itemContext, ArrayList<com.example.goodhabeat_view.CategoryDietData> data) {
+        this.itemContext = itemContext;
         this.data = data;
     }
 
@@ -38,6 +42,7 @@ public class CategoryDietRecyclerViewAdapter extends RecyclerView.Adapter<Catego
         holder.diet_fat.setText(item.getDiet_Fat());
         holder.diet_calories.setText(item.getDiet_Calories());
         holder.diet_disease.setText(item.getDiet_Disease());
+
     }
 
     @Override
@@ -63,6 +68,24 @@ public class CategoryDietRecyclerViewAdapter extends RecyclerView.Adapter<Catego
             diet_fat = (TextView) itemView.findViewById(R.id.diet_fat);
             diet_calories = (TextView) itemView.findViewById(R.id.diet_calories);
             diet_disease = (TextView) itemView.findViewById(R.id.diet_disease);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+
+                    Intent intent = new Intent(itemView.getContext(), CategoryDiet_DetailsMenuActivity.class);
+                    intent.putExtra("diet_title", data.get(position).getDiet_Title());
+                    String diet_info = data.get(position).getDiet_Carbo()
+                            + " | " + data.get(position).getDiet_Protein()
+                            + " | " + data.get(position).getDiet_Fat();
+                    intent.putExtra("diet_info", diet_info);
+                    intent.putExtra("diet_calorie", data.get(position).getDiet_Calories());
+                    intent.putExtra("diet_category", data.get(position).getDiet_category()); // Volley에 사용
+                    intent.putExtra("diet_bind_id", data.get(position).getDiet_bind_id()); // Volley에 사용
+                    itemContext.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                }
+            });
         }
     }
 }

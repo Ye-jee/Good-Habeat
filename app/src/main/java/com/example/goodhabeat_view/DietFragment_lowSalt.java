@@ -43,7 +43,10 @@ public class DietFragment_lowSalt extends Fragment {
     Double carbo_buf = 0.0;
     Double protein_buf = 0.0;
     Double fat_buf = 0.0;
-    Double cal_buf = 0.0;
+    Integer cal_buf = 0;
+
+    // intent 전달
+    String diet_category;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -113,7 +116,7 @@ public class DietFragment_lowSalt extends Fragment {
                             menu_buf += (menu_name + " ");
 
                             // 영양 정보 (1)
-                            Double calorie = bindObj.getDouble("calorie");
+                            Integer calorie = bindObj.getInt("calorie");
                             cal_buf += calorie;
                             Double carbohydrate = bindObj.getDouble("carbohydrate");
                             carbo_buf += carbohydrate;
@@ -125,6 +128,9 @@ public class DietFragment_lowSalt extends Fragment {
                             // 질병
                             JSONObject bindObj0 = bindArray.getJSONObject(0);
                             diet_disease = bindObj0.getString("disease"); // 질병
+
+                            // intent 전달
+                            diet_category = bindObj.getString("category");
                         }
 
                         // 식단 메뉴 (2)
@@ -138,16 +144,18 @@ public class DietFragment_lowSalt extends Fragment {
                         protein_buf = 0.0;
                         diet_fat = String.format("%.1f", fat_buf);
                         fat_buf = 0.0;
-                        diet_calories = String.format("%.1f", cal_buf);
-                        cal_buf = 0.0;
+                        diet_calories = cal_buf.toString();
+                        cal_buf = 0;
 
-                        CategoryDietData dataSet = new CategoryDietData(diet_title + " 식단", diet_food, diet_carbo + " g", diet_protein + " g", diet_fat + " g", diet_calories + " kcal", diet_disease);
+                        CategoryDietData dataSet = new CategoryDietData(diet_title + " 식단", diet_food,
+                                "탄수화물 " + diet_carbo + "g", "단백질 " + diet_protein + "g",  "지방 " + diet_fat + "g", diet_calories + " kcal",
+                                diet_disease, diet_category, i+1);
                         category_diet_data.add(dataSet);
                     }
 
                     diet_food = "";
 
-                    recyclerView.setAdapter(new com.example.goodhabeat_view.CategoryDietRecyclerViewAdapter(category_diet_data));
+                    recyclerView.setAdapter(new com.example.goodhabeat_view.CategoryDietRecyclerViewAdapter(getContext(), category_diet_data));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
