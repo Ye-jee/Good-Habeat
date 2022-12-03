@@ -51,9 +51,13 @@ import com.google.android.material.navigation.NavigationView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -73,6 +77,14 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
     CircleProgressBar circleProgressBar;
     CustomCalendarView customCalendarView;
 
+    //----------------------------
+    //출석률
+    TextView txt_percent2;
+    String detail_date_string, detail_date_Bstring;
+    int detail_date_count, detail_date_Bcount;
+    int before_date_attend, date_attend;
+    //----------------------------
+
     //BMI -----------------------
     TextView bmi_status, bmi_num, info_height, info_weight, btn_set_info;
     double bmi;
@@ -85,6 +97,7 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
     String con_string, hp_string, v_string, lc_string, lsa_string, lsu_string;
     StringBuilder String_sum = new StringBuilder("");
     //----------------------------
+
 
 
     //네비게이션 관련 코드
@@ -341,10 +354,137 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
         //toggle.syncState();
 
 
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------
         // Progress Circle /////////////////////////////////////////////////////////////
-        circleProgressBar=findViewById(R.id.cpb_circlebar);
-        circleProgressBar.setProgress(83);  // 해당 퍼센트를 적용
+        Calendar calendar = Calendar.getInstance();
+        Calendar b_calendar = Calendar.getInstance();
+        b_calendar.add(Calendar.MONTH , -1);
 
+        int beforeOfMonth = b_calendar.getActualMaximum(calendar.DAY_OF_MONTH);
+        System.out.println("저번달 월 일수: "+beforeOfMonth);
+        int daysOfMonth = calendar.getActualMaximum(calendar.DAY_OF_MONTH);
+        System.out.println("해당 월 일수: "+daysOfMonth);
+
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat timeFormat = new SimpleDateFormat("MM");
+        String month_num = timeFormat.format(currentTime);
+        System.out.println("month num: "+month_num);
+
+        String beforeMonth = new java.text.SimpleDateFormat("MM").format(b_calendar.getTime());
+
+
+        circleProgressBar=findViewById(R.id.cpb_circlebar);
+        txt_percent2=(TextView)findViewById(R.id.txt_percent2);
+
+        //유저 해당 월 출석일 수 가져오기
+        String url_myrecord_month = "http://10.0.2.2:3000/myrecord_month";
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        request = new StringRequest(
+                Request.Method.POST,
+                url_myrecord_month,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            System.out.println("응답완료: "+response);
+                            JSONArray jsonarray = new JSONArray(response);
+                            //JSONArray jArray = mainObj.getJSONArray("");
+                            JSONObject attend_json  = jsonarray.getJSONObject(0);
+                            detail_date_string = attend_json.getString("detail_date_count");
+                            detail_date_count = Integer.parseInt(detail_date_string);
+                            System.out.println("해당 출석률: "+detail_date_count);
+
+                            circleProgressBar.setMax(daysOfMonth);
+                            circleProgressBar.setProgress(detail_date_count);  // 해당 퍼센트를 적용
+
+                            date_attend = (int) Math.round(detail_date_count*(Math.pow(daysOfMonth, -1))*100);
+                            System.out.println("date_attend: "+date_attend);
+
+
+
+                        }catch (Exception e){ e.printStackTrace(); }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("실패 이유: "+error.getMessage());
+                    }
+                }
+        ) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("nickname", nickname_get);
+                params.put("system_month", month_num);
+
+                return params;
+            }
+        };
+        requestQueue.add(request);
+
+
+        //유저 저번달 월 출석일 수 가져오기
+        String url_before_month = "http://10.0.2.2:3000/myrecord_Bmonth";
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        request = new StringRequest(
+                Request.Method.POST,
+                url_before_month,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            System.out.println("응답완료: "+response);
+                            JSONArray jsonarray = new JSONArray(response);
+                            //JSONArray jArray = mainObj.getJSONArray("");
+                            JSONObject attend_json  = jsonarray.getJSONObject(0);
+                            detail_date_Bstring = attend_json.getString("detail_date_Bcount");
+                            detail_date_Bcount = Integer.parseInt(detail_date_Bstring);
+                            System.out.println("저번달 출석률: "+detail_date_Bcount);
+                            System.out.println("before_date_attend: "+before_date_attend);
+                            before_date_attend = (int) Math.round(detail_date_Bcount*(Math.pow(beforeOfMonth, -1))*100);;
+
+                            int attend_result = date_attend - before_date_attend;
+                            System.out.println("출석률 결과 : "+attend_result);
+
+                            if(attend_result>0){
+                                txt_percent2.setText(beforeMonth+"월 보다 " +attend_result+"% 더 잘지켰어요!");
+                            } else {
+                                txt_percent2.setText(beforeMonth+"월 보다 " +Math.abs(attend_result)+"% 덜 잘지켰어요.");
+                            }
+
+
+
+
+                        }catch (Exception e){ e.printStackTrace(); }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("실패 이유: "+error.getMessage());
+                    }
+                }
+        ) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("nickname", nickname_get);
+                params.put("before_month", beforeMonth);
+
+                return params;
+            }
+        };
+        requestQueue.add(request);
+
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00000000")));
 

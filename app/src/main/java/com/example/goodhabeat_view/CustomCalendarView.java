@@ -58,6 +58,8 @@ import java.util.Map;
 import java.util.TimeZone;
 
 public class CustomCalendarView extends LinearLayout {
+
+
     RequestQueue requestQueue;
     SharedPreferences preferences;
 
@@ -70,6 +72,9 @@ public class CustomCalendarView extends LinearLayout {
     TextView time_break, time_lunch, time_dinner;
     ImageView check_break, check_lunch, check_dinner;
     String txtMenuBreak, txtMenuLunch, txtMenuDinner;
+    double calorie_sum = 0, carbohydrate_sum = 0, protein_sum = 0, fat_sum = 0;
+    int b,l,di;
+
 
     String Smenu_break, Smenu_lunch, Smenu_dinner;
     String Stime_break, Stime_lunch, Stime_dinner;
@@ -137,6 +142,15 @@ public class CustomCalendarView extends LinearLayout {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                calorie_sum = 0;
+                carbohydrate_sum = 0;
+                protein_sum = 0;
+                fat_sum = 0;
+
+                b=0;
+                l=0;
+                di=0;
+
                 AlertDialog.Builder builder= new AlertDialog.Builder(context);
                 builder.setCancelable(true);
 
@@ -201,89 +215,6 @@ public class CustomCalendarView extends LinearLayout {
 
                 bottomSheetDialog.setContentView(bottomSheetView);
                 bottomSheetDialog.show();
-
-                //--------------------------------------------------------------------------------------------------------------------------------------------------------
-                //날짜 별 식단
-                String SelectDate = y + "-" + m + "-" + d;
-                String SelectTomorrowDate = ty + "-" + tm + "-" + td;
-                String SelectYesterdayDate = ty + "-" + tm + "-" + td;
-
-                String url_user_detail = "http://10.0.2.2:3000/user_diet";
-                requestQueue = Volley.newRequestQueue(getContext());
-                SimpleDateFormat systemTime = new SimpleDateFormat(getTimeFormat, Locale.getDefault());
-                String system_time = systemTime.format(currentTime); // 문자열을 정수로 변경
-
-                    StringRequest request = new StringRequest(
-                            Request.Method.POST,
-                            url_user_detail,
-                            new Response.Listener<String>() {
-                                @Override
-                                public void onResponse(String response) {
-                                    try {
-                                        System.out.println("응답완료: "+response);
-                                        JSONArray json_array = new JSONArray(response);
-
-                                        for(int i=0; i<response.length(); i++){
-                                        JSONObject diet_json = json_array.getJSONObject(i);
-                                         // height_get = diet_json.getString("detail_time");
-                                        //weight_get = diet_json.getString("meal");
-
-                                            //String Smenu_break, Smenu_lunch, Smenu_dinner;
-                                            //String Stime_break, Stime_lunch, Stime_dinner;
-
-                                        }
-
-
-
-                                    }catch (Exception e){ e.printStackTrace(); }
-                                    }
-                                },
-                                new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        System.out.println("응답실패: "+error.getMessage());
-                                    }
-                                }
-                        ) {
-                            @Nullable
-                            @Override
-                            protected Map<String, String> getParams() throws AuthFailureError {
-                                Map<String, String> params = new HashMap<>();
-
-                                params.put("nick_check", nickname_get);
-                                params.put("SelectDate", SelectDate);
-                                params.put("SelectTomorrowDate", SelectTomorrowDate);
-                                params.put("SelectYesterdayDate", SelectYesterdayDate);
-
-
-                                return params;
-                            }
-                        };
-                        requestQueue.add(request);
-
-
-
-                //(구버전)날짜 별 식단
-
-                // 날짜 별 식단
-                tvToday = (TextView) bottomSheetView.findViewById(R.id.tvToday);
-
-                menu_break = (TextView) bottomSheetView.findViewById(R.id.menu_break);
-                menu_lunch = (TextView) bottomSheetView.findViewById(R.id.menu_lunch);
-                menu_dinner = (TextView) bottomSheetView.findViewById(R.id.menu_dinner);
-
-                check_break = (ImageView) bottomSheetView.findViewById(R.id.check_break);
-                check_lunch = (ImageView) bottomSheetView.findViewById(R.id.check_lunch);
-                check_dinner = (ImageView) bottomSheetView.findViewById(R.id.check_dinner);
-
-                time_break = (TextView) bottomSheetView.findViewById(R.id.time_break);
-                time_lunch = (TextView) bottomSheetView.findViewById(R.id.time_lunch);
-                time_dinner = (TextView) bottomSheetView.findViewById(R.id.time_dinner);
-
-                // 메뉴 취소선 (취소선은 없애기로 결정)
-                //menu_break.setPaintFlags(menu_break.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG); //취소선
-                //menu_lunch.setPaintFlags(menu_lunch.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG); //취소선
-
                 //--------------------------------------------------------------------------------------------------------------------------------------------------------
 
                 // ProgressBar 설정
@@ -312,10 +243,314 @@ public class CustomCalendarView extends LinearLayout {
                 tv_protein_num.setText(protein_str);
                 tv_fat_num.setText(fat_str);
 
+                //--------------------------------------------------------------------------------------------------------------------------------------------------------
+                //날짜 별 식단
+                String SelectDate = y + "-" + m + "-" + d;
+                String SelectTomorrowDate = ty + "-" + tm + "-" + td;
+                String SelectYesterdayDate = y + "-" + ym + "-" + yd;
+                LinearLayout breakfast = (LinearLayout) bottomSheetView.findViewById(R.id.breakfast);
+                LinearLayout lunch = (LinearLayout) bottomSheetView.findViewById(R.id.lunch);
+                LinearLayout dinner = (LinearLayout) bottomSheetView.findViewById(R.id.dinner);
+
+                String url_user_detail = "http://10.0.2.2:3000/user_diet";
+                requestQueue = Volley.newRequestQueue(getContext());
+                SimpleDateFormat systemTime = new SimpleDateFormat(getTimeFormat, Locale.getDefault());
+                String system_time = systemTime.format(currentTime); // 문자열을 정수로 변경
+                String[] break_menu ;
+                StringRequest request = new StringRequest(
+                        Request.Method.POST,
+                        url_user_detail,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    System.out.println("응답완료: " + response);
+
+                                    if(response.contains("detail_date")){
+                                        System.out.println("테이블: user_detail");
+                                        JSONArray detail_json = new JSONArray(response);
+                                        for(int i=0; i<detail_json.length(); i++){
+                                            JSONObject dietObj = detail_json.getJSONObject(i); //중괄호 벗겨서 하나씩 나눔
+
+                                            //System.out.println("dietObj[" + i + "] : " + dietObj);
+                                            String detail_meal = dietObj.getString("meal");
+                                            String detail_time = dietObj.getString("detail_time");
+                                            String menu_name = dietObj.getString("menu_name");
+
+                                            String s_calorie = dietObj.getString("calorie");
+                                            double calorie = Double.parseDouble(s_calorie);
+                                            //System.out.println("[ calorie "+i+"] "+calorie);
+                                            calorie_sum += calorie ;
+
+                                            String s_carbohydrate = dietObj.getString("carbohydrate");
+                                            double carbohydrate = Double.parseDouble(s_carbohydrate);
+                                            carbohydrate_sum += carbohydrate;
+
+                                            String s_protein = dietObj.getString("protein");
+                                            double protein = Double.parseDouble(s_protein);
+                                            protein_sum += protein;
+
+                                            String s_fat  = dietObj.getString("fat");
+                                            double fat = Double.parseDouble(s_fat);
+                                            fat_sum += fat;
+
+                                            if(detail_meal.equals("1")){
+                                                time_break.setText(detail_time.substring(0, 5));
+                                                menu_break.append(menu_name + ", ");
+                                                b = 1;
+                                            }
+
+                                            if(detail_meal.equals("2")){
+                                                time_lunch.setText(detail_time.substring(0, 5));
+                                                menu_lunch.append(menu_name + ", ");
+                                                l = 1;
+                                            }
+
+                                            if(detail_meal.equals("3")){
+                                                time_dinner.setText(detail_time.substring(0, 5));
+                                                menu_dinner.append(menu_name + ", ");
+                                                di = 1;
+                                            }
+
+                                                /*
+                                                switch (detail_meal){
+                                                    case "1" :
+                                                        time_break.setText(detail_time.substring(0, 5));
+                                                        menu_break.append(menu_name + ", ");
+                                                        break;
+
+                                                    case "2" :
+                                                       time_lunch.setText(detail_time.substring(0, 5));
+                                                        menu_lunch.append(menu_name + ", ");
+
+                                                        break;
+
+                                                    case "3" :
+                                                        time_dinner.setText(detail_time.substring(0, 5));
+                                                        menu_dinner.append(menu_name + ", ");
+
+                                                        break;
+                                                } //meal 스위치 끝
+
+                                                 */
+
+                                        }//for문 끝
+
+
+                                        if(b==1){
+                                            String break_name = menu_break.getText().toString();
+                                            break_name = break_name.substring(0, break_name.length() - 2);
+                                            menu_break.setText(break_name);
+                                        } else {
+                                            breakfast.setVisibility(View.GONE);
+                                        }
+
+                                        if(l==1){
+                                            String lunch_name = menu_lunch.getText().toString();
+                                            lunch_name = lunch_name.substring(0, lunch_name.length() - 2);
+                                            menu_lunch.setText(lunch_name);
+                                        } else {
+                                            lunch.setVisibility(View.GONE);
+                                        }
+
+                                        if(di==1){
+                                            String dinner_name = menu_dinner.getText().toString();
+                                            dinner_name = dinner_name.substring(0, dinner_name.length() - 2);
+                                            menu_dinner.setText(dinner_name);
+                                        } else {
+                                            dinner.setVisibility(View.GONE);
+                                        }
+
+                                    }//detail if문 끝
+
+                                    if(response.contains("diet_date")){
+                                        System.out.println("테이블: diet");
+                                        JSONArray detail_json = new JSONArray(response);
+                                        for(int i=0; i<detail_json.length(); i++){
+                                            JSONObject dietObj = detail_json.getJSONObject(i); //중괄호 벗겨서 하나씩 나눔
+                                            //System.out.println("dietObj[" + i + "] : " + dietObj);
+                                            String detail_meal = dietObj.getString("meal");
+                                            String diet_date = dietObj.getString("diet_date");
+                                            String menu_name = dietObj.getString("menu_name");
+
+
+                                            String s_calorie = dietObj.getString("calorie");
+                                            double calorie = Double.parseDouble(s_calorie);
+                                            //System.out.println("[ calorie "+i+"] "+calorie);
+                                            calorie_sum += calorie ;
+
+                                            String s_carbohydrate = dietObj.getString("carbohydrate");
+                                            double carbohydrate = Double.parseDouble(s_carbohydrate);
+                                            carbohydrate_sum += carbohydrate;
+
+                                            String s_protein = dietObj.getString("protein");
+                                            double protein = Double.parseDouble(s_protein);
+                                            protein_sum += protein;
+
+                                            String s_fat  = dietObj.getString("fat");
+                                            double fat = Double.parseDouble(s_fat);
+                                            fat_sum += fat;
+
+                                            //-----------------------------------------------------------------
+
+
+                                            if(detail_meal.equals("1")){
+                                                time_break.setText("");
+                                                menu_break.append(menu_name + ", ");
+                                                b = 1;
+                                            }
+
+                                            if(detail_meal.equals("2")){
+                                                time_lunch.setText("");
+                                                menu_lunch.append(menu_name + ", ");
+                                                l = 1;
+                                            }
+
+                                            if(detail_meal.equals("3")){
+                                                time_dinner.setText("");
+                                                menu_dinner.append(menu_name + ", ");
+                                                di = 1;
+                                            }
+
+
+                                        }//for문 끝
+                                        //메뉴 이름 보여주기
+                                        if(b==1){
+                                            String break_name = menu_break.getText().toString();
+                                            break_name = break_name.substring(0, break_name.length() - 2);
+                                            menu_break.setText(break_name);
+                                        } else {
+                                            breakfast.setVisibility(View.GONE);
+                                        }
+
+                                        if(l==1){
+                                            String lunch_name = menu_lunch.getText().toString();
+                                            lunch_name = lunch_name.substring(0, lunch_name.length() - 2);
+                                            menu_lunch.setText(lunch_name);
+                                        } else {
+                                            lunch.setVisibility(View.GONE);
+                                        }
+
+                                        if(di==1){
+                                            String dinner_name = menu_dinner.getText().toString();
+                                            dinner_name = dinner_name.substring(0, dinner_name.length() - 2);
+                                            menu_dinner.setText(dinner_name);
+                                        } else {
+                                            dinner.setVisibility(View.GONE);
+                                        }
+
+
+                                    }//detail if문 끝
+                                    int calorie_int = (int) Math.round(calorie_sum);
+                                    int carbo_max = (int) Math.round(calorie_sum*0.5);
+                                    int protein_max = (int) Math.round(calorie_sum*0.2);
+                                    int fat_max = (int) Math.round(calorie_sum*0.3);
+
+                                    int carbo_int = (int) Math.round(carbohydrate_sum);
+                                    int protein_int = (int) Math.round(protein_sum);
+                                    int fat_int = (int) Math.round(fat_sum);
+
+                                    cal_progress.setProgress(calorie_int);
+                                    System.out.println("칼로리 총 합산: "+calorie_int);
+                                    int cal_progress_num = (int) Math.round((calorie_sum/2350)*100);
+                                    System.out.println("칼로리 총 합산 퍼센트: "+cal_progress_num);
+
+                                    carbo_progress.setMax(carbo_max);
+                                    carbo_progress.setProgress(carbo_int);
+                                    System.out.println("탄수화물 총 합산: "+carbo_int);
+                                    int carbo_progress_num = (int) Math.round((carbohydrate_sum/carbo_max)*100);
+                                    System.out.println("탄수화물 총 합산 퍼센트: "+carbo_progress_num);
+
+
+                                    protein_progress.setMax(protein_max);
+                                    protein_progress.setProgress(protein_int);
+                                    System.out.println("단백질 총 합산: "+protein_int);
+                                    int protein_progress_num = (int) Math.round((protein_sum/protein_max)*100);
+                                    System.out.println("단백질 총 합산 퍼센트: "+protein_progress_num);
+
+                                    fat_progress.setMax(fat_max);
+                                    fat_progress.setProgress(fat_int);
+                                    System.out.println("지방 총 합산: "+fat_int);
+                                    int fat_progress_num = (int) Math.round((fat_sum/fat_max)*100);
+                                    System.out.println("지방 총 합산 퍼센트: "+fat_progress_num);
+
+                                    String cal_str = String.valueOf(cal_progress_num);
+                                    String carbo_str = String.valueOf(carbo_progress_num);
+                                    String protein_str = String.valueOf(protein_progress_num);
+                                    String fat_str = String.valueOf(fat_progress_num);
+
+                                    tv_cal_num.setText(cal_str);
+                                    tv_carbo_num.setText(carbo_str);
+                                    tv_protein_num.setText(protein_str);
+                                    tv_fat_num.setText(fat_str);
+
+
+
+                                }catch (Exception e){ e.printStackTrace(); }
+
+                                if(response.equals("[]")){
+                                    breakfast.setVisibility(View.GONE);
+                                    lunch.setVisibility(View.GONE);
+                                    dinner.setVisibility(View.GONE);
+                                }
+                            }
+
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                System.out.println("응답실패: "+error.getMessage());
+                            }
+                        }
+                ) {
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+
+                        params.put("nick_check", nickname_get);
+                        params.put("SelectDate", SelectDate);
+                        params.put("SelectTomorrowDate", SelectTomorrowDate);
+                        params.put("SelectYesterdayDate", SelectYesterdayDate);
+
+
+                        return params;
+                    }
+                };
+                requestQueue.add(request);
+
+
+
+                //(구버전)날짜 별 식단
+
+                // 날짜 별 식단
+                tvToday = (TextView) bottomSheetView.findViewById(R.id.tvToday);
+
+                menu_break = (TextView) bottomSheetView.findViewById(R.id.menu_break);
+                menu_lunch = (TextView) bottomSheetView.findViewById(R.id.menu_lunch);
+                menu_dinner = (TextView) bottomSheetView.findViewById(R.id.menu_dinner);
+
+                check_break = (ImageView) bottomSheetView.findViewById(R.id.check_break);
+                check_lunch = (ImageView) bottomSheetView.findViewById(R.id.check_lunch);
+                check_dinner = (ImageView) bottomSheetView.findViewById(R.id.check_dinner);
+
+                time_break = (TextView) bottomSheetView.findViewById(R.id.time_break);
+                time_lunch = (TextView) bottomSheetView.findViewById(R.id.time_lunch);
+                time_dinner = (TextView) bottomSheetView.findViewById(R.id.time_dinner);
+
+
+
+
+
+                // 메뉴 취소선 (취소선은 없애기로 결정)
+                //menu_break.setPaintFlags(menu_break.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG); //취소선
+                //menu_lunch.setPaintFlags(menu_lunch.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG); //취소선
+
+
 
                 // 날짜 변경
                 tvToday.setText(m + "월 " + d + "일");
-                
+
                 RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
 /*
