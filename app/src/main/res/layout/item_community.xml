@@ -12,8 +12,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="30dp"
-        android:background="@drawable/round_rec_background_community"
-        android:elevation="4dp"
+        android:background="@drawable/round_rec_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -21,10 +20,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <ImageView
-            android:id="@+id/commu_user_pic"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+        <TextView
+            android:id="@+id/post_Id"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,25 +34,25 @@
             android:id="@+id/commu_user_nicName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="-5dp"
             android:text="사용자 닉네임1"
             android:textColor="@color/theme1"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/commu_user_pic"
-            app:layout_constraintTop_toTopOf="@+id/commu_user_pic" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/post_Id" />
 
         <TextView
             android:id="@+id/commu_create_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="5dp"
             android:text="2022.08.28"
             android:textColor="@color/theme2"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/commu_user_pic"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/commu_user_nicName" />
 
         <TextView
@@ -72,14 +71,14 @@
             android:id="@+id/commu_content_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             android:text="늦은 아침으로 샐러드 먹었어요! 맛있네요 ^ㅁ^"
             android:textColor="@color/theme3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/commu_user_pic"
-            app:layout_constraintTop_toBottomOf="@+id/commu_user_pic" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/commu_create_date" />
 
         <ImageView
             android:id="@+id/commu_content_img"

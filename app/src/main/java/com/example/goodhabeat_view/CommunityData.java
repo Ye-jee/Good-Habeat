@@ -2,20 +2,19 @@ package com.example.goodhabeat_view;
 
 public class CommunityData {
 
-    int community_user_pic;
+    String community_post_num;
     String community_user_nikName;
     String community_create_date;
     String community_create_time;
     String community_content_text;
-    int community_content_img;
+    String community_content_img;
     int community_heart_img;
     String community_heart_number;
     String community_delete_text;
 
-    public CommunityData(int community_user_pic, String community_user_nikName, String community_create_date, String community_create_time,
-                         String community_content_text, int community_content_img, int community_heart_img, String community_heart_number, String community_delete_text) {
-
-        this.community_user_pic = community_user_pic;
+    public CommunityData(String community_post_num, String community_user_nikName, String community_create_date, String community_create_time,
+                         String community_content_text, String community_content_img, int community_heart_img, String community_heart_number, String community_delete_text) {
+        this.community_post_num = community_post_num;
         this.community_user_nikName = community_user_nikName;
         this.community_create_date = community_create_date;
         this.community_create_time = community_create_time;
@@ -26,8 +25,8 @@ public class CommunityData {
         this.community_delete_text = community_delete_text;
     }
 
-    public int getCommunity_user_pic() {
-        return community_user_pic;
+    public String getCommunity_post_num() {
+        return community_post_num;
     }
 
     public String getCommunity_user_nikName() {
@@ -46,7 +45,7 @@ public class CommunityData {
         return community_content_text;
     }
 
-    public int getCommunity_content_img() {
+    public String getCommunity_content_img() {
         return community_content_img;
     }
 

@@ -1,5 +1,7 @@
 package com.example.goodhabeat_view;
 
+import static com.example.goodhabeat_view.LoginActivity.requestQueue;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -16,15 +19,32 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CommunityActivity extends AppCompatActivity {
 
     //네비게이션 관련 코드
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
+
+    int my_heart_icons =1;
+    String my_state;
+    TextView myWrote, write_content;
 
     //네비게이션 드로우어 헤더
     View navHeader;
@@ -40,6 +60,8 @@ public class CommunityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_community);
 
         writing_imgBtn = (ImageButton)findViewById(R.id.writing_imgBtn);
+        myWrote = (TextView) findViewById(R.id.myWrote);
+        write_content = (TextView) findViewById(R.id.write_content);
 
         writing_imgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,33 +88,158 @@ public class CommunityActivity extends AppCompatActivity {
         //타이틀바 없애는 코드
         getSupportActionBar().hide();
 
+
+
+
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.community_list_container);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ArrayList<com.example.goodhabeat_view.CommunityData> community_data = new ArrayList<>();
+        ArrayList<CommunityData> community_data = new ArrayList<>();
 
-        //삭제버튼은 내 게시글에만 보여야 됨!!! - 리사이클러뷰에서는 어떻게 해야 되지?
+        //SharedPreference
+        preferences = getApplicationContext().getSharedPreferences("userInfo", MODE_PRIVATE);
+        String userId = preferences.getString("user_id","");
 
-        int user_pic[] = {R.drawable.community_person01, R.drawable.community_person01, R.drawable.community_person01};
-        String user_nikName[] = {"user_name1", "로그인 사용자", "user_name2"};
-        String create_date[] = {"2022.04.20", "2022.08.28", "2022.10.16"};
-        String create_time[] = {"09:22", "10:11", "14:20"};
-        String content_text[] = {"일어나자마자 아침으로 샐러드를 만들어 먹었어요! 뿌듯하다!",
-                                    "오늘 아침으로 두부 샐러드를 먹었습니다 -ㅁ-",
-                                    "샐러드도 치킨이 들어가니 먹을만 하네요...!"};
-        int content_img[] = {R.drawable.community_img_salad, R.drawable.community_img_salad2, R.drawable.community_img_salad3};
-        int heart_img[] = {R.drawable.community_heart_fil, R.drawable.community_heart_empty, R.drawable.community_heart_empty};
-        String heart_number[] = {"152", "47" ,"66"};
-        String delete_text[] = {"", "삭제", ""};
+        write_content.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String commu_post = "http://10.0.2.2:3000/commu_post";
+                requestQueue =  Volley.newRequestQueue(getApplicationContext());
 
-        for(int i = 0; i< user_pic.length; i++){
-            com.example.goodhabeat_view.CommunityData dataSet = new com.example.goodhabeat_view.CommunityData(user_pic[i], user_nikName[i], create_date[i], create_time[i],
-                                            content_text[i], content_img[i], heart_img[i], heart_number[i], delete_text[i]);
-            community_data.add(dataSet);
-        }
+                Request request = new StringRequest(Request.Method.POST, commu_post, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            System.out.println("response : " + response);
 
-        recyclerView.setAdapter(new CommunityRecyclerViewAdapter(community_data));
+                            JSONArray resArray = new JSONArray(response);
+
+                            for(int i=0; i<resArray.length(); i++) {
+                                JSONObject dietObj = resArray.getJSONObject(i);
+                                //System.out.println("dietObj[" + i + "] : " + dietObj);
+                                String my_post_id = dietObj.getString("post_id");
+                                String my_nickname = dietObj.getString("nickname");
+                                String my_content = dietObj.getString("content");
+                                String my_postdate = dietObj.getString("post_date");
+                                String my_post_date = my_postdate.substring(0,10);
+                                String my_posttime = dietObj.getString("post_time");
+                                String my_post_time = my_posttime.substring(0,5);
+                                String my_post_image = dietObj.getString("post_image");
+                                String my_like_count = dietObj.getString("like_count");
+                                my_heart_icons = 0;
+                                String my_del_state = dietObj.getString("del_state");
+                                if(Integer.parseInt(my_del_state) > 0){
+                                    my_state = "";
+                                }
 
 
+                                CommunityData dataSet = new CommunityData(my_post_id, my_nickname, my_post_date, my_post_time, my_content, my_post_image, my_heart_icons , my_like_count , my_state);
+                                community_data.add(dataSet);
+                            }
+
+                            recyclerView.setAdapter(new CommunityRecyclerViewAdapter(getApplicationContext(), community_data));
+
+                        }catch (Exception e){ e.printStackTrace(); }
+                        System.out.println("글 가져오기 성공 : " + response);
+                    }
+                },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                System.out.println(error.getMessage());
+                            }
+                        }
+                ) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("user_id", userId);
+
+                        return params;
+                    }
+                };
+
+                requestQueue.add(request);
+            }
+        });
+
+        String commu_post = "http://10.0.2.2:3000/commu_post";
+        requestQueue =  Volley.newRequestQueue(getApplicationContext());
+
+        Request request = new StringRequest(Request.Method.POST, commu_post, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try{
+                    System.out.println("response : " + response);
+
+                    JSONArray resArray = new JSONArray(response);
+
+                    for(int i=0; i<resArray.length(); i++) {
+                        JSONObject dietObj = resArray.getJSONObject(i);
+                        //System.out.println("dietObj[" + i + "] : " + dietObj);
+                        String my_post_id = dietObj.getString("post_id");
+                        String my_nickname = dietObj.getString("nickname");
+                        String my_content = dietObj.getString("content");
+                        String my_postdate = dietObj.getString("post_date");
+                        String my_post_date = my_postdate.substring(0,10);
+                        String my_posttime = dietObj.getString("post_time");
+                        String my_post_time = my_posttime.substring(0,5);
+                        String my_post_image = dietObj.getString("post_image");
+                        String my_like_count = dietObj.getString("like_count");
+                        my_heart_icons = 0;
+                        String my_del_state = dietObj.getString("del_state");
+                        if(Integer.parseInt(my_del_state) > 0){
+                            my_state = "";
+                        }
+
+                        System.out.println("글 아이디: " +my_post_id);
+
+
+                        CommunityData dataSet = new CommunityData(my_post_id, my_nickname, my_post_date, my_post_time, my_content, my_post_image, my_heart_icons , my_like_count , my_state);
+                        community_data.add(dataSet);
+                    }
+
+                    recyclerView.setAdapter(new CommunityRecyclerViewAdapter(getApplicationContext(), community_data));
+
+                }catch (Exception e){ e.printStackTrace(); }
+                System.out.println("글 가져오기 성공 : " + response);
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error.getMessage());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("user_id", userId);
+
+                return params;
+            }
+        };
+
+        requestQueue.add(request);
+
+
+
+
+
+        //특정 사용자 글만 보는 법
+        myWrote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String state = "1";
+                VolleyMyCommuinty(state);
+            }
+        });
+
+
+
+
+        //-----------------------------------------------------------------------------------------------------------------------------
 
         //네비게이션 관련 코드
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
@@ -106,7 +253,6 @@ public class CommunityActivity extends AppCompatActivity {
 
         //네비게이션 헤더
         navHeader = navigationView.getHeaderView(0);
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -152,6 +298,78 @@ public class CommunityActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+    }
+
+    // 외부 함수
+    public void VolleyMyCommuinty(String state) {
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.community_list_container);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ArrayList<CommunityData> community_data = new ArrayList<>();
+
+        //SharedPreference
+        preferences = getApplicationContext().getSharedPreferences("userInfo", MODE_PRIVATE);
+        String userId = preferences.getString("user_id","");
+
+
+        String commu_mypost = "http://10.0.2.2:3000/commu_mypost";
+        requestQueue =  Volley.newRequestQueue(getApplicationContext());
+
+        Request request = new StringRequest(Request.Method.POST, commu_mypost, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try{
+                    System.out.println("response : " + response);
+
+                    JSONArray resArray = new JSONArray(response);
+
+                    for(int i=0; i<resArray.length(); i++) {
+                        JSONObject dietObj = resArray.getJSONObject(i);
+                        //System.out.println("dietObj[" + i + "] : " + dietObj);
+                        String my_post_id = dietObj.getString("post_id");
+                        String my_nickname = dietObj.getString("nickname");
+                        String my_content = dietObj.getString("content");
+                        String my_postdate = dietObj.getString("post_date");
+                        String my_post_date = my_postdate.substring(0,10);
+                        String my_posttime = dietObj.getString("post_time");
+                        String my_post_time = my_posttime.substring(0,5);
+                        String my_post_image = dietObj.getString("post_image");
+                        String my_like_count = dietObj.getString("like_count");
+                            my_heart_icons = 0;
+                        String my_del_state = dietObj.getString("del_state");
+                        if(Integer.parseInt(my_del_state) > 0){
+                            my_state = "삭제";
+                        }
+
+
+                        CommunityData dataSet = new CommunityData(my_post_id, my_nickname, my_post_date, my_post_time, my_content, my_post_image, my_heart_icons , my_like_count , my_state);
+                        community_data.add(dataSet);
+                    }
+
+                    recyclerView.setAdapter(new CommunityRecyclerViewAdapter(getApplicationContext(), community_data));
+
+                }catch (Exception e){ e.printStackTrace(); }
+                System.out.println("글 가져오기 성공 : " + response);
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error.getMessage());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("user_id", userId);
+
+                return params;
+            }
+        };
+
+        requestQueue.add(request);
+
 
     }
 }
