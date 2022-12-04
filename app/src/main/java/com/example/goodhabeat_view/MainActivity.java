@@ -4,15 +4,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.provider.ContactsContract;
 import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,7 +43,11 @@ import com.google.android.material.navigation.NavigationView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -62,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
     //SwipeableViewPager swipeableViewPager;
     ViewPager viewPager;
     CircleIndicator indicator;
+
+    Bitmap bitmap;
 
     //카테고리 별 식단 페이지 이동 관련
     TextView categoryText_convenience;
@@ -107,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
         categoryText_lowSalt = (TextView) findViewById(R.id.main_lowSalt_category);
         categoryText_lowSugar = (TextView) findViewById(R.id.main_lowSugar_category);
 
-        /*challenge_date = (TextView) findViewById(R.id.challenge_date);*/
         today_cal_bar = (ProgressBar) findViewById(R.id.today_cal_bar);
 
         season_image = (ImageView) findViewById(R.id.season_image);
@@ -117,40 +129,35 @@ public class MainActivity extends AppCompatActivity {
         season_recipe = (TextView) findViewById(R.id.season_recipe);
         season_exp = (TextView) findViewById(R.id.season_exp);
 
-        //상단 이미지 슬라이드 관련 코드
-        // 상단 메뉴 사진 클릭시, 오늘의 메뉴 페이지 이동하는 코드는 ImagePagerAdapter에서 작성함
-        viewPager = findViewById(R.id.ImageViewPager);
-        imageAdapter = new ImagePagerAdapter(this);
-        viewPager.setAdapter(imageAdapter);
-
-        indicator = findViewById(R.id.indicator);
-        indicator.setViewPager(viewPager);
-
-
         //SharedPreference
         preferences = getApplicationContext().getSharedPreferences("userInfo", MODE_PRIVATE);
         String userName = preferences.getString("nickname","");
         //System.out.println("preferences nickname : " + userName );
 
+        // 오늘 날짜
+        SimpleDateFormat todayFormat = new SimpleDateFormat(todayDateFormat, Locale.getDefault());
+        tv_TodayDate.setText(todayFormat.format(currentTime));
 
         // 시간대 (아침, 점심, 저녁)
         SimpleDateFormat timeFormat = new SimpleDateFormat(getTimeFormat, Locale.getDefault());
         Integer clock = Integer.parseInt(timeFormat.format(currentTime));
 
+        //상단 이미지 슬라이드 관련 코드
+        // 상단 메뉴 사진 클릭시, 오늘의 메뉴 페이지 이동하는 코드는 ImagePagerAdapter에서 작성함
+        viewPager = findViewById(R.id.ImageViewPager);
+
         if(clock >= 6 && clock <= 11){
             today_clock.setText("아침");
+            setCurrentMenuImage(1, userName);
         } else if(clock >= 12 && clock <= 17) {
             today_clock.setText("점심");
+            setCurrentMenuImage(2, userName);
         } else if(clock >= 18 && clock <= 23) {
             today_clock.setText("저녁");
+            setCurrentMenuImage(3, userName);
         } else if(clock >= 0 && clock <= 5) {
-            today_clock.setText("");
-            today_clock_text.setText("금식할 시간이에요.");
+            setCurrentMenuImage(1, userName); // 임시 배치
         }
-
-        // 오늘 날짜
-        SimpleDateFormat todayFormat = new SimpleDateFormat(todayDateFormat, Locale.getDefault());
-        tv_TodayDate.setText(todayFormat.format(currentTime));
 
 
         // Volley
@@ -201,18 +208,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         // 사용자 지정 정책 --> 타임아웃 에러 해결
-        stringRequest.setRetryPolicy(new com.android.volley.DefaultRetryPolicy(
-                30000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        requestQueue = Volley.newRequestQueue(getApplicationContext());
-        if (requestQueue == null) {
-            Volley.newRequestQueue(getApplicationContext());
-        }
-
-        stringRequest.setShouldCache(false); // 이전 결과가 있어도 새로 요청하여 응답을 보여줌
-        requestQueue.add(stringRequest);
+        customVolleyEnd(stringRequest, requestQueue);
 
         /**/
 
@@ -267,7 +263,6 @@ public class MainActivity extends AppCompatActivity {
 
                     season_food_img.setImageResource(R.drawable.strawberryy);
 
-
                 }catch (Exception e){ e.printStackTrace(); }
             }
         }, new Response.ErrorListener() {
@@ -285,18 +280,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         // 사용자 지정 정책 --> 타임아웃 에러 해결
-        stringRequest_s.setRetryPolicy(new com.android.volley.DefaultRetryPolicy(
-                30000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        requestQueue_s = Volley.newRequestQueue(getApplicationContext());
-        if (requestQueue_s == null) {
-            Volley.newRequestQueue(getApplicationContext());
-        }
-
-        stringRequest_s.setShouldCache(false); // 이전 결과가 있어도 새로 요청하여 응답을 보여줌
-        requestQueue_s.add(stringRequest_s);
+        customVolleyEnd(stringRequest_s, requestQueue_s);
 
         season_recipe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -380,6 +364,63 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // 이미지 URL 가져오기
+    public void setCurrentMenuImage(Integer meal, String nickname) {
+        ArrayList<ImageUrlData> menu_image_data = new ArrayList<>();
+
+        String url = "http://10.0.2.2:3000/main/menu_image";
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //System.out.println(response);
+
+                try {
+                    JSONArray resArray = new JSONArray(response);
+                    //System.out.println(resArray);
+
+                    for(int i=0; i<resArray.length(); i++) {
+                        JSONObject imgObj = resArray.getJSONObject(i);
+                        System.out.println("imgObj[" + i + "] : " + imgObj);
+
+                        String recipe_image = imgObj.getString("recipe_image");
+                        recipe_image = recipe_image.replaceAll("'\'", "");
+                        System.out.println(recipe_image);
+
+
+                        ImageUrlData dataSet = new ImageUrlData(recipe_image);
+                        //ImageUrlData dataSet = new ImageUrlData(setURLImage(recipe_image));
+                        menu_image_data.add(dataSet);
+                    }
+
+                    imageAdapter = new ImagePagerAdapter(getApplicationContext(), menu_image_data);
+                    viewPager.setAdapter(imageAdapter);
+
+                    indicator = findViewById(R.id.indicator);
+                    indicator.setViewPager(viewPager);
+
+                }catch (Exception e){ e.printStackTrace(); }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        ){
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parameters = new HashMap<>();
+                parameters.put("nickname", nickname);
+                parameters.put("meal", meal.toString());
+                return parameters;
+            }
+        };
+
+        // 사용자 지정 정책 --> 타임아웃 에러 해결
+        customVolleyEnd(stringRequest, requestQueue);
+
+    }
+
     // 카테고리 선택
     public void MoveCategory() {
         categoryText_convenience.setOnClickListener(new View.OnClickListener() {
@@ -445,6 +486,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // 사용자 지정 정책 --> 타임아웃 에러 해결
+    public void customVolleyEnd(StringRequest stringRequest, RequestQueue requestQueue){
+        stringRequest.setRetryPolicy(new com.android.volley.DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        if (requestQueue == null) {
+            Volley.newRequestQueue(getApplicationContext());
+        }
+
+        stringRequest.setShouldCache(false); // 이전 결과가 있어도 새로 요청하여 응답을 보여줌
+        requestQueue.add(stringRequest);
+    }
 
 }
 
