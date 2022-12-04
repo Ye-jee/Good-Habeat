@@ -4,15 +4,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.provider.ContactsContract;
 import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +27,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -37,7 +43,11 @@ import com.google.android.material.navigation.NavigationView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -58,16 +68,13 @@ public class MainActivity extends AppCompatActivity {
     TextView today_clock_text;
     TextView tv_TodayDate;
 
-    /*LinearLayout menu_list;
-    ImageView breakfast_main;
-    ImageView lunch_main;
-    ImageView dinner_main;*/
-
     //이미지 슬라이드 관련
     ImagePagerAdapter imageAdapter;
     //SwipeableViewPager swipeableViewPager;
     ViewPager viewPager;
     CircleIndicator indicator;
+
+    Bitmap bitmap;
 
     //카테고리 별 식단 페이지 이동 관련
     TextView categoryText_convenience;
@@ -77,8 +84,7 @@ public class MainActivity extends AppCompatActivity {
     TextView categoryText_lowSalt;
     TextView categoryText_lowSugar;
 
-    //TextView challenge_date;
-    ProgressBar goal_main_bar;
+    double calorie_sum = 0; // 88
     ProgressBar today_cal_bar;
 
     ImageView season_image;
@@ -107,11 +113,6 @@ public class MainActivity extends AppCompatActivity {
         today_clock_text = (TextView) findViewById(R.id.today_clock_text);
         tv_TodayDate = (TextView) findViewById(R.id.tv_TodayDate);
 
-        /*menu_list = (LinearLayout) findViewById(R.id.menu_img_area);
-        breakfast_main = (ImageView) findViewById(R.id.breakfast_main);
-        lunch_main = (ImageView) findViewById(R.id.lunch_main);
-        dinner_main = (ImageView) findViewById(R.id.menu_main);*/
-
         categoryText_convenience = (TextView) findViewById(R.id.main_convenience_category);
         categoryText_highPro = (TextView) findViewById(R.id.main_highPro_category);
         categoryText_lowCal = (TextView) findViewById(R.id.main_lowCal_category);
@@ -119,8 +120,6 @@ public class MainActivity extends AppCompatActivity {
         categoryText_lowSalt = (TextView) findViewById(R.id.main_lowSalt_category);
         categoryText_lowSugar = (TextView) findViewById(R.id.main_lowSugar_category);
 
-        /*challenge_date = (TextView) findViewById(R.id.challenge_date);*/
-        goal_main_bar = (ProgressBar) findViewById(R.id.goal_main_bar);
         today_cal_bar = (ProgressBar) findViewById(R.id.today_cal_bar);
 
         season_image = (ImageView) findViewById(R.id.season_image);
@@ -130,53 +129,35 @@ public class MainActivity extends AppCompatActivity {
         season_recipe = (TextView) findViewById(R.id.season_recipe);
         season_exp = (TextView) findViewById(R.id.season_exp);
 
-        //getSupportActionBar().hide();
-
-        /*breakfast_main.setImageResource(R.drawable.salmon);
-        breakfast_main.setImageResource(R.drawable.salad);
-        breakfast_main.setImageResource(R.drawable.broccoli);*/
-
-        season_food_img.setImageResource(R.drawable.strawberryy);
-
-
-
-
-
-
-        //상단 이미지 슬라이드 관련 코드
-        // 상단 메뉴 사진 클릭시, 오늘의 메뉴 페이지 이동하는 코드는 ImagePagerAdapter에서 작성함
-        viewPager = findViewById(R.id.ImageViewPager);
-        imageAdapter = new ImagePagerAdapter(this);
-        viewPager.setAdapter(imageAdapter);
-
-        indicator = findViewById(R.id.indicator);
-        indicator.setViewPager(viewPager);
-
-
         //SharedPreference
         preferences = getApplicationContext().getSharedPreferences("userInfo", MODE_PRIVATE);
         String userName = preferences.getString("nickname","");
         //System.out.println("preferences nickname : " + userName );
 
+        // 오늘 날짜
+        SimpleDateFormat todayFormat = new SimpleDateFormat(todayDateFormat, Locale.getDefault());
+        tv_TodayDate.setText(todayFormat.format(currentTime));
 
         // 시간대 (아침, 점심, 저녁)
         SimpleDateFormat timeFormat = new SimpleDateFormat(getTimeFormat, Locale.getDefault());
         Integer clock = Integer.parseInt(timeFormat.format(currentTime));
 
+        //상단 이미지 슬라이드 관련 코드
+        // 상단 메뉴 사진 클릭시, 오늘의 메뉴 페이지 이동하는 코드는 ImagePagerAdapter에서 작성함
+        viewPager = findViewById(R.id.ImageViewPager);
+
         if(clock >= 6 && clock <= 11){
             today_clock.setText("아침");
+            setCurrentMenuImage(1, userName);
         } else if(clock >= 12 && clock <= 17) {
             today_clock.setText("점심");
+            setCurrentMenuImage(2, userName);
         } else if(clock >= 18 && clock <= 23) {
             today_clock.setText("저녁");
+            setCurrentMenuImage(3, userName);
         } else if(clock >= 0 && clock <= 5) {
-            today_clock.setText("");
-            today_clock_text.setText("금식할 시간이에요.");
+            setCurrentMenuImage(1, userName); // 임시 배치
         }
-
-        // 오늘 날짜
-        SimpleDateFormat todayFormat = new SimpleDateFormat(todayDateFormat, Locale.getDefault());
-        tv_TodayDate.setText(todayFormat.format(currentTime));
 
 
         // Volley
@@ -187,16 +168,29 @@ public class MainActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                //System.out.println("/main response : " + response);
-                //System.out.println("---------------------");
-
                 try {
-                    //System.out.println("파싱한 아이디 : " + response);
-                    String user_id = response;
+                    JSONArray detail_json = new JSONArray(response);
+                    System.out.println(detail_json);
+
+                    // 사용자 아이디
+                    String user_id = detail_json.getJSONObject(0).getString("user_id");
                     preferences = getApplicationContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("user_id", user_id);
                     editor.commit();
+
+                    // 총 칼로리량
+                    for(int i=0; i<detail_json.length(); i++){
+                        JSONObject dietObj = detail_json.getJSONObject(i);
+                        Double calorie = Double.parseDouble(dietObj.getString("calorie"));
+                        calorie_sum += calorie ;
+                    }
+
+                    int calorie_int = (int) Math.round(calorie_sum);
+
+                    today_cal_bar.setMax(2350); //프로그레스바 Max 크기
+                    today_cal_bar.setProgress(calorie_int); //프로그레스 바 칼로리
+
                 }catch (Exception e){ e.printStackTrace(); }
             }
         }, new Response.ErrorListener() {
@@ -214,18 +208,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         // 사용자 지정 정책 --> 타임아웃 에러 해결
-        stringRequest.setRetryPolicy(new com.android.volley.DefaultRetryPolicy(
-                30000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        requestQueue = Volley.newRequestQueue(getApplicationContext());
-        if (requestQueue == null) {
-            Volley.newRequestQueue(getApplicationContext());
-        }
-
-        stringRequest.setShouldCache(false); // 이전 결과가 있어도 새로 요청하여 응답을 보여줌
-        requestQueue.add(stringRequest);
+        customVolleyEnd(stringRequest, requestQueue);
 
         /**/
 
@@ -280,7 +263,6 @@ public class MainActivity extends AppCompatActivity {
 
                     season_food_img.setImageResource(R.drawable.strawberryy);
 
-
                 }catch (Exception e){ e.printStackTrace(); }
             }
         }, new Response.ErrorListener() {
@@ -298,18 +280,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         // 사용자 지정 정책 --> 타임아웃 에러 해결
-        stringRequest_s.setRetryPolicy(new com.android.volley.DefaultRetryPolicy(
-                30000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        requestQueue_s = Volley.newRequestQueue(getApplicationContext());
-        if (requestQueue_s == null) {
-            Volley.newRequestQueue(getApplicationContext());
-        }
-
-        stringRequest_s.setShouldCache(false); // 이전 결과가 있어도 새로 요청하여 응답을 보여줌
-        requestQueue_s.add(stringRequest_s);
+        customVolleyEnd(stringRequest_s, requestQueue_s);
 
         season_recipe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -358,15 +329,6 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
 
                 }
-                /*else if(id == R.id.menu_challenge) {
-                    //Toast.makeText(getApplicationContext(), "챌린지", Toast.LENGTH_SHORT).show();
-
-                    //if문으로 챌린지가 설정되어 있지 않은 액티비티/프레그먼트 또는 챌린지가 설정되어 있는 액티비티/프레그먼트로 이동하게 하는 코드 입력 예정
-                    //우선 설정되어 있지 않은 화면부터
-                    Intent intent = new Intent(getApplicationContext(), ChallengeActivity_Not.class);
-                    startActivity(intent);
-
-                }*/
                 else if(id == R.id.menu_community) {
                     //Toast.makeText(getApplicationContext(), "커뮤니티", Toast.LENGTH_SHORT).show();
 
@@ -374,7 +336,6 @@ public class MainActivity extends AppCompatActivity {
                     //커뮤니티 페이지로 이동하는 코드
                     Intent intent = new Intent(getApplicationContext(), CommunityActivity.class);
                     startActivity(intent);
-
                 }
                 else if(id == R.id.menu_setting) {
                     //설정 페이지로 이동하는 코드
@@ -385,7 +346,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
     @Override
@@ -402,6 +362,63 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    // 이미지 URL 가져오기
+    public void setCurrentMenuImage(Integer meal, String nickname) {
+        ArrayList<ImageUrlData> menu_image_data = new ArrayList<>();
+
+        String url = "http://10.0.2.2:3000/main/menu_image";
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //System.out.println(response);
+
+                try {
+                    JSONArray resArray = new JSONArray(response);
+                    //System.out.println(resArray);
+
+                    for(int i=0; i<resArray.length(); i++) {
+                        JSONObject imgObj = resArray.getJSONObject(i);
+                        System.out.println("imgObj[" + i + "] : " + imgObj);
+
+                        String recipe_image = imgObj.getString("recipe_image");
+                        recipe_image = recipe_image.replaceAll("'\'", "");
+                        System.out.println(recipe_image);
+
+
+                        ImageUrlData dataSet = new ImageUrlData(recipe_image);
+                        //ImageUrlData dataSet = new ImageUrlData(setURLImage(recipe_image));
+                        menu_image_data.add(dataSet);
+                    }
+
+                    imageAdapter = new ImagePagerAdapter(getApplicationContext(), menu_image_data);
+                    viewPager.setAdapter(imageAdapter);
+
+                    indicator = findViewById(R.id.indicator);
+                    indicator.setViewPager(viewPager);
+
+                }catch (Exception e){ e.printStackTrace(); }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        ){
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parameters = new HashMap<>();
+                parameters.put("nickname", nickname);
+                parameters.put("meal", meal.toString());
+                return parameters;
+            }
+        };
+
+        // 사용자 지정 정책 --> 타임아웃 에러 해결
+        customVolleyEnd(stringRequest, requestQueue);
+
     }
 
     // 카테고리 선택
@@ -469,6 +486,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // 사용자 지정 정책 --> 타임아웃 에러 해결
+    public void customVolleyEnd(StringRequest stringRequest, RequestQueue requestQueue){
+        stringRequest.setRetryPolicy(new com.android.volley.DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        if (requestQueue == null) {
+            Volley.newRequestQueue(getApplicationContext());
+        }
+
+        stringRequest.setShouldCache(false); // 이전 결과가 있어도 새로 요청하여 응답을 보여줌
+        requestQueue.add(stringRequest);
+    }
 
 }
-

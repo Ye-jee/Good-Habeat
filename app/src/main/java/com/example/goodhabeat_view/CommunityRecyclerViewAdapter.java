@@ -39,7 +39,7 @@ import java.util.Map;
 
 public class CommunityRecyclerViewAdapter extends RecyclerView.Adapter<CommunityRecyclerViewAdapter.ViewHolder>{
 
-    String id_post;
+    int heart_on = 1;
     Context itemContext;
     ArrayList<CommunityData> data;
 
@@ -71,10 +71,12 @@ public class CommunityRecyclerViewAdapter extends RecyclerView.Adapter<Community
         setURLImage(item.getCommunity_content_img(), holder.content_img); //이미지 세팅
         //holder.content_img.setImageResource(item.getCommunity_content_img());
        // holder.heart_img.setImageResource(item.getCommunity_heart_img());
-        if(data.get(position).getCommunity_heart_img()==1)
-            holder.heart_img.setImageResource(R.drawable.community_heart_fil);
+
+        if(heart_on == 1)
+            {holder.heart_img.setImageResource(R.drawable.community_heart_fil);}
         else
-            holder.heart_img.setImageResource(R.drawable.community_heart_empty);
+            {holder.heart_img.setImageResource(R.drawable.community_heart_empty);}
+
         holder.heart_number.setText(item.getCommunity_heart_number());
         holder.delete_text.setText(item.getCommunity_delete_text());
 
@@ -113,6 +115,7 @@ public class CommunityRecyclerViewAdapter extends RecyclerView.Adapter<Community
 
             //--------------------------------------------------------------------------------------------------------------------------------------------------------
             preferences = itemView.getContext().getSharedPreferences("userInfo", MODE_PRIVATE);
+            String user_nickname = preferences.getString("nickname","");
             String userId = preferences.getString("user_id","");
             //--------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -120,43 +123,59 @@ public class CommunityRecyclerViewAdapter extends RecyclerView.Adapter<Community
             System.out.println("글 아이디: "+id_post);
 
             heart_img.setOnClickListener(new View.OnClickListener() {
+
+
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
+                    String post_nick = data.get(position).getCommunity_user_nikName();
 
-                    // Volley
-                    String commu_post = "http://10.0.2.2:3000/commu_heart";
-                    requestQueue = Volley.newRequestQueue(itemView.getContext());
+                    if(!user_nickname.equals(post_nick)){
+                        // Volley
+                        String commu_post = "http://10.0.2.2:3000/commu_heart";
+                        requestQueue = Volley.newRequestQueue(itemView.getContext());
 
-                    Request request = new StringRequest(Request.Method.POST, commu_post, new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try{
-                                System.out.println("response : " + response);
-                            }catch (Exception e){ e.printStackTrace(); }
-                            System.out.println("하트 누르기 성공 : " + response);
-                        }
-                    },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    Toast.makeText(itemView.getContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                                    System.out.println(error.getMessage());
-                                }
+                        Request request = new StringRequest(Request.Method.POST, commu_post, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try{
+                                    System.out.println("하트 누르기 성공 : " + response);
+                                    String state = "1";
+                                    ((CommunityActivity)CommunityActivity.mContext).VolleyCommuinty(state);
+                                    if(response.equals("1")){
+                                        heart_on = 1;
+                                    } else {
+                                        heart_on = 2;
+                                    }
+                                }catch (Exception e){ e.printStackTrace(); }
+                                System.out.println("heart_on: " + heart_on);
                             }
-                    ) {
-                        @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            Map<String, String> params = new HashMap<>();
-                            params.put("post_id", data.get(position).getCommunity_post_num());
-                            params.put("user_id", userId);
+                        },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Toast.makeText(itemView.getContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                        System.out.println(error.getMessage());
+                                    }
+                                }
+                        ) {
+                            @Override
+                            protected Map<String, String> getParams() throws AuthFailureError {
+                                Map<String, String> params = new HashMap<>();
+                                params.put("post_id", data.get(position).getCommunity_post_num());
+                                params.put("user_id", userId);
 
-                            return params;
-                        }
-                    };
+                                return params;
+                            }
+                        };
 
-                    requestQueue.add(request);
+                        requestQueue.add(request);
 
+                    } else {
+
+                    }
+                    String state = "1";
+                    ((CommunityActivity)CommunityActivity.mContext).VolleyCommuinty(state);
                 }
             });
 

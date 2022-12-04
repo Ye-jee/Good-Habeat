@@ -30,7 +30,7 @@ public class MenuSelectActivity extends AppCompatActivity {
         actionBar.hide();
 
         viewPager = findViewById(R.id.viewPager);
-        menuSelect_viewPagerAdapter = new com.example.goodhabeat_view.MenuSelect_ViewPagerAdapter(getSupportFragmentManager());
+        menuSelect_viewPagerAdapter = new MenuSelect_ViewPagerAdapter(getSupportFragmentManager());
 
         tabLayout = findViewById(R.id.tabLayout);
         viewPager.setAdapter(menuSelect_viewPagerAdapter);

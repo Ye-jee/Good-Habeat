@@ -31,7 +31,7 @@ public class MenuFragment_soup extends Fragment {
         String menu_kcal[] = {"34kcal", "156kcal", "60kcal"};
 
         for(int i=0; i<menu_img.length; i++) {
-            com.example.goodhabeat_view.MenuSelectData dataSet = new com.example.goodhabeat_view.MenuSelectData(menu_img[i], menu_name[i], menu_information[i], menu_kcal[i]);
+            MenuSelectData dataSet = new MenuSelectData(menu_img[i], menu_name[i], menu_information[i], menu_kcal[i]);
             menu_select_data.add(dataSet);
         }
 
