@@ -1,31 +1,41 @@
 package com.example.goodhabeat_view;
 
 public class MenuSelectData {
-    int menu_img;
-    String menu_name;
-    String menu_information;
-    String menu_kcal;
 
-    public MenuSelectData(int menu_img, String menu_name, String menu_information, String menu_kcal) {
-        this.menu_img = menu_img;
-        this.menu_name = menu_name;
-        this.menu_information = menu_information;
-        this.menu_kcal = menu_kcal;
+    String menuPicUrl;
+    String menuName;
+    Double menuCarbo;
+    Double menuProtein;
+    Double menuFat;
+    String menuInfo;
+    Double menuCal;
+    Integer recipeId; // intent용 정보
+
+    public MenuSelectData(String menuPicUrl, String menuName, Double menuCarbo, Double menuProtein, Double menuFat, String menuInfo, Double menuCal, Integer recipeId) {
+        this.menuPicUrl = menuPicUrl;
+        this.menuName = menuName;
+        this.menuCarbo = menuCarbo;
+        this.menuProtein = menuProtein;
+        this.menuFat = menuFat;
+        this.menuInfo = menuInfo;
+        this.menuCal = menuCal;
+        this.recipeId = recipeId; // intent용 정보
     }
 
-    public int getMenu_img() {
-        return menu_img;
-    }
+    public String getMenuPicUrl() { return menuPicUrl; }
 
-    public String getMenu_name() {
-        return menu_name;
-    }
+    public String getMenuName() { return menuName; }
 
-    public String getMenu_information() {
-        return menu_information;
-    }
+    public Double getMenuCarbo() { return menuCarbo; }
 
-    public String getMenu_kcal() {
-        return menu_kcal;
-    }
+    public Double getMenuProtein() { return menuProtein; }
+
+    public Double getMenuFat() { return menuFat; }
+
+    public String getMenuInfo() { return menuInfo;}
+
+    public Double getMenuCal() { return menuCal; }
+
+    public Integer getRecipeId() { return recipeId; }
+
 }

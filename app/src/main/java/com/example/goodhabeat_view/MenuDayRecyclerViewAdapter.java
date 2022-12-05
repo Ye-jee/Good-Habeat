@@ -16,6 +16,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -148,14 +149,13 @@ public class MenuDayRecyclerViewAdapter extends RecyclerView.Adapter<MenuDayRecy
                             String menu_name = data.get(position).getMenuName();
 
                             StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            try{
-                                                System.out.println("response : " + response);
-                                            }catch (Exception e){ e.printStackTrace(); }
-                                            Toast.makeText(itemView.getContext(), "데이터 전송 완료", Toast.LENGTH_SHORT).show();
-                                        }
-                                    },
+                                @Override
+                                public void onResponse(String response) {
+                                    try{
+                                        System.out.println("response : " + response);
+                                    }catch (Exception e){ e.printStackTrace(); }
+                                }
+                            },
                                     new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
@@ -188,6 +188,7 @@ public class MenuDayRecyclerViewAdapter extends RecyclerView.Adapter<MenuDayRecy
     }
 
     // 외부 함수
+    // 이미지
     private void setURLImage(String recipe_image, ImageView menuImage) {
         new Thread(new Runnable() {
             @Override
