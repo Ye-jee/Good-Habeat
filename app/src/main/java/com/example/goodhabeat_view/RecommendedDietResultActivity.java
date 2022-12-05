@@ -107,16 +107,15 @@ public class RecommendedDietResultActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if(response.equals("")){
+                        if(response.equals("1")){
                             //1이면 사용 가능
-                            System.out.println("row");
                             System.out.println("진짜진짜 가입 성공");
                             Toast.makeText(getApplicationContext(), "가입이 성공하였습니다.", Toast.LENGTH_SHORT).show();
 
                         } else {
                             //2면 사용 불가
                             System.out.println(response+ " / 회원가입 불가");
-                            Toast.makeText(getApplicationContext(), "회원가입 불가", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
