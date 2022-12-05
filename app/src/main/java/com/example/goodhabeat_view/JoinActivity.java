@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -49,6 +50,8 @@ public class JoinActivity extends AppCompatActivity {
 
     RadioGroup rgGender;
     RadioButton rbFemale, rbMale;
+
+    SharedPreferences preferences;
 
     String gender;
 
@@ -273,6 +276,8 @@ public class JoinActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String nickname = etJoinNick.getText().toString();
 
+
+
                 StringRequest request = new StringRequest(
                         Request.Method.POST,
                         url_nick,
@@ -284,6 +289,8 @@ public class JoinActivity extends AppCompatActivity {
                                     System.out.println(response + " / 닉네임 사용 가능");
                                     Toast.makeText(getApplicationContext(), "사용 가능한 닉네임입니다", Toast.LENGTH_SHORT).show();
                                     nick_check = "ok";
+
+
                                 } else {
                                     //2면 사용 불가
                                     System.out.println(response+ " / 닉네임 사용 불가능");
@@ -311,6 +318,7 @@ public class JoinActivity extends AppCompatActivity {
                 };
                 requestQueue.add(request);
 
+
             }
         }); // btnID 클릭 리스너 버튼 끝 */
 
@@ -330,6 +338,7 @@ public class JoinActivity extends AppCompatActivity {
         btnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
                     String id = etJoinID.getText().toString();
                     String pwd = etJoinPwd.getText().toString();
@@ -353,6 +362,7 @@ public class JoinActivity extends AppCompatActivity {
                         System.out.println(email_check+", " +email);
 
 
+
                     //--------------------------------------------------------------
                     System.out.println("//--------------------------------------------------------------");
                     System.out.println(join_number_check);
@@ -362,6 +372,12 @@ public class JoinActivity extends AppCompatActivity {
                     System.out.println("weight_check: "+weight_check);
                     System.out.println("height_check: "+height_check);
                     System.out.println("email_check:"+ email_check);
+
+
+                preferences = getApplicationContext().getSharedPreferences("userjoin", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("nickname", nickName);
+                editor.commit();
 
 
                 if(id_check.equals("ok") && password_check.equals("ok") && birth_check.equals("ok") && weight_check.equals("ok") && height_check.equals("ok") && nick_check.equals("ok") && email_check.equals("ok"))
@@ -380,13 +396,16 @@ public class JoinActivity extends AppCompatActivity {
                                     try{
                                         System.out.println(response + "\r"+ " / 회원가입 완료");
 
+
                                     }catch (Exception e){
                                         e.printStackTrace();
                                     }
-                                    CustomToast("회원가입이 완료되었습니다. 추천식단 설문조사 페이지로 이동합니다.");
+                                    //CustomToast("회원가입이 완료되었습니다. 추천식단 설문조사 페이지로 이동합니다.");
                                     Intent intent = new Intent(getApplicationContext(), RecommendedDietSurveyActivity.class);
                                     startActivity(intent);
-                                    Toast.makeText(getApplicationContext(), "회원가입 완료!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "회원가입이 완료되었습니다. 추천식단 설문조사 페이지로 이동합니다.", Toast.LENGTH_SHORT).show();
+
+
                                 }
                             },
                             new Response.ErrorListener() {

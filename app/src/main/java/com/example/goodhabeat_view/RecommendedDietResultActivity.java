@@ -1,9 +1,12 @@
 package com.example.goodhabeat_view;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,12 +16,24 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RecommendedDietResultActivity extends AppCompatActivity {
 
+    SharedPreferences preferences;
+
     TextView tv_conven, tv_highProt, tv_vitamin, tv_lowCal, tv_lowSalt, tv_lowSugar;
+
+    String conven="0", highProt="0", vitamin="0", lowCal="0", lowSalt="0", lowSugar="0";
 
     Button btn_selectCustomDiet;
 
@@ -40,82 +55,105 @@ public class RecommendedDietResultActivity extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-        //String url = "http://192.168.56.1:8000/AndroidAppEx/capstoneEx/challenge_CustomDietMainEx1.jsp";
-        String url = "http://192.168.56.1:8000/AndroidAppEx/capstoneEx/challenge_CustomDietMainEx2.jsp";
+        preferences = getApplicationContext().getSharedPreferences("userjoin", Context.MODE_PRIVATE);
+        String id_get = preferences.getString("id", "id 오류 시 출력" );
+        String single_get = preferences.getString("single", "single 오류 시 출력" );
+        String weight_low_get = preferences.getString("weight_low", "weight_low 오류 시 출력" );
+        String weight_high_get = preferences.getString("weight_high", "weight_high 오류 시 출력" );
+        String sugar_get = preferences.getString("sugar", "sugar 오류 시 출력" );
+        String protein_get = preferences.getString("protein", "protein 오류 시 출력" );
+        String vitamin_get = preferences.getString("vitamin", "vitamin 오류 시 출력" );
+        String lowKcal_get = preferences.getString("lowKcal", "lowKcal 오류 시 출력" );
+        String salt_get = preferences.getString("salt", "salt 오류 시 출력" );
 
-        /*StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                url,
+
+
+        if(single_get.equals("1"))
+        {
+            tv_conven.setBackgroundResource(R.drawable.button_custom2);
+            conven="1";
+        }
+
+        if(sugar_get.equals("1")) {
+            tv_lowSugar.setBackgroundResource(R.drawable.button_custom2);
+            lowSugar="1";
+        }
+
+        if(protein_get.equals("1") || weight_high_get.equals("1")) {
+            tv_highProt.setBackgroundResource(R.drawable.button_custom2);
+            highProt="1";
+        }
+
+        if(vitamin_get.equals("1")) {
+            tv_vitamin.setBackgroundResource(R.drawable.button_custom2);
+            vitamin="1";
+        }
+
+        if(lowKcal_get.equals("1") || weight_low_get.equals("1")) {
+            tv_lowCal.setBackgroundResource(R.drawable.button_custom2);
+            lowCal = "1";
+        }
+
+        if(salt_get.equals("1")) {
+            tv_lowSalt.setBackgroundResource(R.drawable.button_custom2);
+            lowSalt="1";
+        }
+
+        String url_user_costom_join = "http://10.0.2.2:3000/user_costom_join";
+
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                url_user_costom_join,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try {
-                            JSONObject mainObj = new JSONObject(response);
-                            JSONArray jsonArray = mainObj.getJSONArray("userCustoms");
+                        if(response.equals("")){
+                            //1이면 사용 가능
+                            System.out.println("row");
+                            System.out.println("진짜진짜 가입 성공");
+                            Toast.makeText(getApplicationContext(), "가입이 성공하였습니다.", Toast.LENGTH_SHORT).show();
 
-                            //int index = 0;
-
-                            //for(int i=1; i<2;i++) {
-                            JSONObject userCustom = jsonArray.getJSONObject(0);
-
-                            String convenience = userCustom.getString("convenience");
-                            String lowCal = userCustom.getString("low_calories");
-                            String lowSalt = userCustom.getString("low_salt");
-                            String highCal = userCustom.getString("high_calories");
-                            String lowSugar = userCustom.getString("low_sugar");
-                            String lowFat = userCustom.getString("low_fat");
-
-                            if(convenience.equals("1")) {
-                                //tv_conven.setBackgroundColor(Color.parseColor("#2E8B57"));
-                                //tv_conven.setTextColor(Color.parseColor("#2E8B57"));
-                                tv_conven.setBackgroundResource(R.drawable.button_custom2);
-                            }
-                            if(lowCal.equals("1")) {
-                                //tv_lowCal.setBackgroundColor(Color.parseColor("#2E8B57"));
-                                //tv_lowCal.setTextColor(Color.parseColor("#2E8B57"));
-                                tv_lowCal.setBackgroundResource(R.drawable.button_custom2);
-                            }
-                            if(lowSalt.equals("1")) {
-                                //tv_lowSalt.setBackgroundColor(Color.parseColor("#2E8B57"));
-                                //tv_lowSalt.setTextColor(Color.parseColor("#2E8B57"));
-                                tv_lowSalt.setBackgroundResource(R.drawable.button_custom2);
-                            }
-                            if(highCal.equals("1")) {
-                                //tv_highCal.setBackgroundColor(Color.parseColor("#2E8B57"));
-                                //tv_highCal.setTextColor(Color.parseColor("#2E8B57"));
-                                tv_highCal.setBackgroundResource(R.drawable.button_custom2);
-                            }
-                            if(lowSugar.equals("1")) {
-                                //tv_lowSugar.setBackgroundColor(Color.parseColor("#2E8B57"));
-                                //tv_lowSugar.setTextColor(Color.parseColor("#2E8B57"));
-                                tv_lowSugar.setBackgroundResource(R.drawable.button_custom2);
-                            }
-                            if(lowFat.equals("1")) {
-                                //tv_lowFat.setBackgroundColor(Color.parseColor("#2E8B57"));
-                                //tv_lowFat.setTextColor(Color.parseColor("#2E8B57"));
-                                tv_lowFat.setBackgroundResource(R.drawable.button_custom2);
-                            }
-
-                            //}
-
-                        }catch (Exception e) {
-                            //Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            //2면 사용 불가
+                            System.out.println(response+ " / 회원가입 불가");
+                            Toast.makeText(getApplicationContext(), "회원가입 불가", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "error : " + error.toString(), Toast.LENGTH_SHORT).show();
+                        System.out.println(error.getMessage());
                     }
-                });
+                }
+        ) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("user_id", id_get);
 
-        requestQueue.add(stringRequest);*/
+                params.put("convenience", conven);
+                params.put("high_protein", highProt);
+                params.put("vitamin", vitamin);
+                params.put("low_calorie", lowCal);
+                params.put("low_salt", lowSalt);
+                params.put("low_sugar", lowSugar);
+
+                return params;
+            }
+        };
+        requestQueue.add(request);
 
 
-        //가짜 데이터(?) - 간편식, 저염, 저칼로리 식단 설정
-        tv_conven.setBackgroundResource(R.drawable.button_custom2);
-        tv_lowCal.setBackgroundResource(R.drawable.button_custom2);
-        tv_lowSalt.setBackgroundResource(R.drawable.button_custom2);
+
+
+
+
+
+
+
+
 
 
 

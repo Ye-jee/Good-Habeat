@@ -1,11 +1,14 @@
 package com.example.goodhabeat_view;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,22 +20,40 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RecommendedDietSurveyActivity extends AppCompatActivity {
 
-    CheckBox cb_single, cb_weight, cb_sugar;
+    CheckBox cb_single, cb_weight, cb_sugar1, cb_sugar2 , cb_protein1, cb_protein2, cb_vitamin1, cb_vitamin2,
+            cb_lowKcal1, cb_lowKcal2, cb_lowSalt1 ;
 
     /*EditText et_CurrentWeight, et_TargetWeight;*/
     TextView tv_currentWeight, tv_targetWeight;
+
 
     /*RadioGroup rg_sugarFrequency;
     RadioButton rb_zeroOne, rb_twoFour, rb_fiveSeven, rb_Ten;*/
 
     Button btn_recmdCustomDiet;
 
+    String id_get;
+
     int eatingNumber;
-    int single, lowcal, lowsalt, highcal, lowsugar, lowfat = 0;
+    int single,weight_low, weight_high, sugar, protein, vitamin,  lowKcal, salt ;
+
+    SharedPreferences preferences;
 
     //체중조절 다이얼로그
     View dialogView_hw;
@@ -44,25 +65,29 @@ public class RecommendedDietSurveyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommanded_diet_survey);
 
-        cb_single = (CheckBox) findViewById(R.id.cb_single);
-        cb_weight = (CheckBox) findViewById(R.id.cb_weight);
-        //cb_sugar = (CheckBox) findViewById(R.id.cb_sugar);
+        cb_single = (CheckBox) findViewById(R.id.cb_single); //1인가구 입니다.
 
-        /*et_CurrentWeight = (EditText) findViewById(R.id.et_currentWeight);
-        et_TargetWeight = (EditText) findViewById(R.id.et_targetWeight);*/
+        cb_weight = (CheckBox) findViewById(R.id.cb_weight); //체중조절을 하고 싶어요
+
+        cb_sugar1 = (CheckBox) findViewById(R.id.cb_sugar1); //곡식 음료
+        cb_sugar2 = (CheckBox) findViewById(R.id.cb_sugar2); //단 음식
+
+        cb_protein1 = (CheckBox) findViewById(R.id.cb_protein1); //생선 고기 계란 콩 자주 섭취
+        cb_protein2 = (CheckBox) findViewById(R.id.cb_protein2); //유제품
+
+        cb_vitamin1 = (CheckBox) findViewById(R.id.cb_vitamin1); //채소류, 버섯
+        cb_vitamin2 = (CheckBox) findViewById(R.id.cb_vitamin2); //과일
+
+        cb_lowKcal1 = (CheckBox) findViewById(R.id.cb_lowKcal1); //튀김
+        cb_lowKcal2 = (CheckBox) findViewById(R.id.cb_lowKcal2); //기름 많은 고기
+
+        cb_lowSalt1 = (CheckBox) findViewById(R.id.cb_lowSalt1); //짠 음식
+
 
         tv_currentWeight = (TextView) findViewById(R.id.tv_currentWeight);
         tv_targetWeight = (TextView) findViewById(R.id.tv_targetWeight);
 
-        /*rg_sugarFrequency = (RadioGroup) findViewById(R.id.rg_sugarFrequency);
-        rb_zeroOne = (RadioButton) findViewById(R.id.rb_zeroOne);
-        rb_twoFour = (RadioButton) findViewById(R.id.rb_twoFour);
-        rb_fiveSeven = (RadioButton) findViewById(R.id.rb_fiveSeven);
-        rb_Ten = (RadioButton) findViewById(R.id.rb_Ten);*/
-
         btn_recmdCustomDiet = (Button) findViewById(R.id.btn_recmdCustomDiet);
-
-        //String url = "http://192.168.56.1:8000/AndroidAppEx/capstoneEx/challenge_recmdCustomDietEx.jsp";
 
 
         //타이틀바 없애는 코드
@@ -70,44 +95,68 @@ public class RecommendedDietSurveyActivity extends AppCompatActivity {
         actionBar.hide();
 
 
+        preferences = getApplicationContext().getSharedPreferences("userjoin", Context.MODE_PRIVATE);
+        String nickname_get = preferences.getString("nickname", "닉네임 못가져옴" );
+        System.out.println("userjoin 가져온 닉네임: "+nickname_get);
+
+
+        //닉네임 확인
+        String url_nickCheck = "http://10.0.2.2:3000/nick_check";
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        //닉네임 존재 확인
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                url_nickCheck,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            System.out.println("응답완료: "+response);
+                            JSONArray jsonarray = new JSONArray(response);
+                            //JSONArray jArray = mainObj.getJSONArray("");
+                            JSONObject setting_json = jsonarray.getJSONObject(0);
+                            id_get = setting_json.getString("user_id");
+
+
+
+                        }catch (Exception e){ e.printStackTrace(); }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("실패 이유: "+error.getMessage());
+                    }
+                }
+        ) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("nick_check", nickname_get);
+
+                return params;
+            }
+        };
+        requestQueue.add(request);
+
+
+
+
+
+
+
+
+
         //맞춤 식단 설문조사 결과를 보여주는 페이지로 이동
         btn_recmdCustomDiet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                /*Toast.makeText(getApplicationContext(), "맞춤 식단 관련 버튼을 클릭!!!하셨어요!!!! \n하루 식사 획수 - " + eatingNumber +
-                        "\n간편식 - " + single + "\n저칼로리 - " + lowcal + "\n저염 - " + lowsalt + "\n고칼로리 - " + highcal +  "\n저당 - " + lowsugar, Toast.LENGTH_LONG).show();*/
 
-                /*String url2 = url
-                        + "?mealFrequency=" + eatingNumber
-                        + "&convenience=" + single
-                        + "&lowCalories=" + lowcal
-                        + "&lowSalt=" + lowsalt
-                        + "&highCalories=" + highcal
-                        + "&lowSugar=" + lowsugar
-                        + "&lowFat=" + lowfat
-                        + "&userFkid=1";
-
-                requestQueue = Volley.newRequestQueue(getApplicationContext());
-
-                StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                        url2,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                Toast.makeText(getApplicationContext(), "맞춤 식단 정보 저장 완료!\n" + response, Toast.LENGTH_SHORT).show();
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(getApplicationContext(), "에러 원인 :" + error.toString(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-                requestQueue.add(stringRequest);*/
-
-                //CustomToast("맞춤 식단 설정이 완료되었습니다.");
 
                 Intent intent = new Intent(getApplicationContext(), RecommendedDietResultActivity.class);
                 startActivity(intent);
@@ -132,53 +181,19 @@ public class RecommendedDietSurveyActivity extends AppCompatActivity {
         toast.show();
     }
 
+    //외부 함수
+    //체크박스를 눌렀을 때
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();        // Is the view now checked?
-
-        //하루 식사 횟수
-        /*if(view.getId() == R.id.cb_breakfast) {
-            if(checked) {
-                eatingNumber = 1;
-                //Toast.makeText(getApplicationContext(), "하루 식사 횟수 : " + eatingNumber + "번", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                eatingNumber--;
-                //Toast.makeText(getApplicationContext(), "하루 식사 횟수 : " + eatingNumber + "번", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        if(view.getId() == R.id.cb_lunch) {
-            if(checked) {
-                eatingNumber++;
-                //Toast.makeText(getApplicationContext(), "하루 식사 횟수 : " + eatingNumber + "번", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                eatingNumber--;
-                //Toast.makeText(getApplicationContext(), "하루 식사 횟수 : " + eatingNumber + "번", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        if(view.getId() == R.id.cb_dinner) {
-            if(checked) {
-                eatingNumber++;
-                //Toast.makeText(getApplicationContext(), "하루 식사 횟수 : " + eatingNumber + "번", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                eatingNumber--;
-                //Toast.makeText(getApplicationContext(), "하루 식사 횟수 : " + eatingNumber + "번", Toast.LENGTH_SHORT).show();
-            }
-        }*/
-
 
         //1인 가구
         if(view.getId() == R.id.cb_single) {
             if(checked) {
                 single = 1;
-                //Toast.makeText(getApplicationContext(), "간편식 : " + single, Toast.LENGTH_SHORT).show();
+
             }
             else {
                 single = 0;
-                //Toast.makeText(getApplicationContext(), "간편식 : " + single, Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -202,7 +217,7 @@ public class RecommendedDietSurveyActivity extends AppCompatActivity {
                         EditText et_targetWeight = (EditText) dialogView_hw.findViewById(R.id.et_targetWeight);
 
                         if(et_currentWeight.getText().toString().equals("") || et_targetWeight.getText().toString().equals("")) {
-                            Toast.makeText(getApplicationContext(), "현재 몸무게와 목표 몸무게를 입력해주세요!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "현재 몸무게와 목표 몸무게를 입력해주세요!", Toast.LENGTH_SHORT).show();
                             cb_weight.setChecked(false);
                         }
                         else {
@@ -211,15 +226,11 @@ public class RecommendedDietSurveyActivity extends AppCompatActivity {
                             int value = target - current;
 
                             if(value <= 0) {
-                                lowcal = 1;
-                                lowsalt = 1;
-                                highcal = 0;
+                                weight_low = 1;
                                 //Toast.makeText(getApplicationContext(), "저칼로리 : " + lowcal + "\n저염 : " + lowsalt, Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                highcal = 1;
-                                lowcal = 0;
-                                lowsalt = 0;
+                                weight_high = 1;
                                 //Toast.makeText(getApplicationContext(), "고칼로리 : " + highcal, Toast.LENGTH_SHORT).show();
                             }
 
@@ -272,58 +283,84 @@ public class RecommendedDietSurveyActivity extends AppCompatActivity {
             }
 
             else {
-                lowcal = 0;
-                lowsalt = 0;
-                highcal = 0;
-                //Toast.makeText(getApplicationContext(), "체중조절에 관심이 없습니다...", Toast.LENGTH_SHORT).show();
-
                 tv_currentWeight.setVisibility(View.GONE);
                 tv_targetWeight.setVisibility(View.GONE);
             }
         }
 
-
-        //단 음식, 저당
-        /*if(view.getId() == R.id.cb_sugar) {
+        //sugar
+        if(view.getId() == R.id.cb_sugar1||view.getId() == R.id.cb_sugar2) {
             if(checked) {
-                //Toast.makeText(getApplicationContext(), "단 음식을 자주 먹습니다...", Toast.LENGTH_SHORT).show();
-
-                rg_sugarFrequency.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                        RadioButton rbName = radioGroup.findViewById(i);
-
-                        if(rbName.getText().toString().equals("0~1번")) {
-                            lowsugar = 0;
-                            //Toast.makeText(getApplicationContext(), "적당히 섭취하시는군요! \n저당 : " + lowsugar , Toast.LENGTH_SHORT).show();
-                        }
-                        else if(rbName.getText().toString().equals("2~4번")) {
-                            lowsugar = 0;
-                            //Toast.makeText(getApplicationContext(), "어느 정도 섭취하시는군요! \n저당 : " + lowsugar, Toast.LENGTH_SHORT).show();
-                        }
-                        else if(rbName.getText().toString().equals("5~7번")) {
-                            lowsugar = 1;
-                            //Toast.makeText(getApplicationContext(), "섭취 빈도를 줄여야 될 것 같아요 \n저당 : " + lowsugar, Toast.LENGTH_SHORT).show();
-                        }
-                        else if(rbName.getText().toString().equals("10번 이상")) {
-                            lowsugar = 1;
-                            //Toast.makeText(getApplicationContext(), "무조건 섭취 빈도를 줄여야 될 것 같아요! \n저당 식단을 추천드립니다. \n저당 : " + lowsugar, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
+                sugar = 1;
 
             }
-            else {      //오류 발생...
-                //rg_sugarFrequency.check(-1);
-                //rg_sugarFrequency.clearCheck();
-                lowsugar = 0;
-                //Toast.makeText(getApplicationContext(), "단 음식을 자주 먹지 않아요~", Toast.LENGTH_SHORT).show();
+            else {
+                sugar = 0;
             }
-        }*/
+        }
+
+        //protein
+        if(view.getId() == R.id.cb_protein1||view.getId() == R.id.cb_protein2) {
+            if(checked) {
+                protein = 1;
+
+            }
+            else {
+                protein = 0;
+            }
+        }
+
+        //vitamin
+        if(view.getId() == R.id.cb_vitamin1||view.getId() == R.id.cb_vitamin2) {
+            if(checked) {
+                vitamin = 1;
+
+            }
+            else {
+                vitamin = 0;
+            }
+        }
+
+        //lowKcal
+        if(view.getId() == R.id.cb_lowKcal1||view.getId() == R.id.cb_lowKcal2) {
+            if(checked) {
+                lowKcal = 1;
+
+            }
+            else {
+                lowKcal = 0;
+            }
+        }
+
+        //lowSalt
+        if(view.getId() == R.id.cb_lowSalt1) {
+            if(checked) {
+                salt  = 1;
+
+            }
+            else {
+                salt  = 0;
+            }
+        }
+
+
+        preferences = getApplicationContext().getSharedPreferences("userjoin", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("id", id_get);
+        System.out.println("id는? "+id_get);
+        editor.putString("single", String.valueOf(single));
+        editor.putString("weight_low", String.valueOf(weight_low));
+        editor.putString("weight_high", String.valueOf(weight_high));
+        editor.putString("sugar", String.valueOf(sugar));
+        editor.putString("protein", String.valueOf(protein));
+        editor.putString("vitamin", String.valueOf(vitamin));
+        editor.putString("lowKcal", String.valueOf(lowKcal));
+        editor.putString("salt", String.valueOf(salt));
+
+        editor.commit(); // 저장|
 
 
 
-    }
+    } //체크박스
 
 }
