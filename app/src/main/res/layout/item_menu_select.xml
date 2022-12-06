@@ -9,9 +9,10 @@
     app:cardElevation="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_item_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/round_rec_background4"
+        android:background="@drawable/round_rec_background"
         android:padding="5dp">
 
         <!--app:riv_corner_radius="15dp"-->

@@ -8,65 +8,167 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DietAddActivity extends AppCompatActivity {
-
-    //생년월일 관련
     Calendar calendar = Calendar.getInstance(); // datePickerDialog
     TextView dietAdd_selectDate;
 
-    //음식추가 버튼
-    Button menuPlus_add;
+    Double total_carbo = 0.0, total_protein = 0.0, total_fat = 0.0, total_calories = 0.0;
+    TextView totalKcal_text, totalCarb_text, totalProtein_text, totalFat_text;
 
-    //추가완료 버튼
-    Button add_completeBtn;
+    String menu_name, menu_calorie;
+
+    Button menuPlus_add; //음식추가 버튼
+    Button add_completeBtn; //추가완료 버튼
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet_add);
-
-        //우선 식단 수정 액티비티 코드를 그대로 가져옴!!
-
         getSupportActionBar().hide();
 
+        Intent intent = getIntent();
+        String check = intent.getStringExtra("check");
+
+        totalCarb_text = (TextView) findViewById(R.id.totalCarb_text);
+        totalProtein_text = (TextView) findViewById(R.id.totalProt_text);
+        totalFat_text = (TextView) findViewById(R.id.totalFat_text);
+        totalKcal_text = (TextView) findViewById(R.id.totalKcal_text);
+
+
+        // 날짜 선택
+        dietAdd_selectDate = (TextView) findViewById(R.id.diet_add_select_date);
+        DatePickerDialog datePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                dietAdd_selectDate.setText(year + "." + (month+1) + "." + dayOfMonth);
+            }
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+
+        datePicker.getWindow().setBackgroundDrawableResource(R.drawable.round_rec_background);
+
+        dietAdd_selectDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePicker.show();
+            }
+        });
+
+
+        // 선택한 메뉴 세팅
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.dietAddList_container);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ArrayList<DietChangeListData> diet_change_list_data = new ArrayList<>();
 
-        /*String dietChange_menu_name[] = {"옥수수밥", "조기구이", "된장찌개"};
-        String dietChange_menu_kcal[] = {"300kcal", "318kcal", "145kcal"};*/
+        if(check == null) {
+            //
+        } else if(check.equals("MENU SELECTED")) {
 
-        String dietChange_menu_name[] = {"현미밥", "아욱된장국", "계란말이"};
-        String dietChange_menu_kcal[] = {"153kcal", "34kcal", "134kcal"};
+            // 선택한 메뉴의 recipe_id 가져오기
+            ArrayList<SelectedMenuItemData> selected_menu = (ArrayList<SelectedMenuItemData>) intent.getSerializableExtra("selected_menu");
 
-        for(int i = 0; i< dietChange_menu_name.length; i++){
-            DietChangeListData dataSet = new DietChangeListData(dietChange_menu_name[i], dietChange_menu_kcal[i]);
-            diet_change_list_data.add(dataSet);
-        }
-
-        //recyclerView.setAdapter(new DietChangeListRecyclerViewAdapter(diet_change_list_data));
-        //13초 뒤에 나타나게 함 - 날짜를 선택해야 해서!!
-        //아님 그냥 아이템들이 안 나타나게 할 것
-        /*Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                recyclerView.setAdapter(new DietChangeListRecyclerViewAdapter(diet_change_list_data));
+            // 선택한 메뉴의 총 탄수화물, 단백질, 지방
+            for(int i=0; i<selected_menu.size(); i++) {
+                total_carbo += selected_menu.get(i).getCarbohydrate();
+                total_protein += selected_menu.get(i).getProtein();
+                total_fat += selected_menu.get(i).getFat();
+                total_calories += selected_menu.get(i).getCalorie();
             }
-        }, 13000);*/ //딜레이 타임 조절
+            totalCarb_text.setText(String.format("%.1f", total_carbo));
+            totalProtein_text.setText(String.format("%.1f", total_protein));
+            totalFat_text.setText(String.format("%.1f", total_fat));
+            totalKcal_text.setText(String.format("%.1f", total_calories));
+
+            // 서버로 전송할 파라미터 배열
+            JSONArray paramArray = new JSONArray();
+            for(int i=0; i<selected_menu.size(); i++) {
+                paramArray.put(selected_menu.get(i).getItem_index());
+            }
+
+            String url = "http://10.0.2.2:3000/add_menu";
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //System.out.println("response : " + response);
+
+                    try {
+                        JSONArray resArray = new JSONArray(response);
+                        //System.out.println("resArray : " + resArray);
+
+                        for(int i=0; i<resArray.length(); i++) {
+                            JSONObject menuObj = resArray.getJSONObject(i);
+                            //System.out.println("menuObj[" + i + "] : " + menuObj);
+
+                            menu_name = menuObj.getString("menu_name");
+                            menu_calorie = menuObj.getString("calorie");
+
+                            DietChangeListData dataSet = new DietChangeListData(menu_name, menu_calorie + " kcal");
+                            diet_change_list_data.add(dataSet);
+
+                        }
+
+                        recyclerView.setAdapter(new DietChangeListRecyclerViewAdapter(diet_change_list_data));
+
+                    }catch (Exception e){ e.printStackTrace(); }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            ){
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parameters = new HashMap<>();
+                    parameters.put("recipe_array", paramArray.toString());
+                    return parameters;
+                }
+            };
+
+            // 사용자 지정 정책 --> 타임아웃 에러 해결
+            stringRequest.setRetryPolicy(new com.android.volley.DefaultRetryPolicy(
+                    30000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+            requestQueue = Volley.newRequestQueue(getApplicationContext());
+            if (requestQueue == null) {
+                Volley.newRequestQueue(getApplicationContext());
+            }
+
+            stringRequest.setShouldCache(false); // 이전 결과가 있어도 새로 요청하여 응답을 보여줌
+            requestQueue.add(stringRequest);
+
+        }
 
 
         //음식 추가 버튼 관련
         menuPlus_add = (Button) findViewById(R.id.menu_plus_add);
-
         menuPlus_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,37 +177,69 @@ public class DietAddActivity extends AppCompatActivity {
             }
         });
 
+
+        String url_nick = "http://10.0.2.2:3000/nick_overlap";
         //추가완료 버튼을 누르면, 메뉴가 바뀐 오늘의 식단으로 이동
+
         add_completeBtn = (Button) findViewById(R.id.menu_add_complete);
         add_completeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+/*
+
+                StringRequest request = new StringRequest(
+                        Request.Method.POST,
+                        url_nick,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                if(response.equals("nick_do")){
+                                    //1이면 사용 가능
+                                    System.out.println(response + " / 닉네임 사용 가능");
+                                    Toast.makeText(getApplicationContext(), "사용 가능한 닉네임입니다", Toast.LENGTH_SHORT).show();
+                                    nick_check = "ok";
+
+
+                                } else {
+                                    //2면 사용 불가
+                                    System.out.println(response+ " / 닉네임 사용 불가능");
+                                    Toast.makeText(getApplicationContext(), "사용 불가능한 닉네임입니다", Toast.LENGTH_SHORT).show();
+                                    nick_check = "no";
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                System.out.println(error.getMessage());
+                            }
+                        }
+                ) {
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+
+                        params.put("nickname", nickname);
+
+                        return params;
+                    }
+                };
+                requestQueue.add(request);
+
+
+
+ */
+
+
+
+
                 Intent intent = new Intent(getApplicationContext(), MenuDayActivity.class);
                 startActivity(intent);
             }
         });
 
-
-
-        // 생년월일 입력
-        dietAdd_selectDate = (TextView) findViewById(R.id.diet_add_select_date);
-
-        DatePickerDialog birthPicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                dietAdd_selectDate.setText(year + "." + (month+1) + "." + dayOfMonth);
-            }
-        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-
-        birthPicker.getWindow().setBackgroundDrawableResource(R.drawable.round_rec_background);
-
-        dietAdd_selectDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                birthPicker.show();
-            }
-        });
-
-
     }
+
 }

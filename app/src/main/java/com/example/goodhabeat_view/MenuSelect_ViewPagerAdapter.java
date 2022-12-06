@@ -10,11 +10,15 @@ import java.util.ArrayList;
 
 public class MenuSelect_ViewPagerAdapter extends FragmentPagerAdapter {
 
+    int tab_index;
+
     private ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
     private ArrayList<String> name = new ArrayList<>();
 
-    public MenuSelect_ViewPagerAdapter(@NonNull FragmentManager fm) {
+    public MenuSelect_ViewPagerAdapter(@NonNull FragmentManager fm, int tab_index) {
         super(fm);
+        this.tab_index = tab_index;
+
         fragmentArrayList.add(new MenuFragment_rice());
         fragmentArrayList.add(new MenuFragment_soup());
         fragmentArrayList.add(new MenuFragment_kimchi());

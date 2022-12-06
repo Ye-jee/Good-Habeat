@@ -15,7 +15,6 @@ public class CategoryDietActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +27,6 @@ public class CategoryDietActivity extends AppCompatActivity {
         //특정 탭 이동
         int tab_index = getIntent().getIntExtra("TabIndex", 0);
 
-
         viewPager = findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), tab_index);
 
@@ -36,6 +34,7 @@ public class CategoryDietActivity extends AppCompatActivity {
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
+        viewPager.setOffscreenPageLimit(100); // Fragment 전환 > ViewPager 상태 유지
 
         if(tab_index == 0) {
             viewPager.setCurrentItem(0);

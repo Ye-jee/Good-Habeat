@@ -1,14 +1,20 @@
 package com.example.goodhabeat_view;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
 
 public class MenuSelectActivity extends AppCompatActivity {
 
@@ -17,8 +23,7 @@ public class MenuSelectActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
 
-
-    //Button selectCompleteBtn;
+    TextView aa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,25 +34,46 @@ public class MenuSelectActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        //특정 탭 이동
+        int tab_index = getIntent().getIntExtra("TabIndex", 0);
+
         viewPager = findViewById(R.id.viewPager);
-        menuSelect_viewPagerAdapter = new MenuSelect_ViewPagerAdapter(getSupportFragmentManager());
+        menuSelect_viewPagerAdapter = new MenuSelect_ViewPagerAdapter(getSupportFragmentManager(), tab_index);
 
         tabLayout = findViewById(R.id.tabLayout);
         viewPager.setAdapter(menuSelect_viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
+        viewPager.setOffscreenPageLimit(100); // Fragment 전환 > ViewPager 상태 유지
 
-        /*selectCompleteBtn = (Button) findViewById(R.id.select_completeBtn);
-
-        selectCompleteBtn.setOnClickListener(new View.OnClickListener() {
+        aa = (TextView) findViewById(R.id.tv_title);
+        aa.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                //메뉴 선택을 완료하고 버튼을 클릭해 다시 이전 페이지(식단 설정/추가 페이지)로 이동하는 코드
-                finish();
+            public void onClick(View v) {
+                Intent intent = new
+                        Intent(getApplicationContext(), DietAddActivity.class);
+                startActivity(intent);
             }
-        });*/
+        });
 
-
+        if(tab_index == 0) {
+            viewPager.setCurrentItem(0);
+        }
+        else if(tab_index == 1) {
+            viewPager.setCurrentItem(1);
+        }
+        else if(tab_index == 2) {
+            viewPager.setCurrentItem(2);
+        }
+        else if(tab_index == 3) {
+            viewPager.setCurrentItem(3);
+        }
+        else if(tab_index == 4) {
+            viewPager.setCurrentItem(4);
+        }
+        else if(tab_index == 5) {
+            viewPager.setCurrentItem(5);
+        }
 
 
     }

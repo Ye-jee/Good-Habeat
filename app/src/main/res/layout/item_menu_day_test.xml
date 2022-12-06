@@ -108,29 +108,14 @@
             android:id="@+id/eat_done"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
             android:shadowColor="#B3B3B3"
             android:shadowRadius="2"
             android:text="먹었어요!"
             android:textColor="#A5A5A5"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/eat_dont"
-            app:layout_constraintTop_toBottomOf="@+id/menu_carbo" />
-
-        <TextView
-            android:id="@+id/eat_dont"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:shadowColor="#B3B3B3"
-            android:shadowRadius="2"
-            android:text="못먹었어요"
-            android:textColor="#A5A5A5"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/eat_done"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/eat_done" />
-
+            app:layout_constraintTop_toBottomOf="@+id/menu_carbo" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,16 +5,33 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MenuFragment_sideDish extends Fragment {
 
+    Button selectCompleteBtn;
+    ArrayList<SelectedMenuItemData> selected_menu = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,32 +43,76 @@ public class MenuFragment_sideDish extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ArrayList<MenuSelectData> menu_select_data = new ArrayList<>();
 
-        int menu_img[] = {R.drawable.menu_select_img_rolled_omelet, R.drawable.menu_select_img_chive_pancake, R.drawable.menu_select_img_grilled_mackerel};
-        String menu_name[] = {"계란말이", "부추전", "고등어구이"};
-        String menu_information[] = {"탄수화물 2g 단백질 10g 지방 8g", "탄수화물 20g 단백질 10g 지방 5g", "탄수화물 0g 단백질 17g 지방 12g"};
-        String menu_kcal[] = {"134kcal", "175kcal", "190kcal"};
+        // Volley
+        String url = "http://10.0.2.2:3000/menu_select";
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println(response);
 
-        for(int i=0; i<menu_img.length; i++) {
-            MenuSelectData dataSet = new MenuSelectData(menu_img[i], menu_name[i], menu_information[i], menu_kcal[i]);
-            menu_select_data.add(dataSet);
+                try {
+                    JSONArray resArray = new JSONArray(response);
+
+                    for(int i=0; i<resArray.length(); i++) {
+                        JSONObject dietObj = resArray.getJSONObject(i);
+
+                        String menu_image = dietObj.getString("recipe_image");
+                        String menu_name = dietObj.getString("menu_name");
+                        String carbo = dietObj.getString("carbohydrate");
+                        String protein = dietObj.getString("protein");
+                        String fat = dietObj.getString("fat");
+                        String menu_info = "탄수화물 " + carbo + "g " + "단백질 " + protein + "g " + "지방 " + fat + "g ";
+                        String menu_calorie = dietObj.getString("calorie");
+                        Integer recipe_id = dietObj.getInt("recipe_id");
+
+                        MenuSelectData dataSet = new MenuSelectData(menu_image, menu_name, Double.parseDouble(carbo), Double.parseDouble(protein), Double.parseDouble(fat), menu_info, Double.parseDouble(menu_calorie), recipe_id);
+                        menu_select_data.add(dataSet);
+                    }
+
+                    recyclerView.setAdapter(new MenuSelectRecyclerViewAdapter(getContext(), menu_select_data, selected_menu));
+
+                }catch (Exception e){ e.printStackTrace(); }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        ){
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parameters = new HashMap<>();
+                parameters.put("category", "4");
+                return parameters;
+            }
+        };
+
+        // 사용자 지정 정책 --> 타임아웃 에러 해결
+        stringRequest.setRetryPolicy(new com.android.volley.DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        requestQueue = Volley.newRequestQueue(getContext());
+        if (requestQueue == null) {
+            Volley.newRequestQueue(getContext());
         }
 
-        //클릭 이벤트를 구현을 위한 추가코드
-        MenuSelectRecyclerViewAdapter menuSelectRecyclerViewAdapter = new MenuSelectRecyclerViewAdapter(menu_select_data);
-        menuSelectRecyclerViewAdapter.setOnItemClickListener(new MenuSelectRecyclerViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClicked(int postion, String data) {
-                Toast.makeText(getContext(), data, Toast.LENGTH_SHORT).show();
+        stringRequest.setShouldCache(false); // 이전 결과가 있어도 새로 요청하여 응답을 보여줌
+        requestQueue.add(stringRequest);
 
-                //아이템 클릭시 식단 수정 페이지로 이동하는 코드
-                Intent intent = new Intent(getActivity(), DietChangeActivity.class);
+        // 메뉴 선택 완료
+        selectCompleteBtn = (Button) view.findViewById(R.id.selectCompleteBtn);
+        selectCompleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), DietAddActivity.class);
+                intent.putExtra("selected_menu", selected_menu);
+                intent.putExtra("check", "MENU SELECTED");
                 startActivity(intent);
             }
         });
-
-        recyclerView.setAdapter(menuSelectRecyclerViewAdapter);
-
-
 
         return view;
     }
