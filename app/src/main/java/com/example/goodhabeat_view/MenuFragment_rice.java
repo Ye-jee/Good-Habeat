@@ -37,19 +37,12 @@ import java.util.Map;
 
 public class MenuFragment_rice extends Fragment {
 
-    private SharedViewModel viewModel;
-
     Button selectCompleteBtn;
     ArrayList<SelectedMenuItemData> selected_menu = new ArrayList<>();
-    ArrayList<Integer> selected_item_id = new ArrayList<>();
-
-    String riceItemStr = "";
 
     SharedPreferences preferences;
 
-    //ArrayList<Integer> send_data = new JSONArray();
-
-    Button testBtn;
+    Button menuSaveBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,8 +50,7 @@ public class MenuFragment_rice extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_menu_rice, container, false);
 
-        selectCompleteBtn = (Button) view.findViewById(R.id.selectCompleteBtn);
-        testBtn = (Button) view.findViewById(R.id.testBtn);
+        menuSaveBtn = (Button) view.findViewById(R.id.testBtn);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.riceMenu_container);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -123,100 +115,44 @@ public class MenuFragment_rice extends Fragment {
         stringRequest.setShouldCache(false); // 이전 결과가 있어도 새로 요청하여 응답을 보여줌
         requestQueue.add(stringRequest);
 
-        /*
-        *
-        *
-        *
-        *
-        * */
-
-        if(selected_menu.size() == 1) {
-
-
-            //Intent intent = new Intent(getContext(), DietAddActivity.class);
-            //intent.putExtra("send_data", selected_menu.toString());
-            //startActivity(intent);
-        }
-/*
-        for(int i=0; i<selected_menu.size(); i++){
-            selected_item_id.add(selected_menu.get(i).getRiceItemData());
-            System.out.println("rice 데이터 저장(selected_item_id(" + i + ") : " + selected_item_id.get(i));
-        }
-        System.out.println("-----------------------------------");*/
-
-        return view;
-    }
-
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-
-        // 선택 완료 버튼
-        selectCompleteBtn.setOnClickListener(item -> {
-            if (selected_menu.size() == 1) {
-                preferences = getContext().getSharedPreferences("selected_diet_rice", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("selected_diet_rice", selected_menu.get(0).getItem_index().toString());
-                editor.commit();
-
-                //Intent intent = new Intent(getContext(), DietAddActivity.class);
-                //intent.putExtra("send_data", selected_menu.toString());
-                //startActivity(intent);
-            } else if (selected_menu.size() > 1) {
-                preferences = getContext().getSharedPreferences("selected_diet_rice", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.clear();
-                editor.commit();
-                for (int i = 0; i < selected_menu.size() - 1; i++) {
-                    selected_menu.remove(i);
-                    if (selected_menu.size() >= 1) {
-                        editor.putString("selected_diet_rice", selected_menu.get(selected_menu.size() - 1).getItem_index().toString());
-                        editor.commit();
+        // 메뉴 선택
+        selectCompleteBtn = (Button) view.findViewById(R.id.selectCompleteBtn);
+        selectCompleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (selected_menu.size() == 1) {
+                    preferences = getContext().getSharedPreferences("selected_diet_rice", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("selected_diet_rice", selected_menu.get(0).getItem_index().toString());
+                    editor.commit();
+                } else if (selected_menu.size() > 1) {
+                    preferences = getContext().getSharedPreferences("selected_diet_rice", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.clear();
+                    editor.commit();
+                    for (int i = 0; i < selected_menu.size() - 1; i++) {
+                        selected_menu.remove(i);
+                        if (selected_menu.size() >= 1) {
+                            editor.putString("selected_diet_rice", selected_menu.get(selected_menu.size() - 1).getItem_index().toString());
+                            editor.commit();
+                        }
                     }
                 }
             }
-            //selected_menu.clear();
-            //viewModel.select(selected_item_id);
-
-            //rice
-            //send_data.put(riceItem);
         });
-/*
-        // 다른 프래그먼트 데이터 가져오기
-        viewModel.getSelected().observe(getViewLifecycleOwner(), item -> {
-            // soup
-            if (item.getSoupItemData() != null) {
-                send_data.add(item.getSoupItemData.get());
-                System.out.println("soup fragment : " + item.getSoupItemData());
-                System.out.println("-----------------------------------");
-                //Toast.makeText(getContext(), "rice fragment : " + item.getItem_index(), Toast.LENGTH_SHORT).show();
-            }
 
-            // kimchi
-            //send_data.put(item.getKimchiData());
-
-            // sideDish
-
-            // aBowl
-
-
-        });*/
-
-        testBtn.setOnClickListener(new View.OnClickListener() {
+        // 메뉴 저장
+        menuSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(getContext(), DietAddActivity.class);
+                intent.putExtra("selected_menu", selected_menu);
                 intent.putExtra("check", "MENU SELECTED");
-                //intent.putExtra("send_data", send_data.get(0).toString());
                 startActivity(intent);
-
             }
-
-
         });
 
+        return view;
     }
 
 

@@ -11,12 +11,6 @@ public class SelectedMenuItemData implements Serializable {
     Double fat;
     Double calorie;
 
-    Integer riceItemData;
-    Integer soupItemData;
-    ArrayList<Integer> kimchiData;
-    //ArrayList<Integer> viewModelData;
-    //ArrayList<Integer> viewModelData;
-
     public SelectedMenuItemData(Integer item_index, Double carbohydrate, Double protein, Double fat, Double calorie) {
         this.item_index = item_index;
         this.carbohydrate = carbohydrate;
@@ -39,16 +33,6 @@ public class SelectedMenuItemData implements Serializable {
 
     public Double getCalorie() { return calorie; }
     public void setCalorie(Double calorie) { this.calorie = calorie; }
-
-    public Integer getRiceItemData() { return riceItemData; }
-    public void setRiceItemData(Integer riceItemData) { this.riceItemData = riceItemData; }
-
-    public Integer getSoupItemData() { return soupItemData; }
-    public void setSoupItemData(Integer soupItemData) { this.soupItemData = soupItemData; }
-
-    public ArrayList<Integer> getKimchiData() { return kimchiData; }
-
-    public void setKimchiData(ArrayList<Integer> kimchiData) { this.kimchiData = kimchiData; }
 
 
 }
