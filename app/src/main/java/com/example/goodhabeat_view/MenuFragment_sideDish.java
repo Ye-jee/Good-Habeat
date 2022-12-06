@@ -1,6 +1,8 @@
 package com.example.goodhabeat_view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +35,11 @@ public class MenuFragment_sideDish extends Fragment {
 
     Button selectCompleteBtn;
     ArrayList<SelectedMenuItemData> selected_menu = new ArrayList<>();
+
+    ArrayList<Integer> selected_item_id = new ArrayList<>();
+    String riceItemStr = "";
+
+    SharedPreferences preferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -115,5 +123,51 @@ public class MenuFragment_sideDish extends Fragment {
         });
 
         return view;
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // 선택 완료 버튼
+        selectCompleteBtn.setOnClickListener(item -> {
+
+
+
+            ArrayList<Integer> aa = new ArrayList<>();
+
+            for (int i=0; i<selected_menu.size(); i++) {
+                aa.add(selected_menu.get(i).getItem_index());
+            }
+
+            preferences = getContext().getSharedPreferences("selected_diet_side", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("selected_diet_side", aa.toString());
+            editor.commit();
+
+            /*
+            for(int i=0; i<selected_menu.size(); i++){
+
+            }
+
+            if (selected_menu.size() == 1) {
+
+
+                //Intent intent = new Intent(getContext(), DietAddActivity.class);
+                //intent.putExtra("send_data", selected_menu.toString());
+                //startActivity(intent);
+            } else if (selected_menu.size() > 1) {
+                preferences = getContext().getSharedPreferences("selected_diet_side", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.commit();
+                for (int i = 0; i < selected_menu.size() - 1; i++) {
+                    selected_menu.remove(i);
+                    if (selected_menu.size() >= 1) {
+                        editor.putString("selected_diet_side", selected_menu.get(selected_menu.size() - 1).getItem_index().toString());
+                        editor.commit();
+                    }
+                }
+            }*/
+        });
     }
 }

@@ -1,6 +1,8 @@
 package com.example.goodhabeat_view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,14 +34,21 @@ import java.util.Map;
 
 public class MenuFragment_soup extends Fragment {
 
+    private SharedViewModel viewModel;
+
     Button selectCompleteBtn;
     ArrayList<SelectedMenuItemData> selected_menu = new ArrayList<>();
+    ArrayList<Integer> selected_item_id = new ArrayList<>();
+
+    SharedPreferences preferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_menu_soup, container, false);
+
+        selectCompleteBtn = (Button) view.findViewById(R.id.selectCompleteBtn);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.soupMenu_container);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -102,18 +113,62 @@ public class MenuFragment_soup extends Fragment {
         stringRequest.setShouldCache(false); // 이전 결과가 있어도 새로 요청하여 응답을 보여줌
         requestQueue.add(stringRequest);
 
-        // 메뉴 선택 완료
-        selectCompleteBtn = (Button) view.findViewById(R.id.selectCompleteBtn);
-        selectCompleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), DietAddActivity.class);
-                intent.putExtra("selected_menu", selected_menu);
-                intent.putExtra("check", "MENU SELECTED");
-                startActivity(intent);
-            }
-        });
 
         return view;
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+
+        // 선택 완료 버튼
+        selectCompleteBtn.setOnClickListener(item -> {
+            SelectedMenuItemData soupItem = new SelectedMenuItemData(0, 0.0, 0.0, 0.0, 0.0);
+            //if(selected_menu != null) selected_menu.clear();
+
+
+            for(int i=0; i<selected_menu.size(); i++){
+                selected_item_id.add(selected_menu.get(i).getItem_index());
+                System.out.println("soup 데이터 저장 : " + selected_menu.get(i).getItem_index());
+            }
+
+            if(selected_menu.size() == 1) {
+                preferences = getContext().getSharedPreferences("selected_diet_soup", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("selected_diet_soup", selected_menu.get(0).getItem_index().toString());
+                editor.commit();
+
+                //Intent intent = new Intent(getContext(), DietAddActivity.class);
+                //intent.putExtra("send_data", selected_menu.toString());
+                //startActivity(intent);
+            } else if (selected_menu.size() > 1) {
+                preferences = getContext().getSharedPreferences("selected_diet_soup", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.commit();
+                for (int i=0; i<selected_menu.size()-1; i++) {
+                    selected_menu.remove(i);
+                    if(selected_menu.size() >= 1) {
+                        editor.putString("selected_diet_soup", selected_menu.get(selected_menu.size()-1).getItem_index().toString());
+                        editor.commit();
+                    }
+                }
+            }
+
+
+            /*
+            System.out.println("-----------------------------------");
+            soupItem.setSoupItemData(selected_item_id);
+            viewModel.select(soupItem);*/
+        });
+
+        // 다른 프래그먼트 데이터 가져오기
+        viewModel.getSelected().observe(getViewLifecycleOwner(), item -> {
+            //System.out.println("soup fragment : " + item.getRiceItemData());
+            System.out.println("-----------------------------------");
+            //Toast.makeText(getContext(), "soup fragment : " + item.getItem_index(), Toast.LENGTH_SHORT).show();
+        });
+
     }
 }
