@@ -446,8 +446,8 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
                             detail_date_Bstring = attend_json.getString("detail_date_Bcount");
                             detail_date_Bcount = Integer.parseInt(detail_date_Bstring);
                             System.out.println("저번달 출석률: "+detail_date_Bcount);
-                            System.out.println("before_date_attend: "+before_date_attend);
                             before_date_attend = (int) Math.round(detail_date_Bcount*(Math.pow(beforeOfMonth, -1))*100);;
+                            System.out.println("before_date_attend: "+before_date_attend);
 
                             int attend_result = date_attend - before_date_attend;
                             System.out.println("출석률 결과 : "+attend_result);
