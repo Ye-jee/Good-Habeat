@@ -254,14 +254,13 @@ public class MainActivity extends AppCompatActivity {
 
                     String food_name = foodObj.getString("food_name");
                     String food_description = foodObj.getString("food_description");
-                    //String food_image = foodObj.getString("food_image");
+                    String food_image = foodObj.getString("food_image");
 
                     season_name.setText(food_name);
                     season_exp.setText(food_description);
                     season_exp.setMovementMethod(new ScrollingMovementMethod()); // 텍스트뷰 스크롤 설정
                     season_exp.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
-
-                    season_food_img.setImageResource(R.drawable.strawberryy);
+                    setURLImage(food_image, season_food_img);
 
                 }catch (Exception e){ e.printStackTrace(); }
             }
@@ -500,6 +499,55 @@ public class MainActivity extends AppCompatActivity {
 
         stringRequest.setShouldCache(false); // 이전 결과가 있어도 새로 요청하여 응답을 보여줌
         requestQueue.add(stringRequest);
+    }
+
+    // 이미지
+    private void setURLImage(String recipe_image, ImageView menuImage) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    bitmap = getBitmap(recipe_image);
+                }catch (Exception e){
+                    e.printStackTrace();
+                } finally {
+                    if(bitmap != null) {
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                menuImage.setImageBitmap(bitmap);
+                            }
+                        });
+                    }
+                }
+            }
+        }).start();
+    }
+
+    private Bitmap getBitmap(String url) {
+        URL imgUrl = null;
+        HttpURLConnection connection = null;
+        InputStream is = null;
+
+        Bitmap retBitmap = null;
+
+        try{
+            imgUrl = new URL(url);
+            connection = (HttpURLConnection) imgUrl.openConnection();
+            connection.setDoInput(true); //url로 input받는 flag 허용
+            connection.connect(); //연결
+            is = connection.getInputStream();
+            retBitmap = BitmapFactory.decodeStream(is);
+
+        }catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            if(connection!=null) {
+                connection.disconnect();
+            }
+            return retBitmap;
+        }
     }
 
 }
