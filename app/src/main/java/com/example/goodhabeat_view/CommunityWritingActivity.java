@@ -261,6 +261,9 @@ public class CommunityWritingActivity extends AppCompatActivity {
                     }
 
                 }, 6000);// 0.6초 정도 딜레이를 준 후 시작
+
+                Intent intent = new Intent(getApplicationContext(), CommunityActivity.class);
+                startActivity(intent);
              }
 
         }); //셋 클릭 끝.
