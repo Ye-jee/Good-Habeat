@@ -255,11 +255,6 @@ public class DietAddActivity extends AppCompatActivity {
             }
         });
 
-
-        // 선택된 날짜
-        String diet_date = dietAdd_selectDate.getText().toString();
-        System.out.println("diet_date : " + diet_date);
-
         // meal 라디오 버튼
         group_dayMeal.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -280,6 +275,10 @@ public class DietAddActivity extends AppCompatActivity {
         add_completeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // 선택된 날짜
+                String diet_date = dietAdd_selectDate.getText().toString();
+                System.out.println("diet_date : " + diet_date);
+
                 for(int i=0; i<prefArray.size(); i++) {
                     System.out.println("prefArray(" + i + ")" + prefArray.get(i));
                     AddDietVolley(prefArray.get(i), diet_date, meal);
@@ -290,7 +289,6 @@ public class DietAddActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
     }
 
