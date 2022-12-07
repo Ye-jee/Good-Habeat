@@ -17,10 +17,29 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn_login_overlap"
         android:backgroundTint="@color/main_color1"
-        android:text="메뉴 선택"
+        android:text="밥 선택"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/guideline_bottom"
         app:layout_constraintEnd_toEndOf="@id/guideline_right" />
+
+    <Button
+        android:id="@+id/testBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_login_overlap"
+        android:backgroundTint="@color/main_color1"
+        android:text="메뉴 저장"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/guideline_bottom"
+        app:layout_constraintStart_toEndOf="@id/guideline_left" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="40dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_right"
