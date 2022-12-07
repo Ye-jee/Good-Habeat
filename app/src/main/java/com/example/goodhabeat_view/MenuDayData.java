@@ -8,6 +8,7 @@ public class MenuDayData {
     String menuProtein;
     String menuFat;
     String meal; // intent 정보
+    String eat_check;
 
     public MenuDayData(String menuPicUrl, String menuName, String menuCal, String menuCarbo, String menuProtein, String menuFat, String meal) {
         this.menuPicUrl = menuPicUrl;
@@ -39,4 +40,6 @@ public class MenuDayData {
 
     public String getMeal() { return meal; }
 
+    public String getEat_check() { return eat_check; }
+    public void setEat_check(String eat_check) { this.eat_check = eat_check; }
 }
