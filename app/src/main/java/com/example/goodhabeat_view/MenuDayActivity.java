@@ -205,4 +205,10 @@ public class MenuDayActivity extends AppCompatActivity {
         return format.format(currentTime);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+    }
+
 }
