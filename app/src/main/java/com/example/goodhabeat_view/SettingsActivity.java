@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.AlertDialog;
@@ -72,6 +73,7 @@ public class SettingsActivity extends AppCompatActivity {
     String con_string, hp_string, v_string, lc_string, lsa_string, lsu_string;
     StringBuilder String_sum = new StringBuilder("");
 
+    ConstraintLayout password_change;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +97,7 @@ public class SettingsActivity extends AppCompatActivity {
         editBirth = (EditText)findViewById(R.id.settingsEditBirth) ;
         editHeight = (EditText)findViewById(R.id.setting_Height) ;
         editWeight = (EditText)findViewById(R.id.setting_Weight) ;
+        password_change = (ConstraintLayout)findViewById(R.id.password_change);
 
         save = (Button)findViewById(R.id.save_button);
         nick = (Button)findViewById(R.id.btn_nickname);
@@ -469,6 +472,15 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+
+        password_change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), PasswordChangeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
         //--------------------------------------------------------------------------------------------------------------------------------------------------------
