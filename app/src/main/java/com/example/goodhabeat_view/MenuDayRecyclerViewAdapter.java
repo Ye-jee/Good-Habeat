@@ -172,66 +172,15 @@ public class MenuDayRecyclerViewAdapter extends RecyclerView.Adapter<MenuDayRecy
                                                 data.get(position).setEat_check("non-checked");
                                             }
 
-<<<<<<< HEAD
-
-                            // Volley
-                            String url = "http://10.0.2.2:3000/check_done";
-                            requestQueue = Volley.newRequestQueue(itemView.getContext());
-
-                            SharedPreferences preferences;
-                            preferences = itemView.getContext().getSharedPreferences("userInfo", MODE_PRIVATE);
-                            String user_id = preferences.getString("user_id","");
-
-                            Date systemDate = Calendar.getInstance().getTime();
-                            SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                            String date = currentDate.format(systemDate);
-
-                            SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-                            String time = currentTime.format(systemDate);
-
-                            int position = getAdapterPosition();
-                            String meal = data.get(position).getMeal();
-                            String menu_name = data.get(position).getMenuName();
-
-                            StringRequest request = new StringRequest(Request.Method.POST,
-                                    url,
-                                    new Response.Listener<String>() {
-                                @Override
-                                public void onResponse(String response) {
-                                    try{
-                                        System.out.println("response : " + response);
-
-                                        if(response.equals("input")){
-                                            eat_done.setTextColor(Color.parseColor("#2E8B57"));
-                                            eat_check = 0;
-                                        }
-                                        if(response.equals("delete")){
-                                            eat_done.setTextColor(Color.parseColor("#A5A5A5"));
-                                            eat_check = 1;
-                                        }
-
-
-
-                                    }catch (Exception e){ e.printStackTrace(); }
-                                }
-                            },
-                                    new Response.ErrorListener() {
-                                        @Override
-                                        public void onErrorResponse(VolleyError error) {
-                                            Toast.makeText(itemView.getContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                                            System.out.println(error.getMessage());
-                                        }
-=======
                                         }catch (Exception e){ e.printStackTrace(); }
->>>>>>> 7bbca694a4176410f3e66db8df90248cc4a1bd17
                                     }
                                 }, new Response.ErrorListener() {
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                Toast.makeText(itemView.getContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                                                System.out.println(error.getMessage());
-                                            }
-                                        }
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Toast.makeText(itemView.getContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                        System.out.println(error.getMessage());
+                                    }
+                                }
                                 ) {
                                     @Override
                                     protected Map<String, String> getParams() throws AuthFailureError {
@@ -276,12 +225,12 @@ public class MenuDayRecyclerViewAdapter extends RecyclerView.Adapter<MenuDayRecy
                                         }catch (Exception e){ e.printStackTrace(); }
                                     }
                                 }, new Response.ErrorListener() {
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                Toast.makeText(itemView.getContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                                                System.out.println(error.getMessage());
-                                            }
-                                        }
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Toast.makeText(itemView.getContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                        System.out.println(error.getMessage());
+                                    }
+                                }
                                 ) {
                                     @Override
                                     protected Map<String, String> getParams() throws AuthFailureError {
