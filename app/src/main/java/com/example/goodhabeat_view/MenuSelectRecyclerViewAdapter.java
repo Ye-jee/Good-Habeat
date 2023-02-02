@@ -1,7 +1,10 @@
 package com.example.goodhabeat_view;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
@@ -104,6 +107,18 @@ public class MenuSelectRecyclerViewAdapter extends RecyclerView.Adapter<MenuSele
                         selected_item_fat.add(data.get(position).getMenuFat());
                         selected_item_cal.add(data.get(position).getMenuCal());
 
+                        for(int i=0; i<selected_item_id.size(); i++){
+                            System.out.println("남은 데이터 : " + selected_item_id.get(i) + " : " + data.get(position).menuName);
+                            SelectedMenuItemData dataSet = new SelectedMenuItemData(selected_item_id.get(i), selected_item_carbo.get(i), selected_item_protein.get(i), selected_item_fat.get(i), selected_item_cal.get(i));
+                            intent_data.add(dataSet);
+                        }
+/*
+                        Intent intent = new Intent(itemView.getContext(), DietAddActivity.class);
+                        intent.putExtra("check", "MENU SELECTED");
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK); // 뒤로가기 방지
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // 뒤로가기 방지
+                        itemContext.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));*/
+
                     } else {
                         // 아이템 삭제
                         menuContainer.setBackgroundResource(R.drawable.round_rec_background);
@@ -116,7 +131,6 @@ public class MenuSelectRecyclerViewAdapter extends RecyclerView.Adapter<MenuSele
 
                     System.out.println("데이터 갯수 : " + selected_item_id.size());
                     for(int i=0; i<selected_item_id.size(); i++){
-                        System.out.println("남은 데이터 : " + selected_item_id.get(i) + " /n -- /n");
                         SelectedMenuItemData dataSet = new SelectedMenuItemData(selected_item_id.get(i), selected_item_carbo.get(i), selected_item_protein.get(i), selected_item_fat.get(i), selected_item_cal.get(i));
                         intent_data.add(dataSet);
                     }

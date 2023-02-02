@@ -10,18 +10,13 @@ import android.os.Handler;
 
 public class IntroActivity extends AppCompatActivity {
 
-
     SharedPreferences preferences;
-
-    //인트로 액티비티 알파벳 변경함 -> intro에서 Intro로!
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
-        
+
         getSupportActionBar().hide();
 
         Handler handler = new Handler();

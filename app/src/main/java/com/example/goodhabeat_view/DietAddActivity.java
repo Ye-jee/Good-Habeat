@@ -69,9 +69,12 @@ public class DietAddActivity extends AppCompatActivity {
         add_lc = (RadioButton) findViewById(R.id.someday_lunch);
         add_dn = (RadioButton) findViewById(R.id.someday_dinner);
 
+<<<<<<< HEAD
         //생략
 
 
+=======
+>>>>>>> 7bbca694a4176410f3e66db8df90248cc4a1bd17
         // Intent
         Intent intent = getIntent();
         String check = intent.getStringExtra("check");

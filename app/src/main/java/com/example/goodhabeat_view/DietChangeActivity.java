@@ -36,7 +36,7 @@ public class DietChangeActivity extends AppCompatActivity {
 
         String dietChange_menu_name[] = {"현미밥"/*, "아욱된장국", "계란말이"*/};
         String dietChange_menu_kcal[] = {"153kcal"/*, "34kcal", "134kcal"*/};
-
+/*
         for(int i = 0; i< dietChange_menu_name.length; i++){
            // DietChangeListData dataSet = new DietChangeListData(dietChange_menu_name[i], dietChange_menu_kcal[i]);
            // diet_change_list_data.add(dataSet);
@@ -51,7 +51,7 @@ public class DietChangeActivity extends AppCompatActivity {
                 recyclerView.setAdapter(new DietChangeListRecyclerViewAdapter(diet_change_list_data));
             }
         }, 5000); //딜레이 타임 조절
-
+*/
 
         //음식 추가 버튼 관련
         menuPlus_change = (Button) findViewById(R.id.menu_plus_change);

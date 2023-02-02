@@ -1,6 +1,8 @@
 package com.example.goodhabeat_view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +36,8 @@ public class MenuFragment_soup extends Fragment {
 
     Button selectCompleteBtn;
     ArrayList<SelectedMenuItemData> selected_menu = new ArrayList<>();
+
+    SharedPreferences preferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -102,15 +108,28 @@ public class MenuFragment_soup extends Fragment {
         stringRequest.setShouldCache(false); // 이전 결과가 있어도 새로 요청하여 응답을 보여줌
         requestQueue.add(stringRequest);
 
-        // 메뉴 선택 완료
         selectCompleteBtn = (Button) view.findViewById(R.id.selectCompleteBtn);
         selectCompleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), DietAddActivity.class);
-                intent.putExtra("selected_menu", selected_menu);
-                intent.putExtra("check", "MENU SELECTED");
-                startActivity(intent);
+                if(selected_menu.size() == 1) {
+                    preferences = getContext().getSharedPreferences("selected_diet_soup", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("selected_diet_soup", selected_menu.get(0).getItem_index().toString());
+                    editor.commit();
+                } else if (selected_menu.size() > 1) {
+                    preferences = getContext().getSharedPreferences("selected_diet_soup", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.clear();
+                    editor.commit();
+                    for (int i=0; i<selected_menu.size()-1; i++) {
+                        selected_menu.remove(i);
+                        if(selected_menu.size() >= 1) {
+                            editor.putString("selected_diet_soup", selected_menu.get(selected_menu.size()-1).getItem_index().toString());
+                            editor.commit();
+                        }
+                    }
+                }
             }
         });
 
