@@ -20,7 +20,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class CategoryDiet_DetailMenuData_RecyclerViewAdapter extends RecyclerView.Adapter<CategoryDiet_DetailMenuData_RecyclerViewAdapter.ViewHolder>{
+public class CategoryDiet_DetailMenuData_RecyclerViewAdapter
+extends RecyclerView.Adapter<CategoryDiet_DetailMenuData_RecyclerViewAdapter.ViewHolder>{
     Context itemContext;
     ArrayList<CategoryDiet_DetailMenuData> data;
 

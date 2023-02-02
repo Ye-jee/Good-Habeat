@@ -185,7 +185,6 @@ public class CommunityWritingActivity extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(String requestId, Map resultData) {
-
                         System.out.println("success: "+resultData);
                         try {
                             JSONObject pic_cw = new JSONObject(resultData);
@@ -208,9 +207,6 @@ public class CommunityWritingActivity extends AppCompatActivity {
                         System.out.println("reschedule: "+error);
                     }
                 }).dispatch();
-                ///~~~
-
-                //initConfig();
 
                 new Handler().postDelayed(new Runnable()
                 {
@@ -277,20 +273,13 @@ public class CommunityWritingActivity extends AppCompatActivity {
         config.put("api_secret", "2YNh2GmCs2CQ8NFu6JS3QONbZDg");
         //config.put("secure", true);
         MediaManager.init(this, config);
-
-
     }
-
-    /*
-     * select the image from the gallery
-     */
     private void selectImage() {
         Intent intent = new Intent();
         intent.setType("image/*"); // if you want to you can use pdf/gif/video
         intent.setAction(Intent.ACTION_GET_CONTENT);
         someActivityResultLauncher.launch(intent);
     }
-
     ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {

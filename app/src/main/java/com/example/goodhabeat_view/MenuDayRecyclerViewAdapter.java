@@ -155,7 +155,9 @@ public class MenuDayRecyclerViewAdapter extends RecyclerView.Adapter<MenuDayRecy
                             String meal = data.get(position).getMeal();
                             String menu_name = data.get(position).getMenuName();
 
-                            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                            StringRequest request = new StringRequest(Request.Method.POST,
+                                    url,
+                                    new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
                                     try{

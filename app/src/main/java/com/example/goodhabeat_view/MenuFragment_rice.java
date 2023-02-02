@@ -1,6 +1,8 @@
 package com.example.goodhabeat_view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +11,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,32 +40,17 @@ public class MenuFragment_rice extends Fragment {
     Button selectCompleteBtn;
     ArrayList<SelectedMenuItemData> selected_menu = new ArrayList<>();
 
+    SharedPreferences preferences;
+
+    Button menuSaveBtn;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_menu_rice, container, false);
 
-        /*
-        *
-        *
-        * */
-
-
-        // 프래그먼트 간 데이터 전송
-        getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String key, @NonNull Bundle bundle) {
-                // We use a String here, but any type that can be put in a Bundle is supported
-                String result = bundle.getString("bundleKey");
-                // Do something with the result...
-            }
-        });
-
-        /*
-        *
-        *
-        * */
+        menuSaveBtn = (Button) view.findViewById(R.id.testBtn);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.riceMenu_container);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -126,11 +115,36 @@ public class MenuFragment_rice extends Fragment {
         stringRequest.setShouldCache(false); // 이전 결과가 있어도 새로 요청하여 응답을 보여줌
         requestQueue.add(stringRequest);
 
-        // 메뉴 선택 완료
+        // 메뉴 선택
         selectCompleteBtn = (Button) view.findViewById(R.id.selectCompleteBtn);
         selectCompleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (selected_menu.size() == 1) {
+                    preferences = getContext().getSharedPreferences("selected_diet_rice", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("selected_diet_rice", selected_menu.get(0).getItem_index().toString());
+                    editor.commit();
+                } else if (selected_menu.size() > 1) {
+                    preferences = getContext().getSharedPreferences("selected_diet_rice", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.clear();
+                    editor.commit();
+                    for (int i = 0; i < selected_menu.size() - 1; i++) {
+                        selected_menu.remove(i);
+                        if (selected_menu.size() >= 1) {
+                            editor.putString("selected_diet_rice", selected_menu.get(selected_menu.size() - 1).getItem_index().toString());
+                            editor.commit();
+                        }
+                    }
+                }
+            }
+        });
+
+        // 메뉴 저장
+        menuSaveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent intent = new Intent(getContext(), DietAddActivity.class);
                 intent.putExtra("selected_menu", selected_menu);
                 intent.putExtra("check", "MENU SELECTED");
@@ -140,4 +154,6 @@ public class MenuFragment_rice extends Fragment {
 
         return view;
     }
+
+
 }

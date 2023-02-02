@@ -86,7 +86,6 @@ public class CustomCalendarView extends LinearLayout {
     Calendar calendar = Calendar.getInstance(Locale.KOREA);
     Context context;
     SimpleDateFormat dateFormat_kor = new SimpleDateFormat("yyyy년 MMM", Locale.KOREA);
-    SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy", Locale.KOREA);
     SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM", Locale.KOREA);
     SimpleDateFormat monthFormat_data = new SimpleDateFormat("MM", Locale.KOREA);
     SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.KOREA);

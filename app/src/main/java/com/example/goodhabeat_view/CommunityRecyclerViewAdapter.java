@@ -135,7 +135,8 @@ public class CommunityRecyclerViewAdapter extends RecyclerView.Adapter<Community
                         String commu_post = "http://10.0.2.2:3000/commu_heart";
                         requestQueue = Volley.newRequestQueue(itemView.getContext());
 
-                        Request request = new StringRequest(Request.Method.POST, commu_post, new Response.Listener<String>() {
+                        Request request = new StringRequest(Request.Method.POST,
+                                commu_post, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 try{

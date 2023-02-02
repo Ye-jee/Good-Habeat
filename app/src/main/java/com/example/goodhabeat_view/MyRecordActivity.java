@@ -356,7 +356,7 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
 
 
         //--------------------------------------------------------------------------------------------------------------------------------------------------------
-        // Progress Circle /////////////////////////////////////////////////////////////
+        // Progress Circle
         Calendar calendar = Calendar.getInstance();
         Calendar b_calendar = Calendar.getInstance();
         b_calendar.add(Calendar.MONTH , -1);

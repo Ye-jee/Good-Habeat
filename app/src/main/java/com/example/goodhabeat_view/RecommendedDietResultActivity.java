@@ -149,10 +149,6 @@ public class RecommendedDietResultActivity extends AppCompatActivity {
                     params.put("low_salt", lowSalt);
                     params.put("low_sugar", lowSugar);
 
-
-
-
-
                     return params;
                 }
             };
