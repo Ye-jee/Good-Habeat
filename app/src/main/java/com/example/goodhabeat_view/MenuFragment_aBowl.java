@@ -83,6 +83,7 @@ public class MenuFragment_aBowl extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getContext(), "ERROR : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                System.out.println("=============" + error);
             }
         }
         ){

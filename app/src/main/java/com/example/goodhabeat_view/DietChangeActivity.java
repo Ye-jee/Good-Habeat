@@ -44,14 +44,15 @@ public class DietChangeActivity extends AppCompatActivity {
 
         //recyclerView.setAdapter(new DietChangeListRecyclerViewAdapter(diet_change_list_data));
         //5초 뒤에 나타나게 함
-        Handler handler = new Handler();
+        /*Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 recyclerView.setAdapter(new DietChangeListRecyclerViewAdapter(diet_change_list_data));
             }
-        }, 5000); //딜레이 타임 조절
-*/
+
+        }, 5000); //딜레이 타임 조절*/
+
 
         //음식 추가 버튼 관련
         menuPlus_change = (Button) findViewById(R.id.menu_plus_change);
