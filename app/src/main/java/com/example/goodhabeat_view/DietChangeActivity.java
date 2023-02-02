@@ -38,8 +38,8 @@ public class DietChangeActivity extends AppCompatActivity {
         String dietChange_menu_kcal[] = {"153kcal"/*, "34kcal", "134kcal"*/};
 /*
         for(int i = 0; i< dietChange_menu_name.length; i++){
-           // DietChangeListData dataSet = new DietChangeListData(dietChange_menu_name[i], dietChange_menu_kcal[i]);
-           // diet_change_list_data.add(dataSet);
+            DietChangeListData dataSet = new DietChangeListData(dietChange_menu_name[i], dietChange_menu_kcal[i]);
+            diet_change_list_data.add(dataSet);
         }
 
         //recyclerView.setAdapter(new DietChangeListRecyclerViewAdapter(diet_change_list_data));

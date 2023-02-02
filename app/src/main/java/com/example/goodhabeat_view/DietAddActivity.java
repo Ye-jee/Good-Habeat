@@ -69,11 +69,6 @@ public class DietAddActivity extends AppCompatActivity {
         add_lc = (RadioButton) findViewById(R.id.someday_lunch);
         add_dn = (RadioButton) findViewById(R.id.someday_dinner);
 
-
-        //생략
-
-
-
         // Intent
         Intent intent = getIntent();
         String check = intent.getStringExtra("check");
@@ -298,6 +293,7 @@ public class DietAddActivity extends AppCompatActivity {
     }
 
     public void AddDietVolley(String recipe_id, String diet_date, String meal) {
+        // SharedPreference 사용자 아이디
         // SharedPreference 사용자 아이디
         preferences = getApplicationContext().getSharedPreferences("userInfo", MODE_PRIVATE);
         String user_id = preferences.getString("user_id","");

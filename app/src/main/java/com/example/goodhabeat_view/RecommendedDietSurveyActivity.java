@@ -47,14 +47,11 @@ public class RecommendedDietSurveyActivity extends AppCompatActivity {
     RadioButton rb_zeroOne, rb_twoFour, rb_fiveSeven, rb_Ten;*/
 
     Button btn_recmdCustomDiet;
-    String user_custom_id;
+
     String id_get;
-    String id_gett;
 
     int eatingNumber;
     int single,weight_low, weight_high, sugar, protein, vitamin,  lowKcal, salt ;
-
-    String wherer_check;
 
     SharedPreferences preferences;
 
@@ -98,129 +95,59 @@ public class RecommendedDietSurveyActivity extends AppCompatActivity {
         actionBar.hide();
 
 
-
-
         preferences = getApplicationContext().getSharedPreferences("userjoin", Context.MODE_PRIVATE);
-        String Join_nickname_get = preferences.getString("nickname", "no_nick" );
-        System.out.println("userjoin 가져온 닉네임: "+Join_nickname_get);
-
-        preferences = getApplicationContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        String nickname_get = preferences.getString("nickname", "nickname 오류" );
-
-        System.out.println(nickname_get);
+        String nickname_get = preferences.getString("nickname", "닉네임 못가져옴" );
+        System.out.println("userjoin 가져온 닉네임: "+nickname_get);
 
 
-        if(Join_nickname_get.equals("no_nick") ) {
-            System.out.println("no_nick 진입!");
+        //닉네임 확인
+        String url_nickCheck = "http://10.0.2.2:3000/nick_check";
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        //닉네임 존재 확인
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                url_nickCheck,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
 
-            preferences = getApplicationContext().getSharedPreferences("userInfo", MODE_PRIVATE);
-            id_get = preferences.getString("user_id","");
-
-
-            ////--------------------------------------------
-
-            //user_custom_id 찾기
-            String url_user_custom_id = "http://10.0.2.2:3000/user_costom_find";
-            requestQueue = Volley.newRequestQueue(getApplicationContext());
-            //닉네임 존재 확인
-            StringRequest request = new StringRequest(
-                    Request.Method.POST,
-                    url_user_custom_id,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-
-                            try {
-
-                                System.out.println("응답완료: "+response);
-                                JSONArray jsonarray = new JSONArray(response);
-                                JSONObject setting_json = jsonarray.getJSONObject(0);
-                                user_custom_id = setting_json.getString("user_custom_id");
-
-                                preferences = getApplicationContext().getSharedPreferences("userjoin", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString("user_custom_id", user_custom_id);
-                                editor.putString("wherer_check", "not_join");
-
-                                editor.commit(); // 저장
+                        try {
+                            System.out.println("응답완료: "+response);
+                            JSONArray jsonarray = new JSONArray(response);
+                            //JSONArray jArray = mainObj.getJSONArray("");
+                            JSONObject setting_json = jsonarray.getJSONObject(0);
+                            id_get = setting_json.getString("user_id");
 
 
 
-                            }catch (Exception e){ e.printStackTrace(); }
+                        }catch (Exception e){ e.printStackTrace(); }
 
-                        }
-
-
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            System.out.println("어디서 왔는지 실패 이유: "+error.getMessage());
-                        }
                     }
-            ) {
-                @Nullable
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<>();
-
-                    params.put("user_id", id_get);
-
-                    return params;
-                }
-            };
-            requestQueue.add(request);
-
-
-        } else {
-
-            //닉네임 확인
-            String url_nickCheck = "http://10.0.2.2:3000/nick_check";
-            requestQueue = Volley.newRequestQueue(getApplicationContext());
-            //닉네임 존재 확인
-            StringRequest request = new StringRequest(
-                    Request.Method.POST,
-                    url_nickCheck,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-
-                            try {
-                                System.out.println("응답완료: "+response);
-                                JSONArray jsonarray = new JSONArray(response);
-                                //JSONArray jArray = mainObj.getJSONArray("");
-                                JSONObject setting_json = jsonarray.getJSONObject(0);
-                                id_get = setting_json.getString("user_id");
-
-
-
-                            }catch (Exception e){ e.printStackTrace(); }
-
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            System.out.println("실패 이유: "+error.getMessage());
-                        }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("실패 이유: "+error.getMessage());
                     }
-            ) {
-                @Nullable
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<>();
-
-                    params.put("nick_check", Join_nickname_get);
-
-                    return params;
                 }
-            };
-            requestQueue.add(request);
+        ) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
 
-        }
+                params.put("nick_check", nickname_get);
+
+                return params;
+            }
+        };
+        requestQueue.add(request);
 
 
-        //----------------------------------------------------------------------------------------------------------------
+
+
+
+
 
 
 
@@ -233,7 +160,6 @@ public class RecommendedDietSurveyActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), RecommendedDietResultActivity.class);
                 startActivity(intent);
-                finish();
 
             }
         });

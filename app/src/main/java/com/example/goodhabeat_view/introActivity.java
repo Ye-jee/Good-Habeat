@@ -8,7 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
-public class IntroActivity extends AppCompatActivity {
+public class introActivity extends AppCompatActivity {
 
     SharedPreferences preferences;
 

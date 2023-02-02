@@ -26,7 +26,6 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class RecommendedDietResultActivity extends AppCompatActivity {
 
@@ -56,10 +55,6 @@ public class RecommendedDietResultActivity extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-
-
-
-
         preferences = getApplicationContext().getSharedPreferences("userjoin", Context.MODE_PRIVATE);
         String id_get = preferences.getString("id", "id 오류 시 출력" );
         String single_get = preferences.getString("single", "single 오류 시 출력" );
@@ -70,10 +65,6 @@ public class RecommendedDietResultActivity extends AppCompatActivity {
         String vitamin_get = preferences.getString("vitamin", "vitamin 오류 시 출력" );
         String lowKcal_get = preferences.getString("lowKcal", "lowKcal 오류 시 출력" );
         String salt_get = preferences.getString("salt", "salt 오류 시 출력" );
-        String where = preferences.getString("wherer_check", "yes_join" );
-        System.out.println("어디서? "+where);
-        String user_custom_id = preferences.getString("user_custom_id", "no_have_user_custom_id" );
-        System.out.println("user_custom_id: "+user_custom_id);
 
 
 
@@ -108,106 +99,54 @@ public class RecommendedDietResultActivity extends AppCompatActivity {
             lowSalt="1";
         }
 
-        if(where.equals("yes_join")){
-            String url_user_costom_join = "http://10.0.2.2:3000/user_costom_join";
+        String url_user_costom_join = "http://10.0.2.2:3000/user_costom_join";
 
-            StringRequest request = new StringRequest(
-                    Request.Method.POST,
-                    url_user_costom_join,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            if(response.equals("1")){
-                                //1이면 사용 가능
-                                System.out.println("진짜진짜 가입 성공");
-                                Toast.makeText(getApplicationContext(), "가입이 성공하였습니다.", Toast.LENGTH_SHORT).show();
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                url_user_costom_join,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.equals("1")){
+                            //1이면 사용 가능
+                            System.out.println("진짜진짜 가입 성공");
+                            Toast.makeText(getApplicationContext(), "가입이 성공하였습니다.", Toast.LENGTH_SHORT).show();
 
-                            } else {
-                                //2면 사용 불가
-                                System.out.println(response+ " / 회원가입 불가");
-                                Toast.makeText(getApplicationContext(), "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            System.out.println(error.getMessage());
+                        } else {
+                            //2면 사용 불가
+                            System.out.println(response+ " / 회원가입 불가");
+                            Toast.makeText(getApplicationContext(), "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
-            ) {
-                @Nullable
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<>();
-                    params.put("user_id", id_get);
-
-                    params.put("convenience", conven);
-                    params.put("high_protein", highProt);
-                    params.put("vitamin", vitamin);
-                    params.put("low_calorie", lowCal);
-                    params.put("low_salt", lowSalt);
-                    params.put("low_sugar", lowSugar);
-
-                    return params;
-                }
-            };
-            requestQueue.add(request);
-
-
-        }
-
-
-
-        if(where.equals("not_join")){
-
-            String url_user_costom_setting = "http://10.0.2.2:3000/user_costom_setting";
-
-            StringRequest request = new StringRequest(
-                    Request.Method.POST,
-                    url_user_costom_setting,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            if(response.equals("1")){
-                                //1이면 사용 가능
-                                System.out.println("진짜진짜 변경 성공");
-                                Toast.makeText(getApplicationContext(), "변경이 됐습니다.", Toast.LENGTH_SHORT).show();
-
-                            } else {
-                                //2면 사용 불가
-                                System.out.println(response+ " / 변경 불가");
-                                Toast.makeText(getApplicationContext(), "변경이 되지 않았습니다. 재시도 해주세요.", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            System.out.println(error.getMessage());
-                        }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error.getMessage());
                     }
-            ) {
-                @Nullable
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<>();
-                    params.put("user_id", id_get);
-
-                    params.put("convenience", conven);
-                    params.put("high_protein", highProt);
-                    params.put("vitamin", vitamin);
-                    params.put("low_calorie", lowCal);
-                    params.put("low_salt", lowSalt);
-                    params.put("low_sugar", lowSugar);
-                    params.put("user_custom_id", user_custom_id);
-
-                    return params;
                 }
-            };
-            requestQueue.add(request);
+        ) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("user_id", id_get);
 
-        }
+                params.put("convenience", conven);
+                params.put("high_protein", highProt);
+                params.put("vitamin", vitamin);
+                params.put("low_calorie", lowCal);
+                params.put("low_salt", lowSalt);
+                params.put("low_sugar", lowSugar);
+
+                return params;
+            }
+        };
+        requestQueue.add(request);
+
+
+
+
 
 
 
@@ -233,18 +172,9 @@ public class RecommendedDietResultActivity extends AppCompatActivity {
                 intent.putExtra("customResult", customDietResult);
                 startActivity(intent);*/
 
-                if(where.equals("yes_join")){
-                    //로그인 페이지로 이동하는 코드
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-
-
+                //로그인 페이지로 이동하는 코드
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
             }
         });
 

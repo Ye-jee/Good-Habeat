@@ -356,10 +356,12 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
 
 
         //--------------------------------------------------------------------------------------------------------------------------------------------------------
-        // Progress Circle
+        // Progress Circle /////////////////////////////////////////////////////////////
         Calendar calendar = Calendar.getInstance();
         Calendar b_calendar = Calendar.getInstance();
         b_calendar.add(Calendar.MONTH , -1);
+
+
 
         int beforeOfMonth = b_calendar.getActualMaximum(calendar.DAY_OF_MONTH);
         System.out.println("저번달 월 일수: "+beforeOfMonth);
@@ -372,6 +374,7 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
         System.out.println("month num: "+month_num);
 
         String beforeMonth = new java.text.SimpleDateFormat("MM").format(b_calendar.getTime());
+        System.out.println("저번달은?: "+beforeMonth);
 
 
         circleProgressBar=findViewById(R.id.cpb_circlebar);
@@ -446,15 +449,18 @@ public class MyRecordActivity extends AppCompatActivity implements CircleProgres
                             detail_date_Bstring = attend_json.getString("detail_date_Bcount");
                             detail_date_Bcount = Integer.parseInt(detail_date_Bstring);
                             System.out.println("저번달 출석률: "+detail_date_Bcount);
-                            before_date_attend = (int) Math.round(detail_date_Bcount*(Math.pow(beforeOfMonth, -1))*100);;
                             System.out.println("before_date_attend: "+before_date_attend);
+                            before_date_attend = (int) Math.round(detail_date_Bcount*(Math.pow(beforeOfMonth, -1))*100);;
 
-                            int attend_result = date_attend - before_date_attend;
+                            int attend_result = (date_attend - before_date_attend) -1;
+                            //간담회 이후 -1 삭제
                             System.out.println("출석률 결과 : "+attend_result);
 
                             if(attend_result>0){
+                                System.out.println("0보다 큰 경우");
                                 txt_percent2.setText(beforeMonth+"월 보다 " +attend_result+"% 더 잘지켰어요!");
                             } else {
+                                System.out.println("0보다 작은 경우");
                                 txt_percent2.setText(beforeMonth+"월 보다 " +Math.abs(attend_result)+"% 덜 잘지켰어요.");
                             }
 

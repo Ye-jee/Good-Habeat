@@ -86,6 +86,7 @@ public class CustomCalendarView extends LinearLayout {
     Calendar calendar = Calendar.getInstance(Locale.KOREA);
     Context context;
     SimpleDateFormat dateFormat_kor = new SimpleDateFormat("yyyy년 MMM", Locale.KOREA);
+    SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy", Locale.KOREA);
     SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM", Locale.KOREA);
     SimpleDateFormat monthFormat_data = new SimpleDateFormat("MM", Locale.KOREA);
     SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.KOREA);
@@ -360,50 +361,6 @@ public class CustomCalendarView extends LinearLayout {
                                             dinner.setVisibility(View.GONE);
                                         }
 
-
-                                        int calorie_int = (int) Math.round(calorie_sum);
-                                        int carbo_max = (int) Math.round(calorie_sum*0.5);
-                                        int protein_max = (int) Math.round(calorie_sum*0.2);
-                                        int fat_max = (int) Math.round(calorie_sum*0.3);
-
-                                        int carbo_int = (int) Math.round(carbohydrate_sum);
-                                        int protein_int = (int) Math.round(protein_sum);
-                                        int fat_int = (int) Math.round(fat_sum);
-
-                                        cal_progress.setProgress(calorie_int);
-                                        System.out.println("칼로리 총 합산: "+calorie_int);
-                                        int cal_progress_num = (int) Math.round((calorie_sum/2350)*100);
-                                        System.out.println("칼로리 총 합산 퍼센트: "+cal_progress_num);
-
-                                        carbo_progress.setMax(carbo_max);
-                                        carbo_progress.setProgress(carbo_int);
-                                        System.out.println("탄수화물 총 합산: "+carbo_int);
-                                        int carbo_progress_num = (int) Math.round((carbohydrate_sum/carbo_max)*100);
-                                        System.out.println("탄수화물 총 합산 퍼센트: "+carbo_progress_num);
-
-
-                                        protein_progress.setMax(protein_max);
-                                        protein_progress.setProgress(protein_int);
-                                        System.out.println("단백질 총 합산: "+protein_int);
-                                        int protein_progress_num = (int) Math.round((protein_sum/protein_max)*100);
-                                        System.out.println("단백질 총 합산 퍼센트: "+protein_progress_num);
-
-                                        fat_progress.setMax(fat_max);
-                                        fat_progress.setProgress(fat_int);
-                                        System.out.println("지방 총 합산: "+fat_int);
-                                        int fat_progress_num = (int) Math.round((fat_sum/fat_max)*100);
-                                        System.out.println("지방 총 합산 퍼센트: "+fat_progress_num);
-
-                                        String cal_str = String.valueOf(cal_progress_num);
-                                        String carbo_str = String.valueOf(carbo_progress_num);
-                                        String protein_str = String.valueOf(protein_progress_num);
-                                        String fat_str = String.valueOf(fat_progress_num);
-
-                                        tv_cal_num.setText(cal_str);
-                                        tv_carbo_num.setText(carbo_str);
-                                        tv_protein_num.setText(protein_str);
-                                        tv_fat_num.setText(fat_str);
-
                                     }//detail if문 끝
 
                                     if(response.contains("diet_date")){
@@ -482,57 +439,50 @@ public class CustomCalendarView extends LinearLayout {
                                             dinner.setVisibility(View.GONE);
                                         }
 
-                                        int calorie_int = (int) Math.round(calorie_sum);
-                                        int carbo_max = (int) Math.round(calorie_sum*0.5);
-                                        int protein_max = (int) Math.round(calorie_sum*0.2);
-                                        int fat_max = (int) Math.round(calorie_sum*0.3);
-
-                                        int carbo_int = (int) Math.round(carbohydrate_sum);
-                                        int protein_int = (int) Math.round(protein_sum);
-                                        int fat_int = (int) Math.round(fat_sum);
-
-                                        cal_progress.setProgress(0);
-                                        System.out.println("칼로리 총 합산: "+calorie_int);
-                                        int cal_progress_num = (int) Math.round((calorie_sum/2350)*100);
-                                        System.out.println("칼로리 총 합산 퍼센트: "+cal_progress_num);
-
-                                        carbo_progress.setMax(0);
-                                        carbo_progress.setProgress(0);
-                                        System.out.println("탄수화물 총 합산: "+carbo_int);
-                                        int carbo_progress_num = (int) Math.round((carbohydrate_sum/carbo_max)*100);
-                                        System.out.println("탄수화물 총 합산 퍼센트: "+carbo_progress_num);
-
-
-                                        protein_progress.setMax(0);
-                                        protein_progress.setProgress(0);
-                                        System.out.println("단백질 총 합산: "+protein_int);
-                                        int protein_progress_num = (int) Math.round((protein_sum/protein_max)*100);
-                                        System.out.println("단백질 총 합산 퍼센트: "+protein_progress_num);
-
-                                        fat_progress.setMax(0);
-                                        fat_progress.setProgress(0);
-                                        System.out.println("지방 총 합산: "+fat_int);
-                                        int fat_progress_num = (int) Math.round((fat_sum/fat_max)*100);
-                                        System.out.println("지방 총 합산 퍼센트: "+fat_progress_num);
-
-                                        String cal_str = String.valueOf(cal_progress_num);
-                                        String carbo_str = String.valueOf(carbo_progress_num);
-                                        String protein_str = String.valueOf(protein_progress_num);
-                                        String fat_str = String.valueOf(fat_progress_num);
-
-                                        tv_cal_num.setText("0");
-                                        tv_carbo_num.setText("0");
-                                        tv_protein_num.setText("0");
-                                        tv_fat_num.setText("0");
-
-
-
-
-
 
                                     }//detail if문 끝
+                                    int calorie_int = (int) Math.round(calorie_sum);
+                                    int carbo_max = (int) Math.round(calorie_sum*0.5);
+                                    int protein_max = (int) Math.round(calorie_sum*0.2);
+                                    int fat_max = (int) Math.round(calorie_sum*0.3);
+
+                                    int carbo_int = (int) Math.round(carbohydrate_sum);
+                                    int protein_int = (int) Math.round(protein_sum);
+                                    int fat_int = (int) Math.round(fat_sum);
+
+                                    cal_progress.setProgress(calorie_int);
+                                    System.out.println("칼로리 총 합산: "+calorie_int);
+                                    int cal_progress_num = (int) Math.round((calorie_sum/2350)*100);
+                                    System.out.println("칼로리 총 합산 퍼센트: "+cal_progress_num);
+
+                                    carbo_progress.setMax(carbo_max);
+                                    carbo_progress.setProgress(carbo_int);
+                                    System.out.println("탄수화물 총 합산: "+carbo_int);
+                                    int carbo_progress_num = (int) Math.round((carbohydrate_sum/carbo_max)*100);
+                                    System.out.println("탄수화물 총 합산 퍼센트: "+carbo_progress_num);
 
 
+                                    protein_progress.setMax(protein_max);
+                                    protein_progress.setProgress(protein_int);
+                                    System.out.println("단백질 총 합산: "+protein_int);
+                                    int protein_progress_num = (int) Math.round((protein_sum/protein_max)*100);
+                                    System.out.println("단백질 총 합산 퍼센트: "+protein_progress_num);
+
+                                    fat_progress.setMax(fat_max);
+                                    fat_progress.setProgress(fat_int);
+                                    System.out.println("지방 총 합산: "+fat_int);
+                                    int fat_progress_num = (int) Math.round((fat_sum/fat_max)*100);
+                                    System.out.println("지방 총 합산 퍼센트: "+fat_progress_num);
+
+                                    String cal_str = String.valueOf(cal_progress_num);
+                                    String carbo_str = String.valueOf(carbo_progress_num);
+                                    String protein_str = String.valueOf(protein_progress_num);
+                                    String fat_str = String.valueOf(fat_progress_num);
+
+                                    tv_cal_num.setText(cal_str);
+                                    tv_carbo_num.setText(carbo_str);
+                                    tv_protein_num.setText(protein_str);
+                                    tv_fat_num.setText(fat_str);
 
 
 

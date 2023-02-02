@@ -185,9 +185,7 @@ public class CommunityActivity extends AppCompatActivity {
         String commu_post = "http://10.0.2.2:3000/commu_post";
         requestQueue =  Volley.newRequestQueue(getApplicationContext());
 
-        Request request = new StringRequest(Request.Method.POST,
-                commu_post,
-                new Response.Listener<String>() {
+        Request request = new StringRequest(Request.Method.POST, commu_post, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try{
@@ -212,6 +210,7 @@ public class CommunityActivity extends AppCompatActivity {
                         if(Integer.parseInt(my_del_state) > 0){
                             my_state = "";
                         }
+
 
                         CommunityData dataSet = new CommunityData(my_post_id, my_nickname, my_post_date, my_post_time, my_content, my_post_image, my_heart_icons , my_like_count , my_state);
                         community_data.add(dataSet);
@@ -259,9 +258,7 @@ public class CommunityActivity extends AppCompatActivity {
         String commu_mypost = "http://10.0.2.2:3000/commu_mypost";
         requestQueue =  Volley.newRequestQueue(getApplicationContext());
 
-        Request request = new StringRequest(Request.Method.POST,
-                commu_mypost,
-                new Response.Listener<String>() {
+        Request request = new StringRequest(Request.Method.POST, commu_mypost, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try{
@@ -286,6 +283,7 @@ public class CommunityActivity extends AppCompatActivity {
                         if(Integer.parseInt(my_del_state) > 0){
                             my_state = "삭제";
                         }
+
 
                         CommunityData dataSet = new CommunityData(my_post_id, my_nickname, my_post_date, my_post_time, my_content, my_post_image, my_heart_icons , my_like_count , my_state);
                         community_data.add(dataSet);

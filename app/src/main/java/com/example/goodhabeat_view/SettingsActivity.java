@@ -1,22 +1,16 @@
 package com.example.goodhabeat_view;
 
-import static com.example.goodhabeat_view.LoginActivity.requestQueue;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,11 +32,8 @@ import com.google.android.material.navigation.NavigationView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -59,7 +50,6 @@ public class SettingsActivity extends AppCompatActivity {
     SharedPreferences preferences;
     TextView tvUserName, tvUserEmail;
     TextView again_test, test_result;
-    TextView getout;
 
     EditText editNick, editBirth, editHeight, editWeight ;
     Button save, nick;
@@ -73,7 +63,6 @@ public class SettingsActivity extends AppCompatActivity {
     String con_string, hp_string, v_string, lc_string, lsa_string, lsu_string;
     StringBuilder String_sum = new StringBuilder("");
 
-    ConstraintLayout password_change;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,13 +80,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         again_test = (TextView)findViewById(R.id.textView39);
         test_result = (TextView)findViewById(R.id.textView38);
-        getout  = (TextView)findViewById(R.id.getout);
 
         editNick = (EditText)findViewById(R.id.settingsEditNick) ;
         editBirth = (EditText)findViewById(R.id.settingsEditBirth) ;
         editHeight = (EditText)findViewById(R.id.setting_Height) ;
         editWeight = (EditText)findViewById(R.id.setting_Weight) ;
-        password_change = (ConstraintLayout)findViewById(R.id.password_change);
 
         save = (Button)findViewById(R.id.save_button);
         nick = (Button)findViewById(R.id.btn_nickname);
@@ -414,73 +401,10 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), RecommendedDietSurveyActivity.class);
                 startActivity(intent);
-
-            }
-        });
-
-        getout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                AlertDialog.Builder dlg = new AlertDialog.Builder(getApplicationContext());
-                dlg.setMessage("정말 탈퇴하시겠습니까?");
-                dlg.setPositiveButton("네", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String url_getout = "http://10.0.2.2:3000/getout";
-                        requestQueue = Volley.newRequestQueue(getApplicationContext());
-
-                        SharedPreferences preferences;
-                        preferences = getApplicationContext().getSharedPreferences("userInfo", MODE_PRIVATE);
-                        String user_id = preferences.getString("user_id","");
-
-                        StringRequest request = new StringRequest(
-                                Request.Method.POST,
-                                url_getout,
-                                new Response.Listener<String>() {
-                                    @Override
-                                    public void onResponse(String response) {
-                                        Toast.makeText(getApplicationContext(), "탈퇴되었습니다.", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                },
-                                new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        System.out.println("실패 이유: "+error.getMessage());
-                                    }
-                                }
-                        ) {
-                            @Nullable
-                            @Override
-                            protected Map<String, String> getParams() throws AuthFailureError {
-                                Map<String, String> params = new HashMap<>();
-
-                                params.put("user_id", user_id);
-
-                                return params;
-                            }
-                        };
-                        requestQueue.add(request);
-
-                    }
-                });
-                dlg.setNegativeButton("취소", null);
-                dlg.show();
             }
         });
 
 
-        password_change.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), PasswordChangeActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
 
         //--------------------------------------------------------------------------------------------------------------------------------------------------------

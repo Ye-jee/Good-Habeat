@@ -55,7 +55,6 @@ public class MenuFragment_rice extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.riceMenu_container);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ArrayList<MenuSelectData> menu_select_data = new ArrayList<>();
-        //
 
         // Volley
         String url = "http://10.0.2.2:3000/menu_select";

@@ -365,6 +365,7 @@ public class MainActivity extends AppCompatActivity {
 
     // 이미지 URL 가져오기
     public void setCurrentMenuImage(Integer meal, String nickname) {
+        System.out.println("메인 상단 사진 함수 접속");
         ArrayList<ImageUrlData> menu_image_data = new ArrayList<>();
 
         String url = "http://10.0.2.2:3000/main/menu_image";
